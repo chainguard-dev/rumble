@@ -1,15 +1,16 @@
 package main
 
 import (
-	//"bufio"
-	///"bytes"
-
 	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
 	"os"
 	"os/exec"
+	"strings"
+	"time"
+
+	rumbletypes "github.com/chainguard-dev/rumble/pkg/types"
 )
 
 func main() {
@@ -22,75 +23,89 @@ func main() {
 }
 
 func scanImage(image string, scanner string) error {
+	var err error
+	var summary *rumbletypes.ImageScanSummary
 	switch scanner {
 	case "trivy":
-		return scanImageTrivy(image)
+		summary, err = scanImageTrivy(image)
 	case "grype":
-		return scanImageGrype(image)
+		summary, err = scanImageGrype(image)
+	default:
+		err = fmt.Errorf("invalid scanner: %s", scanner)
 	}
-	return fmt.Errorf("invalid scanner: %s", scanner)
-}
-
-func scanImageTrivy(image string) error {
+	if err != nil {
+		return err
+	}
+	b, err := json.MarshalIndent(summary, "", "    ")
+	if err != nil {
+		return err
+	}
+	fmt.Println(string(b))
 	return nil
 }
 
-type grypeScanOutput struct {
-	Matches []grypeScanOutputMatches `json:"matches"`
+func scanImageTrivy(image string) (*rumbletypes.ImageScanSummary, error) {
+	return nil, nil
 }
 
-type grypeScanOutputMatches struct {
-	Vulnerability grypeScanOutputMatchesVulnerability `json:"vulnerability"`
-}
-
-type grypeScanOutputMatchesVulnerability struct {
-	Severity string `json:"severity"`
-}
-
-func scanImageGrype(image string) error {
+func scanImageGrype(image string) (*rumbletypes.ImageScanSummary, error) {
+	summary := &rumbletypes.ImageScanSummary{
+		Image:   image,
+		Digest:  "todo",
+		Scanner: "grype",
+		Time:    time.Now().UTC().Format("2006-01-02T15:04:05"),
+	}
 	log.Printf("scanning %s with grype\n", image)
-	app := "grype"
-
 	file, err := os.CreateTemp("", "grype-scan-")
 	if err != nil {
-		log.Fatal(err)
+		return summary, err
 	}
 	defer os.Remove(file.Name())
-
-	fmt.Println(file.Name())
-
 	args := []string{"-v", "-o", "json", "--file", file.Name(), image}
-
-	// with open(report_name, encoding="utf-8") as file:
-	//     scan_results = json.load(file)
-
-	//     # collect all cves and convert to counter
-	//     cve_list = []
-	//     for field in scan_results["matches"]:
-	//         # lowercase the vulnerability severity to avoid inconsistent naming
-	//         # across tools
-	//         cve_list.append(field["vulnerability"]["severity"].lower())
-
-	//     cve_counter = Counter(cve_list)
-
-	cmd := exec.Command(app, args...)
+	cmd := exec.Command("grype", args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
-		return err
+		return summary, err
 	}
-
 	b, err := os.ReadFile(file.Name())
 	if err != nil {
-		return err
+		return summary, err
 	}
-	// fmt.Println(string(b))
-	var output grypeScanOutput
+	fmt.Println(string(b))
+	var output rumbletypes.GrypeScanOutput
 	if err := json.Unmarshal(b, &output); err != nil {
-		return err
+		return summary, err
 	}
 
-	fmt.Println(output)
+	// TODO:Create dat summary!
+	summary.Success = true
+	summary.ScannerVersion = output.Descriptor.Version
+	summary.ScannerDbVersion = output.Descriptor.Db.Checksum
 
-	return nil
+	// TODO: get the digest beforehand
+	summary.Digest = strings.Split(output.Source.Target.RepoDigests[0], "@")[1]
+
+	// CVE counts by severity
+	summary.TotCveCount = len(output.Matches)
+	for _, match := range output.Matches {
+		switch match.Vulnerability.Severity {
+		case "Low":
+			summary.LowCveCount++
+		case "Medium":
+			summary.MedCveCount++
+		case "High":
+			summary.HighCveCount++
+		case "Critical":
+			summary.CritCveCount++
+		case "Negligible":
+			summary.NegligibleCveCount++
+		case "Unknown":
+			summary.UnknownCveCount++
+		default:
+			fmt.Printf("WARNING: unknown severity: %s\n", match.Vulnerability.Severity)
+		}
+	}
+
+	return summary, nil
 }
