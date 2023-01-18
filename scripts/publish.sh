@@ -19,11 +19,6 @@ APKO_IMAGE_REPO="cgr.dev/chainguard/apko"
 APKO_IMAGE_IDENTIFIER=":latest"
 APKO_IMAGE_REF="${APKO_IMAGE_REF:-${APKO_IMAGE_REPO}${APKO_IMAGE_IDENTIFIER}}"
 
-if [[ "${REGISTRY_USERNAME}" == "missing" || "${REGISTRY_PASSWORD}" == "missing" ]]; then
-    echo "Must set REGISTRY_USERNAME and REGISTRY_PASSWORD. Exiting."
-    exit 1
-fi
-
 rm -rf ./packages/
 
 rm -f melange.rsa melange.rsa.pub
@@ -36,11 +31,17 @@ docker run --rm --privileged -v "${PWD}":/work\
     --repository-append packages \
     --signing-key melange.rsa
 
-export DOCKER_CONFIG="$(mktemp -d)"
-trap "rm -rf ${DOCKER_CONFIG}" EXIT
-echo "{}" > "${DOCKER_CONFIG}/config.json"
-docker login "$(echo "${REF}" | cut -d: -f1 | cut -d/ -f1)" \
-    -u "${REGISTRY_USERNAME}" -p "${REGISTRY_PASSWORD}"
+if [[ "${DOCKER_CONFIG}" == "" ]]; then
+    if [[ "${REGISTRY_USERNAME}" == "missing" || "${REGISTRY_PASSWORD}" == "missing" ]]; then
+        echo "Must set REGISTRY_USERNAME and REGISTRY_PASSWORD. Exiting."
+        exit 1
+    fi
+    export DOCKER_CONFIG="$(mktemp -d)"
+    trap "rm -rf ${DOCKER_CONFIG}" EXIT
+    echo "{}" > "${DOCKER_CONFIG}/config.json"
+    docker login "$(echo "${REF}" | cut -d: -f1 | cut -d/ -f1)" \
+        -u "${REGISTRY_USERNAME}" -p "${REGISTRY_PASSWORD}"
+fi
 
 APKOREFS="${REF}"
 echo "GITHUB_EVENT_NAME: ${GITHUB_EVENT_NAME}"

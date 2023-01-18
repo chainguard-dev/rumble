@@ -22,15 +22,26 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@9becc617647dfa20ae7b1151972e9b3a2c338a2b # v2.8.1
+      - name: Login to registry
+        id: login
+        run: |
+          set -x
+          export DOCKER_CONFIG="$(mktemp -d)"
+          cosign login ghcr.io -u "${REGISTRY_USERNAME}" -p "${REGISTRY_PASSWORD}"
+          echo "docker-config=${DOCKER_CONFIG}" >> $GITHUB_OUTPUT
       - name: Publish image
+        env:
+          DOCKER_CONFIG: ${{ steps.login.outputs.docker-config }}
         run: |
           set -x
           ./scripts/publish.sh
       - name: Attestationception!
+        env:
+          DOCKER_CONFIG: ${{ steps.login.outputs.docker-config }}
         run: |
           set -x
-          export DOCKER_CONFIG="$(mktemp -d)"
-          docker login ghcr.io -u "${REGISTRY_USERNAME}" -p "${REGISTRY_PASSWORD}"
           docker run --rm -v "${DOCKER_CONFIG}":/config \
             -e DOCKER_CONFIG=/config \
             "${REF}" \
