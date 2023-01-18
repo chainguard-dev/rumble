@@ -1,0 +1,48 @@
+name: rumble-image-publish
+on:
+  push:
+    branches:
+      - main
+  #schedule:
+  #  - cron: '30 12 * * *'
+  workflow_dispatch: {}
+env:
+  REF: "ghcr.io/chainguard-dev/rumble:latest"
+  REGISTRY_USERNAME: ${{ github.repository_owner }}
+  REGISTRY_PASSWORD: ${{ github.token }}
+  COSIGN_EXPERIMENTAL: "true"
+  CHAINGUARD_GITHUB_EVENT_NAME: "schedule"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write # needed for GitHub OIDC Token **not production ready**
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@main
+      - name: Publish image
+        run: ARCH=amd64 ./scripts/publish.sh
+      - name: Attestationception!
+        run: |
+          export DOCKER_CONFIG="$(mktemp -d)"
+          cosign login ghcr.io -u "${REGISTRY_USERNAME}" -p "${REGISTRY_PASSWORD}"
+          docker run --rm 
+          docker run --rm -v "${DOCKER_CONFIG}":/config \
+            -e DOCKER_CONFIG=/config \
+            "${REF}" \
+            -image "${REF}" \
+            -attest
+
+      # - if: ${{ failure() }}
+      #   uses: rtCamp/action-slack-notify@v2.2.0
+      #   env:
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+      #     SLACK_COLOR: '#8E1600'
+      #     MSG_MINIMAL: 'true'
+      #     SLACK_TITLE: rumble-image-publish failed.
+      #     SLACK_MESSAGE: |
+      #       For detailed logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
