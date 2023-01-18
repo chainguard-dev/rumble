@@ -8,6 +8,13 @@ package:
     - license: Apache-2.0
       paths:
         - "*"
+  # Note: rumble shells out to the following tools,
+  # thus listed as depenedncies for this package
+  dependencies:
+    runtime:
+      - grype
+      - trivy
+      - cosign
 
 environment:
   contents:

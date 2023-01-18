@@ -7,9 +7,6 @@ contents:
   packages:
     - ca-certificates-bundle
     - wolfi-base
-    - grype
-    - trivy
-    - cosign
     - rumble@local
 work-dir: /work
 entrypoint:
