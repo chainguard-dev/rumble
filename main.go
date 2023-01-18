@@ -16,39 +16,76 @@ import (
 func main() {
 	image := flag.String("image", "cgr.dev/chainguard/static:latest", "OCI image")
 	scanner := flag.String("scanner", "grype", "Which scanner to use, (\"trivy\" or \"grype\")")
+	attest := flag.Bool("attest", false, "If enabled, attempt to attest vuln results using cosign")
 	flag.Parse()
-	if err := scanImage(*image, *scanner); err != nil {
+	filename, err := scanImage(*image, *scanner)
+	defer os.Remove(filename)
+	if err != nil {
 		panic(err)
+	}
+	if *attest {
+		fmt.Println("Attempting to attest scan results using cosign...")
+		if err := attestImage(*image, *scanner, filename); err != nil {
+			panic(err)
+		}
 	}
 }
 
-func scanImage(image string, scanner string) error {
-	var err error
+func scanImage(image string, scanner string) (string, error) {
+	var filename string
 	var summary *rumbletypes.ImageScanSummary
+	var err error
 	switch scanner {
 	case "trivy":
-		summary, err = scanImageTrivy(image)
+		filename, summary, err = scanImageTrivy(image)
 	case "grype":
-		summary, err = scanImageGrype(image)
+		filename, summary, err = scanImageGrype(image)
 	default:
 		err = fmt.Errorf("invalid scanner: %s", scanner)
 	}
 	if err != nil {
-		return err
+		return "", err
 	}
+
+	// TODO: upload this to BigQuery if certain flags set etc.
 	b, err := json.MarshalIndent(summary, "", "    ")
 	if err != nil {
-		return err
+		return "", err
 	}
 	fmt.Println(string(b))
-	return nil
+
+	return filename, nil
 }
 
-func scanImageTrivy(image string) (*rumbletypes.ImageScanSummary, error) {
-	return nil, nil
+func attestImage(image string, scanner string, filename string) error {
+	env := append(os.Environ(), "COSIGN_EXPERIMENTAL=1")
+
+	// Attest
+	args := []string{"attest", "--type", "vuln", "--predicate", filename, image}
+	cmd := exec.Command("cosign", args...)
+	fmt.Printf("Running attestation command \"cosign %s\"...\n", strings.Join(args, " "))
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	cmd.Env = env
+	if err := cmd.Run(); err != nil {
+		return err
+	}
+
+	// Verify
+	args = []string{"verify-attestation", "--type", "vuln", image}
+	cmd = exec.Command("cosign", args...)
+	fmt.Printf("Running verify command \"cosign %s\"...\n", strings.Join(args, " "))
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	cmd.Env = env
+	return cmd.Run()
 }
 
-func scanImageGrype(image string) (*rumbletypes.ImageScanSummary, error) {
+func scanImageTrivy(image string) (string, *rumbletypes.ImageScanSummary, error) {
+	return "", nil, nil
+}
+
+func scanImageGrype(image string) (string, *rumbletypes.ImageScanSummary, error) {
 	summary := &rumbletypes.ImageScanSummary{
 		Image:   image,
 		Digest:  "todo",
@@ -58,24 +95,23 @@ func scanImageGrype(image string) (*rumbletypes.ImageScanSummary, error) {
 	log.Printf("scanning %s with grype\n", image)
 	file, err := os.CreateTemp("", "grype-scan-")
 	if err != nil {
-		return summary, err
+		return "", summary, err
 	}
-	defer os.Remove(file.Name())
 	args := []string{"-v", "-o", "json", "--file", file.Name(), image}
 	cmd := exec.Command("grype", args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
-		return summary, err
+		return "", summary, err
 	}
 	b, err := os.ReadFile(file.Name())
 	if err != nil {
-		return summary, err
+		return "", summary, err
 	}
 	fmt.Println(string(b))
 	var output rumbletypes.GrypeScanOutput
 	if err := json.Unmarshal(b, &output); err != nil {
-		return summary, err
+		return "", summary, err
 	}
 
 	// TODO:Create dat summary!
@@ -107,5 +143,5 @@ func scanImageGrype(image string) (*rumbletypes.ImageScanSummary, error) {
 		}
 	}
 
-	return summary, nil
+	return file.Name(), summary, nil
 }
