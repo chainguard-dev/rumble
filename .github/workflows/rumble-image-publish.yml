@@ -30,7 +30,7 @@ jobs:
         run: |
           set -x
           export DOCKER_CONFIG="$(mktemp -d)"
-          cosign login ghcr.io -u "${REGISTRY_USERNAME}" -p "${REGISTRY_PASSWORD}"
+          docker login ghcr.io -u "${REGISTRY_USERNAME}" -p "${REGISTRY_PASSWORD}"
           docker run --rm -v "${DOCKER_CONFIG}":/config \
             -e DOCKER_CONFIG=/config \
             "${REF}" \
