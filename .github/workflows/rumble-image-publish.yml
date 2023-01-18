@@ -21,28 +21,18 @@ jobs:
       id-token: write # needed for GitHub OIDC Token **not production ready**
     steps:
       - name: Checkout source code
-        uses: actions/checkout@v3
-      - name: Install Cosign
-        uses: sigstore/cosign-installer@main
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
       - name: Publish image
-        run: ARCH=amd64 ./scripts/publish.sh
+        run: |
+          set -x
+          ./scripts/publish.sh
       - name: Attestationception!
         run: |
+          set -x
           export DOCKER_CONFIG="$(mktemp -d)"
           cosign login ghcr.io -u "${REGISTRY_USERNAME}" -p "${REGISTRY_PASSWORD}"
-          docker run --rm 
           docker run --rm -v "${DOCKER_CONFIG}":/config \
             -e DOCKER_CONFIG=/config \
             "${REF}" \
             -image "${REF}" \
             -attest
-
-      # - if: ${{ failure() }}
-      #   uses: rtCamp/action-slack-notify@v2.2.0
-      #   env:
-      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-      #     SLACK_COLOR: '#8E1600'
-      #     MSG_MINIMAL: 'true'
-      #     SLACK_TITLE: rumble-image-publish failed.
-      #     SLACK_MESSAGE: |
-      #       For detailed logs: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
