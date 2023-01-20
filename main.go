@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"encoding/json"
 	"flag"
 	"fmt"
@@ -10,6 +11,7 @@ import (
 	"strings"
 	"time"
 
+	"cloud.google.com/go/bigquery"
 	"github.com/chainguard-dev/rumble/pkg/types"
 	rumbletypes "github.com/chainguard-dev/rumble/pkg/types"
 )
@@ -26,7 +28,7 @@ func main() {
 		format = "sarif"
 	}
 
-	filename, startTime, endTime, err := scanImage(*image, *scanner, format)
+	filename, startTime, endTime, summary, err := scanImage(*image, *scanner, format)
 	defer os.Remove(filename)
 	if err != nil {
 		panic(err)
@@ -37,10 +39,51 @@ func main() {
 		if err := attestImage(*image, startTime, endTime, *scanner, filename); err != nil {
 			panic(err)
 		}
+	} else {
+		// TODO: upload this to BigQuery if certain flags set etc.
+		b, err := json.MarshalIndent(summary, "", "    ")
+		if err != nil {
+			panic(err)
+		}
+		fmt.Println(string(b))
+		fmt.Println("im here")
+
+		ctx := context.Background()
+		client, err := bigquery.NewClient(ctx, "MY_GCLOUD_PROJECT") // TODO: make option
+		if err != nil {
+			panic(err)
+		}
+
+		dataset := client.Dataset("MY_GCLOUD_DATASET") // TODO: make option
+
+		table := dataset.Table("MY_GCLOUD_TABLE") // TODO: make option
+
+		u := table.Inserter()
+		if err := u.Put(ctx, summary); err != nil {
+			panic(err)
+		}
+
+		/*
+			TODO: put the table schema creation elsewhere?
+			schema, err := bigquery.InferSchema(rumbletypes.ImageScanSummary{})
+			if err != nil {
+				panic(err)
+			}
+
+			if err := table.Create(ctx, &bigquery.TableMetadata{Schema: schema}); err != nil {
+				panic(err)
+			}
+		*/
+
+		/*
+					if err := table.Create(ctx, &bigquery.TableMetadata{Schema: schema1}); err != nil {
+			    // TODO: Handle error.
+			}
+		*/
 	}
 }
 
-func scanImage(image string, scanner string, format string) (string, *time.Time, *time.Time, error) {
+func scanImage(image string, scanner string, format string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
 	var filename string
 	var startTime, endTime *time.Time
 	var summary *rumbletypes.ImageScanSummary
@@ -54,19 +97,9 @@ func scanImage(image string, scanner string, format string) (string, *time.Time,
 		err = fmt.Errorf("invalid scanner: %s", scanner)
 	}
 	if err != nil {
-		return "", nil, nil, err
+		return "", nil, nil, nil, err
 	}
-
-	if summary != nil {
-		// TODO: upload this to BigQuery if certain flags set etc.
-		b, err := json.MarshalIndent(summary, "", "    ")
-		if err != nil {
-			return "", nil, nil, err
-		}
-		fmt.Println(string(b))
-	}
-
-	return filename, startTime, endTime, nil
+	return filename, startTime, endTime, summary, nil
 }
 
 func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner string, filename string) error {
