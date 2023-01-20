@@ -4,4 +4,4 @@ output.tar
 packages/
 *.cdx
 *.spdx.json
-scripts/
+rumble

@@ -10,6 +10,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/chainguard-dev/rumble/pkg/types"
 	rumbletypes "github.com/chainguard-dev/rumble/pkg/types"
 )
 
@@ -18,47 +19,105 @@ func main() {
 	scanner := flag.String("scanner", "grype", "Which scanner to use, (\"trivy\" or \"grype\")")
 	attest := flag.Bool("attest", false, "If enabled, attempt to attest vuln results using cosign")
 	flag.Parse()
-	filename, err := scanImage(*image, *scanner)
+
+	// If the user is attesting, always use sarif format
+	format := "json"
+	if *attest {
+		format = "sarif"
+	}
+
+	filename, startTime, endTime, err := scanImage(*image, *scanner, format)
 	defer os.Remove(filename)
 	if err != nil {
 		panic(err)
 	}
+
 	if *attest {
 		fmt.Println("Attempting to attest scan results using cosign...")
-		if err := attestImage(*image, *scanner, filename); err != nil {
+		if err := attestImage(*image, startTime, endTime, *scanner, filename); err != nil {
 			panic(err)
 		}
 	}
 }
 
-func scanImage(image string, scanner string) (string, error) {
+func scanImage(image string, scanner string, format string) (string, *time.Time, *time.Time, error) {
 	var filename string
+	var startTime, endTime *time.Time
 	var summary *rumbletypes.ImageScanSummary
 	var err error
 	switch scanner {
 	case "trivy":
-		filename, summary, err = scanImageTrivy(image)
+		filename, startTime, endTime, summary, err = scanImageTrivy(image, format)
 	case "grype":
-		filename, summary, err = scanImageGrype(image)
+		filename, startTime, endTime, summary, err = scanImageGrype(image, format)
 	default:
 		err = fmt.Errorf("invalid scanner: %s", scanner)
 	}
 	if err != nil {
-		return "", err
+		return "", nil, nil, err
 	}
 
-	// TODO: upload this to BigQuery if certain flags set etc.
-	b, err := json.MarshalIndent(summary, "", "    ")
-	if err != nil {
-		return "", err
+	if summary != nil {
+		// TODO: upload this to BigQuery if certain flags set etc.
+		b, err := json.MarshalIndent(summary, "", "    ")
+		if err != nil {
+			return "", nil, nil, err
+		}
+		fmt.Println(string(b))
 	}
-	fmt.Println(string(b))
 
-	return filename, nil
+	return filename, startTime, endTime, nil
 }
 
-func attestImage(image string, scanner string, filename string) error {
+func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner string, filename string) error {
 	env := append(os.Environ(), "COSIGN_EXPERIMENTAL=1")
+
+	// Convert the sarif document to InToto statement
+	b, err := os.ReadFile(filename)
+	if err != nil {
+		return err
+	}
+	var sarifObj types.GrypeScanSarifOutput
+	if err := json.Unmarshal(b, &sarifObj); err != nil {
+		return err
+	}
+
+	if len(sarifObj.Runs) == 0 {
+		return fmt.Errorf("issue with grype sarif output")
+	}
+
+	var result map[string]interface{}
+	if err := json.Unmarshal(b, &result); err != nil {
+		return err
+	}
+
+	statement := rumbletypes.InTotoStatement{
+		Invocation: rumbletypes.InTotoStatementInvocation{
+			URI:       "TODO: pass this in",
+			EventID:   "TODO: pass this in",
+			BuilderID: "TODO: pass this in",
+		},
+		Scanner: rumbletypes.InTotoStatementScanner{
+			URI:     sarifObj.Runs[0].Tool.Driver.InformationURI,
+			Version: sarifObj.Runs[0].Tool.Driver.Version,
+			Result:  result,
+		},
+		Metadata: rumbletypes.InTotoStatementMetadata{
+			ScanStartedOn:  startTime.UTC().Format("2006-01-02T15:04:05Z"),
+			ScanFinishedOn: endTime.UTC().Format("2006-01-02T15:04:05Z"),
+		},
+	}
+
+	b, err = json.MarshalIndent(statement, "", "    ")
+	if err != nil {
+		return err
+	}
+
+	// Overwrite the sarif file with the intoto envelope file
+	if err := os.WriteFile(filename, b, 0644); err != nil {
+		return err
+	}
+	fmt.Println(string(b))
 
 	// Attest
 	args := []string{"attest", "--type", "vuln", "--predicate", filename, image}
@@ -81,39 +140,48 @@ func attestImage(image string, scanner string, filename string) error {
 	return cmd.Run()
 }
 
-func scanImageTrivy(image string) (string, *rumbletypes.ImageScanSummary, error) {
-	return "", nil, nil
+func scanImageTrivy(image string, format string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
+	return "", nil, nil, nil, nil
 }
 
-func scanImageGrype(image string) (string, *rumbletypes.ImageScanSummary, error) {
-	summary := &rumbletypes.ImageScanSummary{
-		Image:   image,
-		Digest:  "todo",
-		Scanner: "grype",
-		Time:    time.Now().UTC().Format("2006-01-02T15:04:05"),
-	}
+func scanImageGrype(image string, format string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
 	log.Printf("scanning %s with grype\n", image)
 	file, err := os.CreateTemp("", "grype-scan-")
 	if err != nil {
-		return "", summary, err
+		return "", nil, nil, nil, err
 	}
-	args := []string{"-v", "-o", "json", "--file", file.Name(), image}
+	args := []string{"-v", "-o", format, "--file", file.Name(), image}
 	cmd := exec.Command("grype", args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+	startTime := time.Now()
 	if err := cmd.Run(); err != nil {
-		return "", summary, err
+		return "", nil, nil, nil, err
 	}
+	endTime := time.Now()
 	b, err := os.ReadFile(file.Name())
 	if err != nil {
-		return "", summary, err
+		return "", nil, nil, nil, err
 	}
 	fmt.Println(string(b))
-	var output rumbletypes.GrypeScanOutput
-	if err := json.Unmarshal(b, &output); err != nil {
-		return "", summary, err
+	// Only attempt summary if the format is JSON
+	if format == "json" {
+		var output rumbletypes.GrypeScanOutput
+		if err := json.Unmarshal(b, &output); err != nil {
+			return "", nil, nil, nil, err
+		}
+		summary := grypeOutputToSummary(image, startTime, &output)
+		return file.Name(), &startTime, &endTime, summary, err
 	}
+	return file.Name(), &startTime, &endTime, nil, nil
+}
 
+func grypeOutputToSummary(image string, scanTime time.Time, output *rumbletypes.GrypeScanOutput) *rumbletypes.ImageScanSummary {
+	summary := &rumbletypes.ImageScanSummary{
+		Image:   image,
+		Scanner: "grype",
+		Time:    scanTime.UTC().Format("2006-01-02T15:04:05Z"),
+	}
 	// TODO:Create dat summary!
 	summary.Success = true
 	summary.ScannerVersion = output.Descriptor.Version
@@ -142,6 +210,5 @@ func scanImageGrype(image string) (string, *rumbletypes.ImageScanSummary, error)
 			fmt.Printf("WARNING: unknown severity: %s\n", match.Vulnerability.Severity)
 		}
 	}
-
-	return file.Name(), summary, nil
+	return summary
 }
