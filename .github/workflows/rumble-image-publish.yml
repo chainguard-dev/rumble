@@ -42,8 +42,10 @@ jobs:
           DOCKER_CONFIG: ${{ steps.login.outputs.docker-config }}
         run: |
           set -x
+          env > github.env
+          echo "DOCKER_CONFIG=/config" >> github.env
           docker run --rm -v "${DOCKER_CONFIG}":/config \
-            -e DOCKER_CONFIG=/config \
+            --env-file github.env \
             "${REF}" \
             -image "${REF}" \
             -attest
