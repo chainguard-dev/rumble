@@ -16,6 +16,12 @@ import (
 	rumbletypes "github.com/chainguard-dev/rumble/pkg/types"
 )
 
+var (
+	GcloudProject = os.Getenv("GCLOUD_PROJECT")
+	GcloudDataset = os.Getenv("GCLOUD_DATASET")
+	GcloudTable   = os.Getenv("GCLOUD_TABLE")
+)
+
 func main() {
 	image := flag.String("image", "cgr.dev/chainguard/static:latest", "OCI image")
 	scanner := flag.String("scanner", "grype", "Which scanner to use, (\"trivy\" or \"grype\")")
@@ -49,14 +55,14 @@ func main() {
 		fmt.Println("im here")
 
 		ctx := context.Background()
-		client, err := bigquery.NewClient(ctx, "MY_GCLOUD_PROJECT") // TODO: make option
+		client, err := bigquery.NewClient(ctx, GcloudProject)
 		if err != nil {
 			panic(err)
 		}
 
-		dataset := client.Dataset("MY_GCLOUD_DATASET") // TODO: make option
+		dataset := client.Dataset(GcloudDataset)
 
-		table := dataset.Table("MY_GCLOUD_TABLE") // TODO: make option
+		table := dataset.Table(GcloudTable)
 
 		u := table.Inserter()
 		if err := u.Put(ctx, summary); err != nil {

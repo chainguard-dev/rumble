@@ -6,6 +6,9 @@ on:
   #  - cron: '0 1 * * *'
 env:
   REF: "ghcr.io/chainguard-dev/rumble:latest"
+  GCLOUD_PROJECT: ${{ secrets.GCLOUD_PROJECT }}
+	GCLOUD_DATASET: ${{ secrets.GCLOUD_DATASET }}
+	GCLOUD_TABLE: ${{ secrets.GCLOUD_TABLE }}
 concurrency: chainguard-public-scan
 jobs:
   generate-matrix:
