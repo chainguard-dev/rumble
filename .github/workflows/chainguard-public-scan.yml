@@ -48,9 +48,8 @@ jobs:
             cat matrix.json | jq '.include += [{ref: "'${name}'"}]' > matrix.json.tmp
             mv matrix.json.tmp matrix.json
           done < images.txt
-          cat matrix.json | jq -c -M > matrix.json.tmp
-          mv matrix.json.tmp matrix.json
-          echo "matrix=$(cat matrix.json)" >> $GITHUB_OUTPUT
+          cat matrix.json | jq
+          echo "matrix=$(cat matrix.json | jq -c -M)" >> $GITHUB_OUTPUT
   scan-chainguard:
     runs-on: ubuntu-latest
     needs: generate-matrix-chainguard
