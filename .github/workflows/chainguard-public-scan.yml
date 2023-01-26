@@ -21,7 +21,7 @@ jobs:
       - id: monopod
         run: |
           set -x
-          cd chainguard-public-images/
+          cd chainguard-public-images/monopod/
           go build -o /tmp/monopod monopod.go
       - id: generate-matrix
         run: |
