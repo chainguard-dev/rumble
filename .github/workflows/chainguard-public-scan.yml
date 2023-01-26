@@ -12,7 +12,7 @@ env:
   GOOGLE_APPLICATION_CREDENTIALS_BASE64: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}
 concurrency: chainguard-public-scan
 jobs:
-  generate-matrix:
+  generate-matrix-chainguard:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.generate-matrix.outputs.matrix }}
@@ -34,12 +34,29 @@ jobs:
           set -x
           cd chainguard-public-images/ 
           echo "matrix=$(/tmp/monopod matrix)" >> $GITHUB_OUTPUT
-  build:
+  generate-matrix-external:
     runs-on: ubuntu-latest
-    needs: generate-matrix
+    outputs:
+      matrix: ${{ steps.generate-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # v3.1.0
+      - id: generate-matrix
+        run: |
+          set -x
+          while read name
+          do
+            cat matrix.json | jq '.include += [{ref: "'${name}'"}]' > matrix.json.tmp
+            mv matrix.json.tmp matrix.json
+          done < images.txt
+          cat matrix.json | jq -c -M > matrix.json.tmp
+          mv matrix.json.tmp matrix.json
+          echo "matrix=$(cat matrix.json)" >> $GITHUB_OUTPUT
+  scan-chainguard:
+    runs-on: ubuntu-latest
+    needs: generate-matrix-chainguard
     strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.generate-matrix-chainguard.outputs.matrix) }}
     permissions:
       id-token: write
       packages: write
@@ -50,6 +67,30 @@ jobs:
           set -x
           echo "${GOOGLE_APPLICATION_CREDENTIALS_BASE64}" | base64 -d > google-creds.json
           IMAGE="$(echo "${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}" | sed 's|^ghcr\.io/chainguard-images/|cgr.dev/chainguard/|')"
+          echo "Scanning: ${IMAGE}"
+          env > github.env
+          echo "GOOGLE_APPLICATION_CREDENTIALS=/google-creds.json" >> github.env
+          docker run --rm \
+            -v "${PWD}/google-creds.json":/google-creds.json \
+            --env-file github.env \
+            "${REF}" \
+            -image "${IMAGE}"
+  scan-external:
+    runs-on: ubuntu-latest
+    needs: generate-matrix-external
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.generate-matrix-external.outputs.matrix) }}
+    permissions:
+      id-token: write
+      packages: write
+      contents: read
+    steps:
+      - name: Run rumble on image
+        run: |
+          set -x
+          echo "${GOOGLE_APPLICATION_CREDENTIALS_BASE64}" | base64 -d > google-creds.json
+          IMAGE="$(echo "${{ matrix.ref }}" | sed 's|^ghcr\.io/chainguard-images/|cgr.dev/chainguard/|')"
           echo "Scanning: ${IMAGE}"
           env > github.env
           echo "GOOGLE_APPLICATION_CREDENTIALS=/google-creds.json" >> github.env
