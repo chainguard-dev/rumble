@@ -1,9 +1,10 @@
 on:
-  push:
-    branches:
-      - main
-  #schedule:
-  #  - cron: '0 1 * * *'
+  #push:
+  #  branches:
+  #    - main
+  schedule:
+    - cron: '0 1 * * *'
+  workflow_dispatch: {}
 env:
   REF: "ghcr.io/chainguard-dev/rumble:latest"
   GCLOUD_PROJECT: ${{ secrets.GCLOUD_PROJECT }}
