@@ -1,3 +1,4 @@
+name: scan
 on:
   schedule:
     - cron: '0 13 * * *' # 8am eastern
@@ -8,7 +9,7 @@ env:
   GCLOUD_DATASET: ${{ secrets.GCLOUD_DATASET }}
   GCLOUD_TABLE: ${{ secrets.GCLOUD_TABLE }}
   GOOGLE_APPLICATION_CREDENTIALS_BASE64: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}
-concurrency: chainguard-public-scan
+concurrency: scan
 jobs:
   generate-matrix-chainguard:
     runs-on: ubuntu-latest
