@@ -2,7 +2,7 @@ name: rumble-image-publish
 on:
   push:
     branches:
-      - mainTODO
+      - main
   #schedule:
   #  - cron: '30 12 * * *'
   workflow_dispatch: {}
