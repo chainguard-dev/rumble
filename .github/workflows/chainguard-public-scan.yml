@@ -43,6 +43,7 @@ jobs:
       - id: generate-matrix
         run: |
           set -x
+          echo '{"include":[]}' > matrix.json
           while read name
           do
             cat matrix.json | jq '.include += [{ref: "'${name}'"}]' > matrix.json.tmp
