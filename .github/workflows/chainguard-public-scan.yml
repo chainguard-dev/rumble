@@ -42,4 +42,4 @@ jobs:
       - name: woo
         run: |
           set -x
-          echo '${{ matrix }}'
+          echo "Scanning: ${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}"
