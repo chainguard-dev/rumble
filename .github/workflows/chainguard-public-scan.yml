@@ -52,10 +52,8 @@ jobs:
           IMAGE="$(echo "${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}" | sed 's|^ghcr\.io/chainguard-images/|cgr.dev/chainguard/|')"
           echo "Scanning: ${IMAGE}"
           env > github.env
-          echo "DOCKER_CONFIG=/config" >> github.env
-          echo "GOOGLE_APPLICATION_CREDENTIALS=/google-creds.json"
+          echo "GOOGLE_APPLICATION_CREDENTIALS=/google-creds.json" >> github.env
           docker run --rm \
-            -v "${DOCKER_CONFIG}":/config \
             -v "${PWD}/google-creds.json":/google-creds.json \
             --env-file github.env \
             "${REF}" \
