@@ -42,4 +42,5 @@ jobs:
       - name: woo
         run: |
           set -x
-          echo "Scanning: ${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}"
+          REF="$(echo "${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}" | sed 's|^ghcr\.io/chainguard-images/|cgr.dev/chainguard/|')"
+          echo "Scanning: ${REF}"
