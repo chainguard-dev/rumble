@@ -4,6 +4,8 @@ on:
       - main
   #schedule:
   #  - cron: '0 1 * * *'
+env:
+  REF: "ghcr.io/chainguard-dev/rumble:latest"
 concurrency: chainguard-public-scan
 jobs:
   generate-matrix:
@@ -39,8 +41,14 @@ jobs:
       packages: write
       contents: read
     steps:
-      - name: woo
+      - name: Run rumble on image
         run: |
           set -x
-          REF="$(echo "${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}" | sed 's|^ghcr\.io/chainguard-images/|cgr.dev/chainguard/|')"
-          echo "Scanning: ${REF}"
+          IMAGE="$(echo "${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}" | sed 's|^ghcr\.io/chainguard-images/|cgr.dev/chainguard/|')"
+          echo "Scanning: ${IMAGE}"
+          env > github.env
+          echo "DOCKER_CONFIG=/config" >> github.env
+          docker run --rm -v "${DOCKER_CONFIG}":/config \
+            --env-file github.env \
+            "${REF}" \
+            -image "${IMAGE}"
