@@ -1,10 +1,5 @@
 name: rumble-image-publish
 on:
-  push:
-    branches:
-      - mainNOPUB
-  #schedule:
-  #  - cron: '30 12 * * *'
   workflow_dispatch: {}
 env:
   REF: "ghcr.io/chainguard-dev/rumble:latest"
