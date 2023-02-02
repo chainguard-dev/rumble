@@ -69,11 +69,14 @@ jobs:
           echo "Scanning: ${IMAGE}"
           env > github.env
           echo "GOOGLE_APPLICATION_CREDENTIALS=/google-creds.json" >> github.env
-          docker run --rm \
-            -v "${PWD}/google-creds.json":/google-creds.json \
-            --env-file github.env \
-            "${REF}" \
-            -image "${IMAGE}"
+          for scanner in "grype" "trivy"; do
+            docker run --rm \
+              -v "${PWD}/google-creds.json":/google-creds.json \
+              --env-file github.env \
+              "${REF}" \
+              -image "${IMAGE}" \
+              -scanner "${scanner}"
+          done
   scan-external:
     runs-on: ubuntu-latest
     needs: generate-matrix-external
@@ -93,8 +96,11 @@ jobs:
           echo "Scanning: ${IMAGE}"
           env > github.env
           echo "GOOGLE_APPLICATION_CREDENTIALS=/google-creds.json" >> github.env
-          docker run --rm \
-            -v "${PWD}/google-creds.json":/google-creds.json \
-            --env-file github.env \
-            "${REF}" \
-            -image "${IMAGE}"
+          for scanner in "grype" "trivy"; do
+            docker run --rm \
+              -v "${PWD}/google-creds.json":/google-creds.json \
+              --env-file github.env \
+              "${REF}" \
+              -image "${IMAGE}" \
+              -scanner "${scanner}"
+          done
