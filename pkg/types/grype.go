@@ -31,19 +31,19 @@ type GrypeScanOutputMatchesVulnerability struct {
 	Severity string `json:"severity"`
 }
 
-type GrypeScanSarifOutput struct {
-	Runs []GrypeScanSarifOutputRun `json:"runs"`
+type SarifOutput struct {
+	Runs []SarifOutputRun `json:"runs"`
 }
 
-type GrypeScanSarifOutputRun struct {
-	Tool GrypeScanSarifOutputRunTool `json:"tool"`
+type SarifOutputRun struct {
+	Tool SarifOutputRunTool `json:"tool"`
 }
 
-type GrypeScanSarifOutputRunTool struct {
-	Driver GrypeScanSarifOutputRunToolDriver `json:"driver"`
+type SarifOutputRunTool struct {
+	Driver SarifOutputRunToolDriver `json:"driver"`
 }
 
-type GrypeScanSarifOutputRunToolDriver struct {
+type SarifOutputRunToolDriver struct {
 	InformationURI string `json:"informationUri"`
 	Version        string `json:"version"`
 }

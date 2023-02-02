@@ -28,6 +28,9 @@ func main() {
 	scanner := flag.String("scanner", "grype", "Which scanner to use, (\"trivy\" or \"grype\")")
 	attest := flag.Bool("attest", false, "If enabled, attempt to attest vuln results using cosign")
 	bigqueryUpload := flag.Bool("bigquery", true, "If enabled, attempt to upload results to BigQuery")
+	invocationURI := flag.String("invocation-uri", "unknown", "in-toto value for invocation uri")
+	invocationEventID := flag.String("invocation-event-id", "unknown", "in-toto value for invocation event_id")
+	invocationBuilderID := flag.String("invocation-builder-id", "unknown", "in-toto value for invocation builder.id")
 	flag.Parse()
 
 	// If the user is attesting, always use sarif format
@@ -44,7 +47,7 @@ func main() {
 
 	if *attest {
 		fmt.Println("Attempting to attest scan results using cosign...")
-		if err := attestImage(*image, startTime, endTime, *scanner, filename); err != nil {
+		if err := attestImage(*image, startTime, endTime, *scanner, *invocationURI, *invocationEventID, *invocationBuilderID, filename); err != nil {
 			panic(err)
 		}
 	} else {
@@ -92,7 +95,7 @@ func scanImage(image string, scanner string, format string) (string, *time.Time,
 	return filename, startTime, endTime, summary, nil
 }
 
-func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner string, filename string) error {
+func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner string, invocationURI string, invocationEventID string, invocationBuilderID string, filename string) error {
 	env := append(os.Environ(), "COSIGN_EXPERIMENTAL=1")
 
 	// Convert the sarif document to InToto statement
@@ -100,7 +103,7 @@ func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner
 	if err != nil {
 		return err
 	}
-	var sarifObj types.GrypeScanSarifOutput
+	var sarifObj types.SarifOutput
 	if err := json.Unmarshal(b, &sarifObj); err != nil {
 		return err
 	}
@@ -116,9 +119,9 @@ func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner
 
 	statement := rumbletypes.InTotoStatement{
 		Invocation: rumbletypes.InTotoStatementInvocation{
-			URI:       "TODO: pass this in",
-			EventID:   "TODO: pass this in",
-			BuilderID: "TODO: pass this in",
+			URI:       invocationURI,
+			EventID:   invocationEventID,
+			BuilderID: invocationBuilderID,
 		},
 		Scanner: rumbletypes.InTotoStatementScanner{
 			URI:     sarifObj.Runs[0].Tool.Driver.InformationURI,
@@ -245,7 +248,7 @@ func grypeOutputToSummary(image string, scanTime time.Time, output *rumbletypes.
 		Scanner: "grype",
 		Time:    scanTime.UTC().Format("2006-01-02T15:04:05Z"),
 	}
-	// TODO:Create dat summary!
+
 	summary.Success = true
 	summary.ScannerVersion = output.Descriptor.Version
 	summary.ScannerDbVersion = output.Descriptor.Db.Checksum
@@ -291,6 +294,7 @@ func trivyOutputToSummary(image string, scanTime time.Time, output *rumbletypes.
 	// TODO: get the digest beforehand
 	summary.Digest = strings.Split(output.Metadata.RepoDigests[0], "@")[1]
 
+	// CVE counts by severity
 	totalCveCount := 0
 	for _, result := range output.Results {
 		for _, vuln := range result.Vulnerabilities {

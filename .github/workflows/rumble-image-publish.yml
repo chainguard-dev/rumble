@@ -44,8 +44,14 @@ jobs:
           set -x
           env > github.env
           echo "DOCKER_CONFIG=/config" >> github.env
-          docker run --rm -v "${DOCKER_CONFIG}":/config \
-            --env-file github.env \
-            "${REF}" \
-            -image "${REF}" \
-            -attest
+          for scanner in "grype" "trivy"; do
+            docker run --rm -v "${DOCKER_CONFIG}":/config \
+              --env-file github.env \
+              "${REF}" \
+              -image "${REF}" \
+              -scanner "${scanner}" \
+              -attest \
+              -invocation-uri "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+              -invocation-event-id "${{ github.run_id }}" \
+              -invocation-builder-id "${{ github.workflow }}"
+          done
