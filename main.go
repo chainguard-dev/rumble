@@ -169,7 +169,7 @@ func scanImageTrivy(image string, format string) (string, *time.Time, *time.Time
 	if err != nil {
 		return "", nil, nil, nil, err
 	}
-	args := []string{"--debug", "image", "-f", format, "-o", file.Name(), image}
+	args := []string{"--debug", "image", "--offline-scan", "-f", format, "-o", file.Name(), image}
 	cmd := exec.Command("trivy", args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
