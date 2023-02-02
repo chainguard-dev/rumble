@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"flag"
@@ -26,6 +27,7 @@ func main() {
 	image := flag.String("image", "cgr.dev/chainguard/static:latest", "OCI image")
 	scanner := flag.String("scanner", "grype", "Which scanner to use, (\"trivy\" or \"grype\")")
 	attest := flag.Bool("attest", false, "If enabled, attempt to attest vuln results using cosign")
+	bigqueryUpload := flag.Bool("bigquery", true, "If enabled, attempt to upload results to BigQuery")
 	flag.Parse()
 
 	// If the user is attesting, always use sarif format
@@ -46,46 +48,28 @@ func main() {
 			panic(err)
 		}
 	} else {
-		// TODO: upload this to BigQuery if certain flags set etc.
+		// Print the summary
 		b, err := json.MarshalIndent(summary, "", "    ")
 		if err != nil {
 			panic(err)
 		}
 		fmt.Println(string(b))
-		fmt.Println("im here")
 
-		ctx := context.Background()
-		client, err := bigquery.NewClient(ctx, GcloudProject)
-		if err != nil {
-			panic(err)
-		}
-
-		dataset := client.Dataset(GcloudDataset)
-
-		table := dataset.Table(GcloudTable)
-
-		u := table.Inserter()
-		if err := u.Put(ctx, summary); err != nil {
-			panic(err)
-		}
-
-		/*
-			TODO: put the table schema creation elsewhere?
-			schema, err := bigquery.InferSchema(rumbletypes.ImageScanSummary{})
+		if *bigqueryUpload {
+			// Upload to BigQuery
+			ctx := context.Background()
+			client, err := bigquery.NewClient(ctx, GcloudProject)
 			if err != nil {
 				panic(err)
 			}
-
-			if err := table.Create(ctx, &bigquery.TableMetadata{Schema: schema}); err != nil {
+			dataset := client.Dataset(GcloudDataset)
+			table := dataset.Table(GcloudTable)
+			u := table.Inserter()
+			if err := u.Put(ctx, summary); err != nil {
 				panic(err)
 			}
-		*/
+		}
 
-		/*
-					if err := table.Create(ctx, &bigquery.TableMetadata{Schema: schema1}); err != nil {
-			    // TODO: Handle error.
-			}
-		*/
 	}
 }
 
@@ -180,7 +164,47 @@ func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner
 }
 
 func scanImageTrivy(image string, format string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
-	return "", nil, nil, nil, nil
+	log.Printf("scanning %s with trivy\n", image)
+	file, err := os.CreateTemp("", "trivy-scan-")
+	if err != nil {
+		return "", nil, nil, nil, err
+	}
+	args := []string{"--debug", "image", "-f", format, "-o", file.Name(), image}
+	cmd := exec.Command("trivy", args...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	startTime := time.Now()
+	if err := cmd.Run(); err != nil {
+		return "", nil, nil, nil, err
+	}
+	endTime := time.Now()
+	b, err := os.ReadFile(file.Name())
+	if err != nil {
+		return "", nil, nil, nil, err
+	}
+	fmt.Println(string(b))
+
+	// Get the trivy version
+	var out bytes.Buffer
+	cmd = exec.Command("trivy", "--version", "-f", "json")
+	cmd.Stdout = &out
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		return "", nil, nil, nil, err
+	}
+	var trivyVersion types.TrivyVersionOutput
+	if err := json.Unmarshal(out.Bytes(), &trivyVersion); err != nil {
+		return "", nil, nil, nil, err
+	}
+	if format == "json" {
+		var output rumbletypes.TrivyScanOutput
+		if err := json.Unmarshal(b, &output); err != nil {
+			return "", nil, nil, nil, err
+		}
+		summary := trivyOutputToSummary(image, startTime, &output, &trivyVersion)
+		return file.Name(), &startTime, &endTime, summary, err
+	}
+	return file.Name(), &startTime, &endTime, nil, nil
 }
 
 func scanImageGrype(image string, format string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
@@ -249,5 +273,44 @@ func grypeOutputToSummary(image string, scanTime time.Time, output *rumbletypes.
 			fmt.Printf("WARNING: unknown severity: %s\n", match.Vulnerability.Severity)
 		}
 	}
+	return summary
+}
+
+func trivyOutputToSummary(image string, scanTime time.Time, output *rumbletypes.TrivyScanOutput, trivyVersion *rumbletypes.TrivyVersionOutput) *rumbletypes.ImageScanSummary {
+	summary := &rumbletypes.ImageScanSummary{
+		Image:              image,
+		Scanner:            "trivy",
+		Time:               scanTime.UTC().Format("2006-01-02T15:04:05Z"),
+		NegligibleCveCount: 0, // This is only available in Grype output
+	}
+
+	summary.Success = true
+	summary.ScannerVersion = trivyVersion.Version
+	summary.ScannerDbVersion = trivyVersion.VulnerabilityDB.UpdatedAt
+
+	// TODO: get the digest beforehand
+	summary.Digest = strings.Split(output.Metadata.RepoDigests[0], "@")[1]
+
+	totalCveCount := 0
+	for _, result := range output.Results {
+		for _, vuln := range result.Vulnerabilities {
+			totalCveCount++
+			switch vuln.Severity {
+			case "LOW":
+				summary.LowCveCount++
+			case "MEDIUM":
+				summary.MedCveCount++
+			case "HIGH":
+				summary.HighCveCount++
+			case "CRITICAL":
+				summary.CritCveCount++
+			case "UNKNOWN":
+				summary.UnknownCveCount++
+			default:
+				fmt.Printf("WARNING: unknown severity: %s\n", vuln.Severity)
+			}
+		}
+	}
+	summary.TotCveCount = totalCveCount
 	return summary
 }
