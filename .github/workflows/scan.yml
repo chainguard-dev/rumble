@@ -61,9 +61,6 @@ jobs:
       packages: write
       contents: read
     steps:
-      - name: kill me
-        run: |
-          exit 1
       - name: Run rumble on image
         run: |
           set -x
@@ -91,9 +88,6 @@ jobs:
       packages: write
       contents: read
     steps:
-      - name: kill me
-        run: |
-          exit 1
       - name: Run rumble on image
         run: |
           set -x
