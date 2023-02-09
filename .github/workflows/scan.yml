@@ -61,6 +61,9 @@ jobs:
       packages: write
       contents: read
     steps:
+      - name: kill me
+        run: |
+          exit 1
       - name: Run rumble on image
         run: |
           set -x
@@ -88,6 +91,9 @@ jobs:
       packages: write
       contents: read
     steps:
+      - name: kill me
+        run: |
+          exit 1
       - name: Run rumble on image
         run: |
           set -x
@@ -104,3 +110,16 @@ jobs:
               -image "${IMAGE}" \
               -scanner "${scanner}"
           done
+
+  slack-notif:
+    needs: [scan-chainguard,scan-external]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
+        if: failure()
+        id: slack
+        with:
+          payload: '{"text": "[scan] failed: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
