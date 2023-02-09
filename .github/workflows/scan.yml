@@ -38,8 +38,6 @@ jobs:
     outputs:
       matrix: ${{ steps.generate-matrix.outputs.matrix }}
     steps:
-      - run: |
-          exit 1
       - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # v3.1.0
       - id: generate-matrix
         run: |
@@ -63,6 +61,8 @@ jobs:
       packages: write
       contents: read
     steps:
+      - run: |
+          exit 1
       - name: Run rumble on image
         run: |
           set -x
