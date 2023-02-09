@@ -63,8 +63,6 @@ jobs:
       packages: write
       contents: read
     steps:
-      - run: |
-          exit 1
       - name: Run rumble on image
         id: rumble-chainguard
         run: |
