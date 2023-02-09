@@ -106,12 +106,13 @@ jobs:
               -image "${IMAGE}" \
               -scanner "${scanner}"
           done
-
-  slack-notif:
-    if: failure()
+  roundup:
+    if: always()
+    needs: [scan-chainguard,scan-external]
     runs-on: ubuntu-latest
     steps:
       - uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
+        if: failure()
         id: slack
         with:
           payload: '{"text": "[scan] failed: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
