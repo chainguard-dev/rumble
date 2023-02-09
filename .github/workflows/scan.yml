@@ -38,6 +38,8 @@ jobs:
     outputs:
       matrix: ${{ steps.generate-matrix.outputs.matrix }}
     steps:
+      - run: |
+          exit 1
       - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # v3.1.0
       - id: generate-matrix
         run: |
@@ -106,11 +108,10 @@ jobs:
           done
 
   slack-notif:
-    needs: [scan-chainguard,scan-external]
+    if: failure()
     runs-on: ubuntu-latest
     steps:
       - uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
-        if: failure()
         id: slack
         with:
           payload: '{"text": "[scan] failed: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
