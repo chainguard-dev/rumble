@@ -53,6 +53,8 @@ jobs:
   scan-chainguard:
     runs-on: ubuntu-latest
     needs: generate-matrix-chainguard
+    outputs:
+      success: ${{ steps.rumble-chainguard.outputs.success }}
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.generate-matrix-chainguard.outputs.matrix) }}
@@ -64,6 +66,7 @@ jobs:
       - run: |
           exit 1
       - name: Run rumble on image
+        id: rumble-chainguard
         run: |
           set -x
           echo "${GOOGLE_APPLICATION_CREDENTIALS_BASE64}" | base64 -d > google-creds.json
@@ -79,9 +82,13 @@ jobs:
               -image "${IMAGE}" \
               -scanner "${scanner}"
           done
+          echo "success=true" >> $GITHUB_OUTPUT
+
   scan-external:
     runs-on: ubuntu-latest
     needs: generate-matrix-external
+    outputs:
+      success: ${{ steps.rumble-external.outputs.success }}
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.generate-matrix-external.outputs.matrix) }}
@@ -91,6 +98,7 @@ jobs:
       contents: read
     steps:
       - name: Run rumble on image
+        id: rumble-external
         run: |
           set -x
           echo "${GOOGLE_APPLICATION_CREDENTIALS_BASE64}" | base64 -d > google-creds.json
@@ -106,13 +114,15 @@ jobs:
               -image "${IMAGE}" \
               -scanner "${scanner}"
           done
+          echo "success=true" >> $GITHUB_OUTPUT
+
   roundup:
     if: always()
     needs: [scan-chainguard,scan-external]
     runs-on: ubuntu-latest
     steps:
       - uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
-        if: failure()
+        if: ${{ needs.scan-chainguard.outputs.success != 'true' || needs.scan-external.outputs.success != 'true' }}
         id: slack
         with:
           payload: '{"text": "[scan] failed: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
