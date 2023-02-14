@@ -1,0 +1,22 @@
+name: Scan an image and attest the result
+description: |
+  This action scans an image using either trivy or grype,
+  then attests the result using cosign.
+inputs:
+  image:
+    description: OCI image
+    required: true
+  scanner:
+    type: choice
+    description: Which scanner to use, ("trivy" or "grype")
+    options: [grype, trivy]
+    required: true
+runs:
+  using: docker
+  image: docker://ghcr.io/chainguard-dev/rumble:latest
+  args:
+    - -image=${{ inputs.image }}
+    - -scanner=${{ inputs.scanner }}
+    - -invocation-builder-id=${{ github.workflow }}
+    - -invocation-event-id=${{ github.run_id }}
+    - -invocation-uri=https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
