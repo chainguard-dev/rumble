@@ -20,3 +20,4 @@ runs:
     - -invocation-builder-id=${{ github.workflow }}
     - -invocation-event-id=${{ github.run_id }}
     - -invocation-uri=https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    - -attest
