@@ -11,13 +11,25 @@ inputs:
     description: Which scanner to use, ("trivy" or "grype")
     options: [grype, trivy]
     required: true
+  invocation-builder-id:
+    description: in-toto value for invocation builder.id
+    default: ${{ github.workflow }}
+    required: true
+  invocation-event-id:
+    description: in-toto value for invocation event_id
+    default: ${{ github.run_id }}
+    required: true
+  invocation-uri:
+    description: in-toto value for invocation event_id
+    default: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    required: true
 runs:
   using: docker
   image: docker://ghcr.io/chainguard-dev/rumble:latest
   args:
     - -image=${{ inputs.image }}
     - -scanner=${{ inputs.scanner }}
-    - -invocation-builder-id=${{ github.workflow }}
-    - -invocation-event-id=${{ github.run_id }}
-    - -invocation-uri=https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+    - -invocation-builder-id=${{ inputs.invocation-builder-id }}
+    - -invocation-event-id=${{ inputs.invocation-event-id }}
+    - -invocation-uri=${{ inputs.invocation-uri }}
     - -attest
