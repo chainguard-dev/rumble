@@ -13,7 +13,9 @@ First, many popular container images, often pulled from Docker Hub, have [hundre
 Second, these vulnerabilities can be a source of compromise, offering attackers a way to gain access to container-based applications.
 Third, because many reported vulnerabilities are either false positives or otherwise do not represent an actual vulnerability, these high CVE counts are a source of wasted staff time since one or more teams must triage the sometimes high number of CVEs.
 
-## How to Use the GitHub Action
+## How the `action.yaml` GitHub Action Works
+
+This GitHub Action scans and attests a container image.
 
 ## How Daily Logging of CVEs Works
 
