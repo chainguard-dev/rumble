@@ -3,7 +3,7 @@
 Collect data on the number of CVEs in a set of container images, including both [Chainguard Images](https://www.chainguard.dev/chainguard-images) and other images. 
 
 This repository serves two purposes:
-- Provides a GitHub Action that uses a set of scanners to output CVE data on a container image.
+- Provides a GitHub Action that scans and attests a container image.
 - Logs daily CVE information on Chainguard Images and set of other images.
 
 ## Background
