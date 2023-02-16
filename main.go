@@ -9,6 +9,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"sort"
 	"strings"
 	"time"
 
@@ -27,11 +28,22 @@ func main() {
 	image := flag.String("image", "cgr.dev/chainguard/static:latest", "OCI image")
 	scanner := flag.String("scanner", "grype", "Which scanner to use, (\"trivy\" or \"grype\")")
 	attest := flag.Bool("attest", false, "If enabled, attempt to attest vuln results using cosign")
+	printenv := flag.Bool("printenv", false, "just print the environment and exit")
 	bigqueryUpload := flag.Bool("bigquery", true, "If enabled, attempt to upload results to BigQuery")
 	invocationURI := flag.String("invocation-uri", "unknown", "in-toto value for invocation uri")
 	invocationEventID := flag.String("invocation-event-id", "unknown", "in-toto value for invocation event_id")
 	invocationBuilderID := flag.String("invocation-builder-id", "unknown", "in-toto value for invocation builder.id")
 	flag.Parse()
+
+	if *printenv {
+		tmp := []string{}
+		tmp = append(tmp, os.Environ()...)
+		sort.Strings(tmp)
+		for _, x := range tmp {
+			fmt.Println(x)
+		}
+		os.Exit(0)
+	}
 
 	// If the user is attesting, always use sarif format
 	format := "json"
