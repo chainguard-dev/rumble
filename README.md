@@ -28,10 +28,13 @@ GCLOUD_PROJECT=*** GCLOUD_DATASET=*** GCLOUD_TABLE=***  go run cmd/tableinit/mai
 ## FAQ
 
 *Is the daily logged CVE data available?*
+
 Not currently. It might be in the future. If you are interested in the data, please open an issue.
 
 *What scanners does `rumble` currently support?*
+
 `trivy` and `grype`.
 
 *How do I learn more about Chainguard images?*
+
 You can request a demo [here](https://www.chainguard.dev/get-demo). You can also check out documentation on the Chainguard [website](https://www.chainguard.dev/chainguard-images) or [GitHub](https://github.com/chainguard-images/).
