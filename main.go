@@ -42,6 +42,18 @@ func main() {
 		for _, x := range tmp {
 			fmt.Println(x)
 		}
+		for _, x := range tmp {
+			if strings.HasPrefix(x, "GOOGLE_APPLICATION_CREDENTIALS=") {
+				tmp := strings.Split(x, "=")
+				credFile := tmp[1]
+				fmt.Printf("Checking for existance of %s ...\n", credFile)
+				if _, err := os.Stat(credFile); err == nil {
+					fmt.Println("Able to find GOOGLE_APPLICATION_CREDENTIALS file")
+				} else {
+					fmt.Println("Unable to find GOOGLE_APPLICATION_CREDENTIALS file")
+				}
+			}
+		}
 		os.Exit(0)
 	}
 
