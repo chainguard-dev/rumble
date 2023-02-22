@@ -122,6 +122,14 @@ func scanImage(image string, scanner string, format string) (string, *time.Time,
 func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner string, invocationURI string, invocationEventID string, invocationBuilderID string, filename string) error {
 	env := append(os.Environ(), "COSIGN_EXPERIMENTAL=1")
 
+	// If pushing to gcloud, we use GOOGLE_APPLICATION_CREDENTIALS, so make sure
+	// that any valid docker config is not used
+	if strings.Contains(image, "gcr.io/") || strings.Contains(image, "pkg.dev/") {
+		if dockerDummyConfig := os.Getenv("DOCKER_DUMMY_CONFIG"); dockerDummyConfig != "" {
+			env = append(env, fmt.Sprintf("DOCKER_CONFIG=%s", dockerDummyConfig))
+		}
+	}
+
 	// Convert the sarif document to InToto statement
 	b, err := os.ReadFile(filename)
 	if err != nil {

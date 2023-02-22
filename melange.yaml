@@ -32,3 +32,8 @@ pipeline:
     runs: |
       set -x
       CGO_ENABLED=0 go build -o "${{targets.destdir}}/usr/sbin/rumble" .
+  - name: Create dummy Docker config for Google Cloud
+    runs: |
+      set -x
+      mkdir -p "${{targets.destdir}}/etc/rumble/docker-dummy"
+      echo '{}' > "${{targets.destdir}}/etc/rumble/docker-dummy/config.json"

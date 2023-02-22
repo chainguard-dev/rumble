@@ -11,3 +11,5 @@ contents:
 work-dir: /work
 entrypoint:
   command: /usr/sbin/rumble
+environment:
+  DOCKER_DUMMY_CONFIG: /etc/rumble/docker-dummy
