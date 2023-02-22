@@ -160,14 +160,17 @@ func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner
 		return err
 	}
 
-	// Verify
+	// Verify (only warn on error since we may not be able to verify private images)
 	args = []string{"verify-attestation", "--type", "vuln", image}
 	cmd = exec.Command("cosign", args...)
 	fmt.Printf("Running verify command \"cosign %s\"...\n", strings.Join(args, " "))
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	cmd.Env = env
-	return cmd.Run()
+	if err := cmd.Run(); err != nil {
+		fmt.Printf("WARNING: Could not verify attestation (is this a private image?): %s\n", err.Error())
+	}
+	return nil
 }
 
 func scanImageTrivy(image string, format string, dockerConfig string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
