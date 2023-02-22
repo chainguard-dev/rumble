@@ -23,6 +23,10 @@ inputs:
     description: in-toto value for invocation event_id
     default: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
     required: true
+  docker-config:
+    description: explicit location of docker config directory
+    default: ""
+    required: false
 runs:
   using: docker
   image: docker://ghcr.io/chainguard-dev/rumble:latest
@@ -34,12 +38,13 @@ runs:
       set -o pipefail
       set -x
       env
+      DOCKER_CONFIG_OVERRIDE="${{ inputs.docker-config }}"
+      if [[ "${DOCKER_CONFIG_OVERRIDE}" != "" ]]; then
+        export DOCKER_CONFIG="${DOCKER_CONFIG_OVERRIDE}"
+      fi
       SRC="${{ inputs.image }}"
       DST="$(echo "${SRC}" | cut -f1 -d"@"):copy"
-      ls -la "${HOME}/.docker" || true
-      cat "${HOME}/.docker/config.json" || true
-      cosign copy -f "${SRC}" "${DST}" || ( \
-        rm -rf "${HOME}/.docker" && cosign copy -f "${SRC}" "${DST}" )
+      cosign copy -f "${SRC}" "${DST}"
   # args:
   #   - -image=${{ inputs.image }}
   #   - -scanner=${{ inputs.scanner }}
