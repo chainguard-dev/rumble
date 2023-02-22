@@ -26,10 +26,19 @@ inputs:
 runs:
   using: docker
   image: docker://ghcr.io/chainguard-dev/rumble:latest
+  entrypoint: /bin/sh
   args:
-    - -image=${{ inputs.image }}
-    - -scanner=${{ inputs.scanner }}
-    - -invocation-builder-id=${{ inputs.invocation-builder-id }}
-    - -invocation-event-id=${{ inputs.invocation-event-id }}
-    - -invocation-uri=${{ inputs.invocation-uri }}
-    - -attest
+    - '-c'
+    - |
+      set -o errexit
+      set -o pipefail
+      set -x
+      cosign copy -f ${{ inputs.image }} ${{ inputs.image }}-copy || ( \
+        rm -rf "${HOME}/.docker" && cosign copy -f ${{ inputs.image }} ${{ inputs.image }}-copy )
+  # args:
+  #   - -image=${{ inputs.image }}
+  #   - -scanner=${{ inputs.scanner }}
+  #   - -invocation-builder-id=${{ inputs.invocation-builder-id }}
+  #   - -invocation-event-id=${{ inputs.invocation-event-id }}
+  #   - -invocation-uri=${{ inputs.invocation-uri }}
+  #   - -attest
