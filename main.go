@@ -9,7 +9,6 @@ import (
 	"log"
 	"os"
 	"os/exec"
-	"sort"
 	"strings"
 	"time"
 
@@ -28,34 +27,12 @@ func main() {
 	image := flag.String("image", "cgr.dev/chainguard/static:latest", "OCI image")
 	scanner := flag.String("scanner", "grype", "Which scanner to use, (\"trivy\" or \"grype\")")
 	attest := flag.Bool("attest", false, "If enabled, attempt to attest vuln results using cosign")
-	printenv := flag.Bool("printenv", false, "just print the environment and exit")
 	bigqueryUpload := flag.Bool("bigquery", true, "If enabled, attempt to upload results to BigQuery")
 	invocationURI := flag.String("invocation-uri", "unknown", "in-toto value for invocation uri")
 	invocationEventID := flag.String("invocation-event-id", "unknown", "in-toto value for invocation event_id")
 	invocationBuilderID := flag.String("invocation-builder-id", "unknown", "in-toto value for invocation builder.id")
+	dockerConfig := flag.String("docker-config", "", "explicit location of docker config directory")
 	flag.Parse()
-
-	if *printenv {
-		tmp := []string{}
-		tmp = append(tmp, os.Environ()...)
-		sort.Strings(tmp)
-		for _, x := range tmp {
-			fmt.Println(x)
-		}
-		for _, x := range tmp {
-			if strings.HasPrefix(x, "GOOGLE_APPLICATION_CREDENTIALS=") {
-				tmp := strings.Split(x, "=")
-				credFile := tmp[1]
-				fmt.Printf("Checking for existance of %s ...\n", credFile)
-				if _, err := os.Stat(credFile); err == nil {
-					fmt.Println("Able to find GOOGLE_APPLICATION_CREDENTIALS file")
-				} else {
-					fmt.Println("Unable to find GOOGLE_APPLICATION_CREDENTIALS file")
-				}
-			}
-		}
-		os.Exit(0)
-	}
 
 	// If the user is attesting, always use sarif format
 	format := "json"
@@ -63,7 +40,7 @@ func main() {
 		format = "sarif"
 	}
 
-	filename, startTime, endTime, summary, err := scanImage(*image, *scanner, format)
+	filename, startTime, endTime, summary, err := scanImage(*image, *scanner, format, *dockerConfig)
 	defer os.Remove(filename)
 	if err != nil {
 		panic(err)
@@ -71,7 +48,7 @@ func main() {
 
 	if *attest {
 		fmt.Println("Attempting to attest scan results using cosign...")
-		if err := attestImage(*image, startTime, endTime, *scanner, *invocationURI, *invocationEventID, *invocationBuilderID, filename); err != nil {
+		if err := attestImage(*image, startTime, endTime, *scanner, *invocationURI, *invocationEventID, *invocationBuilderID, filename, *dockerConfig); err != nil {
 			panic(err)
 		}
 	} else {
@@ -100,16 +77,16 @@ func main() {
 	}
 }
 
-func scanImage(image string, scanner string, format string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
+func scanImage(image string, scanner string, format string, dockerConfig string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
 	var filename string
 	var startTime, endTime *time.Time
 	var summary *rumbletypes.ImageScanSummary
 	var err error
 	switch scanner {
 	case "trivy":
-		filename, startTime, endTime, summary, err = scanImageTrivy(image, format)
+		filename, startTime, endTime, summary, err = scanImageTrivy(image, format, dockerConfig)
 	case "grype":
-		filename, startTime, endTime, summary, err = scanImageGrype(image, format)
+		filename, startTime, endTime, summary, err = scanImageGrype(image, format, dockerConfig)
 	default:
 		err = fmt.Errorf("invalid scanner: %s", scanner)
 	}
@@ -119,15 +96,10 @@ func scanImage(image string, scanner string, format string) (string, *time.Time,
 	return filename, startTime, endTime, summary, nil
 }
 
-func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner string, invocationURI string, invocationEventID string, invocationBuilderID string, filename string) error {
+func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner string, invocationURI string, invocationEventID string, invocationBuilderID string, filename string, dockerConfig string) error {
 	env := append(os.Environ(), "COSIGN_EXPERIMENTAL=1")
-
-	// If pushing to gcloud, we use GOOGLE_APPLICATION_CREDENTIALS, so make sure
-	// that any valid docker config is not used
-	if strings.Contains(image, "gcr.io/") || strings.Contains(image, "pkg.dev/") {
-		if dockerDummyConfig := os.Getenv("DOCKER_DUMMY_CONFIG"); dockerDummyConfig != "" {
-			env = append(env, fmt.Sprintf("DOCKER_CONFIG=%s", dockerDummyConfig))
-		}
+	if dockerConfig != "" {
+		env = append(env, fmt.Sprintf("DOCKER_CONFIG=%s", dockerConfig))
 	}
 
 	// Convert the sarif document to InToto statement
@@ -198,16 +170,21 @@ func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner
 	return cmd.Run()
 }
 
-func scanImageTrivy(image string, format string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
+func scanImageTrivy(image string, format string, dockerConfig string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
 	log.Printf("scanning %s with trivy\n", image)
 	file, err := os.CreateTemp("", "trivy-scan-")
 	if err != nil {
 		return "", nil, nil, nil, err
 	}
+	env := os.Environ()
+	if dockerConfig != "" {
+		env = append(env, fmt.Sprintf("DOCKER_CONFIG=%s", dockerConfig))
+	}
 	args := []string{"--debug", "image", "--offline-scan", "-f", format, "-o", file.Name(), image}
 	cmd := exec.Command("trivy", args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+	cmd.Env = env
 	startTime := time.Now()
 	if err := cmd.Run(); err != nil {
 		return "", nil, nil, nil, err
@@ -224,6 +201,7 @@ func scanImageTrivy(image string, format string) (string, *time.Time, *time.Time
 	cmd = exec.Command("trivy", "--version", "-f", "json")
 	cmd.Stdout = &out
 	cmd.Stderr = os.Stderr
+	cmd.Env = env
 	if err := cmd.Run(); err != nil {
 		return "", nil, nil, nil, err
 	}
@@ -242,16 +220,21 @@ func scanImageTrivy(image string, format string) (string, *time.Time, *time.Time
 	return file.Name(), &startTime, &endTime, nil, nil
 }
 
-func scanImageGrype(image string, format string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
+func scanImageGrype(image string, format string, dockerConfig string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
 	log.Printf("scanning %s with grype\n", image)
 	file, err := os.CreateTemp("", "grype-scan-")
 	if err != nil {
 		return "", nil, nil, nil, err
 	}
+	env := os.Environ()
+	if dockerConfig != "" {
+		env = append(env, fmt.Sprintf("DOCKER_CONFIG=%s", dockerConfig))
+	}
 	args := []string{"-v", "-o", format, "--file", file.Name(), image}
 	cmd := exec.Command("grype", args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
+	cmd.Env = env
 	startTime := time.Now()
 	if err := cmd.Run(); err != nil {
 		return "", nil, nil, nil, err
