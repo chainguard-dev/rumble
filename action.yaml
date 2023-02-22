@@ -33,6 +33,7 @@ runs:
       set -o errexit
       set -o pipefail
       set -x
+      env
       SRC="${{ inputs.image }}"
       DST="$(echo "${SRC}" | cut -f1 -d"@"):copy"
       ls -la "${HOME}/.docker" || true
