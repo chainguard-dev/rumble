@@ -33,8 +33,12 @@ runs:
       set -o errexit
       set -o pipefail
       set -x
-      cosign copy -f ${{ inputs.image }} ${{ inputs.image }}-copy || ( \
-        rm -rf "${HOME}/.docker" && cosign copy -f ${{ inputs.image }} ${{ inputs.image }}-copy )
+      SRC="${{ inputs.image }}"
+      DST="$(echo "${SRC}" | cut -f1 -d"@"):copy"
+      ls -la "${HOME}/.docker" || true
+      cat "${HOME}/.docker/config.json" || true
+      cosign copy -f "${SRC}" "${DST}" || ( \
+        rm -rf "${HOME}/.docker" && cosign copy -f "${SRC}" "${DST}" )
   # args:
   #   - -image=${{ inputs.image }}
   #   - -scanner=${{ inputs.scanner }}
