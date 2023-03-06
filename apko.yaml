@@ -3,11 +3,11 @@ contents:
     - https://packages.wolfi.dev/os/wolfi-signing.rsa.pub
   repositories:
     - https://packages.wolfi.dev/os
-    - '@local /work/packages'
+    - /work/packages
   packages:
     - ca-certificates-bundle
     - wolfi-base
-    - rumble@local
+    - rumble
 work-dir: /work
 entrypoint:
   command: /usr/sbin/rumble

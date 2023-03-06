@@ -8,11 +8,11 @@ cd $DIR/../
 ARCH="${ARCH:-x86_64}"
 REF="${REF:-"rumble:dev"}"
 
-MELANGE_IMAGE_REPO="cgr.dev/chainguard/melange"
+MELANGE_IMAGE_REPO="ghcr.io/wolfi-dev/melange"
 MELANGE_IMAGE_IDENTIFIER=":latest"
 MELANGE_IMAGE_REF="${MELANGE_IMAGE_REF:-${MELANGE_IMAGE_REPO}${MELANGE_IMAGE_IDENTIFIER}}"
 
-APKO_IMAGE_REPO="cgr.dev/chainguard/apko"
+APKO_IMAGE_REPO="ghcr.io/wolfi-dev/apko"
 APKO_IMAGE_IDENTIFIER=":latest"
 APKO_IMAGE_REF="${APKO_IMAGE_REF:-${APKO_IMAGE_REPO}${APKO_IMAGE_IDENTIFIER}}"
 
@@ -31,6 +31,6 @@ docker run --rm --privileged -v "${PWD}":/work\
 docker run --rm -v "${PWD}":/work \
     "${APKO_IMAGE_REF}" build --debug apko.yaml \
     "${REF}" output.tar -k melange.rsa.pub \
-    --build-arch "${ARCH}"
+    --arch "${ARCH}"
 
 docker load < output.tar
