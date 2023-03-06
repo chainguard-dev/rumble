@@ -17,6 +17,10 @@ import (
 	rumbletypes "github.com/chainguard-dev/rumble/pkg/types"
 )
 
+const (
+	attTypeVuln = "https://cosign.sigstore.dev/attestation/vuln/v1"
+)
+
 var (
 	GcloudProject = os.Getenv("GCLOUD_PROJECT")
 	GcloudDataset = os.Getenv("GCLOUD_DATASET")
@@ -97,7 +101,7 @@ func scanImage(image string, scanner string, format string, dockerConfig string)
 }
 
 func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner string, invocationURI string, invocationEventID string, invocationBuilderID string, filename string, dockerConfig string) error {
-	env := append(os.Environ(), "COSIGN_EXPERIMENTAL=1")
+	env := os.Environ()
 	if dockerConfig != "" {
 		env = append(env, fmt.Sprintf("DOCKER_CONFIG=%s", dockerConfig))
 	}
@@ -150,7 +154,7 @@ func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner
 	fmt.Println(string(b))
 
 	// Attest
-	args := []string{"attest", "--yes", "--type", "vuln", "--predicate", filename, image}
+	args := []string{"attest", "--yes", "--type", attTypeVuln, "--predicate", filename, image}
 	cmd := exec.Command("cosign", args...)
 	fmt.Printf("Running attestation command \"cosign %s\"...\n", strings.Join(args, " "))
 	cmd.Stdout = os.Stdout
@@ -161,7 +165,9 @@ func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner
 	}
 
 	// Verify (only warn on error since we may not be able to verify private images)
-	args = []string{"verify-attestation", "--type", "vuln", image}
+	// TODO: pass in the signing identity vs using star for regex
+	args = []string{"verify-attestation", "--type", attTypeVuln,
+		"--certificate-identity-regexp", ".*", "--certificate-oidc-issuer-regexp", ".*", image}
 	cmd = exec.Command("cosign", args...)
 	fmt.Printf("Running verify command \"cosign %s\"...\n", strings.Join(args, " "))
 	cmd.Stdout = os.Stdout
