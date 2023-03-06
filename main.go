@@ -150,7 +150,7 @@ func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner
 	fmt.Println(string(b))
 
 	// Attest
-	args := []string{"attest", "--type", "vuln", "--predicate", filename, image}
+	args := []string{"attest", "--yes", "--type", "vuln", "--predicate", filename, image}
 	cmd := exec.Command("cosign", args...)
 	fmt.Printf("Running attestation command \"cosign %s\"...\n", strings.Join(args, " "))
 	cmd.Stdout = os.Stdout
