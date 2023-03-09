@@ -1,11 +1,11 @@
 alpine:latest
-bitnami/dex:latest
 bitnami/envoy:latest
 bitnami/etcd:latest
 bitnami/haproxy:latest
 bitnami/git:latest
 bitnami/prometheus:latest
 coredns/coredns:latest
+dexidp/dex:latest
 eclipse-temurin:latest
 gcc:latest
 golang:latest
