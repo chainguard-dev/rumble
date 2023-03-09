@@ -4,12 +4,15 @@ bitnami/etcd:latest
 bitnami/haproxy:latest
 bitnami/git:latest
 bitnami/prometheus:latest
+coredns/coredns:latest
+dexidp/dex:latest
 eclipse-temurin:latest
 gcc:latest
 golang:latest
 haproxy:alpine
 haproxy:latest
 memcached:latest
+mintel/dex-k8s-authenticator:latest
 nginx:latest
 nginx:alpine
 php:latest
