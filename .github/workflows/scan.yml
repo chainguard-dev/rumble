@@ -1,7 +1,7 @@
 name: scan
 on:
   schedule:
-    - cron: '0 13 * * *' # 8am eastern
+    - cron: '0 10 * * *' # 10 UTC
   workflow_dispatch: {}
 env:
   REF: "ghcr.io/chainguard-dev/rumble:latest"
