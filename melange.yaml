@@ -9,10 +9,10 @@ package:
       paths:
         - "*"
   # Note: rumble shells out to the following tools,
-  # thus listed as depenedncies for this package
+  # thus listed as dependencies for this package
   dependencies:
     runtime:
-      - grype
+      - grype=0.60.0
       - trivy
       - cosign
 
