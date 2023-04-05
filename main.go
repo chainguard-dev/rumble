@@ -190,6 +190,7 @@ func scanImageTrivy(image string, format string, dockerConfig string) (string, *
 		env = append(env, fmt.Sprintf("DOCKER_CONFIG=%s", dockerConfig))
 	}
 	args := []string{"--debug", "image", "--offline-scan", "-f", format, "-o", file.Name(), image}
+	fmt.Printf("Running scan command \"trivy %s\"...\n", strings.Join(args, " "))
 	cmd := exec.Command("trivy", args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
@@ -240,6 +241,7 @@ func scanImageGrype(image string, format string, dockerConfig string) (string, *
 		env = append(env, fmt.Sprintf("DOCKER_CONFIG=%s", dockerConfig))
 	}
 	args := []string{"-v", "-o", format, "--file", file.Name(), image}
+	fmt.Printf("Running scan command \"grype %s\"...\n", strings.Join(args, " "))
 	cmd := exec.Command("grype", args...)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
