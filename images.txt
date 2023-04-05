@@ -11,7 +11,6 @@ bitnami/minio-client:latest
 bitnami/prometheus:latest
 bitnami/thanos:latest
 busybox:latest
-cockroachdb/bazel:latest-do-not-use
 coredns/coredns:latest
 curlimages/curl:latest
 debian:bullseye-slim
