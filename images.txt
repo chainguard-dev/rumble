@@ -11,14 +11,14 @@ bitnami/minio-client:latest
 bitnami/prometheus:latest
 bitnami/thanos:latest
 busybox:latest
-cockroachdb/bazel:latest
+cockroachdb/bazel:latest-do-not-use
 coredns/coredns:latest
 curlimages/curl:latest
 debian:bullseye-slim
 denoland/deno:latest
 dexidp/dex:latest
 eclipse-temurin:latest
-envoyproxy/envoy:latest
+envoyproxy/envoy:v1.25-latest
 fluent/fluent-bit:latest
 fluentd:latest
 gcc:latest
