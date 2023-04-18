@@ -68,8 +68,7 @@ jobs:
         run: |
           set -x
           echo "${GOOGLE_APPLICATION_CREDENTIALS_BASE64}" | base64 -d > google-creds.json
-          IMAGE="$(echo "${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}" | sed 's|^ghcr\.io/chainguard-images/|cgr.dev/chainguard/|')"
-          echo "Scanning: ${IMAGE}"
+          echo "Scanning: ${{ matrix.ref }}"
           env > github.env
           echo "GOOGLE_APPLICATION_CREDENTIALS=/google-creds.json" >> github.env
           for scanner in "grype" "trivy"; do
@@ -77,10 +76,18 @@ jobs:
               -v "${PWD}/google-creds.json":/google-creds.json \
               --env-file github.env \
               "${REF}" \
-              -image "${IMAGE}" \
+              -image "${{ matrix.ref }}" \
               -scanner "${scanner}"
           done
           echo "success=true" >> $GITHUB_OUTPUT
+      - uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
+        if: ${{ steps.rumble-chainguard.outputs.success != 'true' }}
+        id: slack
+        with:
+          payload: '{"text": "[scan] failed for chainguard image ${{ matrix.ref }}: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
   scan-external:
     runs-on: ubuntu-latest
@@ -100,8 +107,7 @@ jobs:
         run: |
           set -x
           echo "${GOOGLE_APPLICATION_CREDENTIALS_BASE64}" | base64 -d > google-creds.json
-          IMAGE="$(echo "${{ matrix.ref }}" | sed 's|^ghcr\.io/chainguard-images/|cgr.dev/chainguard/|')"
-          echo "Scanning: ${IMAGE}"
+          echo "Scanning: ${{ matrix.ref }}"
           env > github.env
           echo "GOOGLE_APPLICATION_CREDENTIALS=/google-creds.json" >> github.env
           for scanner in "grype" "trivy"; do
@@ -109,21 +115,15 @@ jobs:
               -v "${PWD}/google-creds.json":/google-creds.json \
               --env-file github.env \
               "${REF}" \
-              -image "${IMAGE}" \
+              -image "${{ matrix.ref }}" \
               -scanner "${scanner}"
           done
           echo "success=true" >> $GITHUB_OUTPUT
-
-  roundup:
-    if: always()
-    needs: [scan-chainguard,scan-external]
-    runs-on: ubuntu-latest
-    steps:
       - uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
-        if: ${{ needs.scan-chainguard.outputs.success != 'true' || needs.scan-external.outputs.success != 'true' }}
+        if: ${{ steps.rumble-external.outputs.success != 'true' }}
         id: slack
         with:
-          payload: '{"text": "[scan] failed: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
+          payload: '{"text": "[scan] failed for external image ${{ matrix.ref }}: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

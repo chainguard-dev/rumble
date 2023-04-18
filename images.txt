@@ -34,7 +34,7 @@ docker:latest
 drupal:latest
 eclipse-mosquitto:latest
 eclipse-temurin:latest
-elasticsearch:latest
+elasticsearch:8.7.0
 elixir:latest
 envoyproxy/envoy:v1.25-latest
 erlang:latest
@@ -136,3 +136,4 @@ xwiki:latest
 yourls:latest
 zookeeper:latest
 znc:latest
+thisdoesntexist:latest
