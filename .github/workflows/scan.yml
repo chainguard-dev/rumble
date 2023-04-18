@@ -68,7 +68,7 @@ jobs:
         run: |
           set -x
           echo "${GOOGLE_APPLICATION_CREDENTIALS_BASE64}" | base64 -d > google-creds.json
-          echo "Scanning: ${{ matrix.ref }}"
+          echo "Scanning: ${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}"
           env > github.env
           echo "GOOGLE_APPLICATION_CREDENTIALS=/google-creds.json" >> github.env
           for scanner in "grype" "trivy"; do
@@ -76,7 +76,7 @@ jobs:
               -v "${PWD}/google-creds.json":/google-creds.json \
               --env-file github.env \
               "${REF}" \
-              -image "${{ matrix.ref }}" \
+              -image "${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}" \
               -scanner "${scanner}"
           done
           echo "success=true" >> $GITHUB_OUTPUT
