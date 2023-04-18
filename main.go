@@ -103,7 +103,11 @@ func scanImage(image string, scanner string, format string, dockerConfig string)
 	if err != nil {
 		return "", nil, nil, nil, err
 	}
-	summary.Created = created.Format(time.RFC3339)
+	if created != nil {
+		summary.Created = created.Format(time.RFC3339)
+	} else {
+		summary.Created = "1970-01-01T00:00:00Z"
+	}
 	return filename, startTime, endTime, summary, nil
 }
 
