@@ -13,8 +13,8 @@ import (
 	"time"
 
 	"cloud.google.com/go/bigquery"
+	"github.com/chainguard-dev/rumble/pkg/oci"
 	"github.com/chainguard-dev/rumble/pkg/types"
-	rumbletypes "github.com/chainguard-dev/rumble/pkg/types"
 )
 
 const (
@@ -81,10 +81,16 @@ func main() {
 	}
 }
 
-func scanImage(image string, scanner string, format string, dockerConfig string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
+func scanImage(image string, scanner string, format string, dockerConfig string) (string, *time.Time, *time.Time, *types.ImageScanSummary, error) {
+	// Get the image created time
+	created, buildTimeErr := oci.ImageBuildTime(image)
+	if buildTimeErr != nil {
+		return "", nil, nil, nil, buildTimeErr
+	}
+	fmt.Printf("Image %s built at: %s\n", image, created)
 	var filename string
 	var startTime, endTime *time.Time
-	var summary *rumbletypes.ImageScanSummary
+	var summary *types.ImageScanSummary
 	var err error
 	switch scanner {
 	case "trivy":
@@ -97,6 +103,7 @@ func scanImage(image string, scanner string, format string, dockerConfig string)
 	if err != nil {
 		return "", nil, nil, nil, err
 	}
+	summary.Created = created.Format(time.RFC3339)
 	return filename, startTime, endTime, summary, nil
 }
 
@@ -125,18 +132,18 @@ func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner
 		return err
 	}
 
-	statement := rumbletypes.InTotoStatement{
-		Invocation: rumbletypes.InTotoStatementInvocation{
+	statement := types.InTotoStatement{
+		Invocation: types.InTotoStatementInvocation{
 			URI:       invocationURI,
 			EventID:   invocationEventID,
 			BuilderID: invocationBuilderID,
 		},
-		Scanner: rumbletypes.InTotoStatementScanner{
+		Scanner: types.InTotoStatementScanner{
 			URI:     sarifObj.Runs[0].Tool.Driver.InformationURI,
 			Version: sarifObj.Runs[0].Tool.Driver.Version,
 			Result:  result,
 		},
-		Metadata: rumbletypes.InTotoStatementMetadata{
+		Metadata: types.InTotoStatementMetadata{
 			ScanStartedOn:  startTime.UTC().Format("2006-01-02T15:04:05Z"),
 			ScanFinishedOn: endTime.UTC().Format("2006-01-02T15:04:05Z"),
 		},
@@ -179,7 +186,7 @@ func attestImage(image string, startTime *time.Time, endTime *time.Time, scanner
 	return nil
 }
 
-func scanImageTrivy(image string, format string, dockerConfig string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
+func scanImageTrivy(image string, format string, dockerConfig string) (string, *time.Time, *time.Time, *types.ImageScanSummary, error) {
 	log.Printf("scanning %s with trivy\n", image)
 	file, err := os.CreateTemp("", "trivy-scan-")
 	if err != nil {
@@ -220,7 +227,7 @@ func scanImageTrivy(image string, format string, dockerConfig string) (string, *
 		return "", nil, nil, nil, err
 	}
 	if format == "json" {
-		var output rumbletypes.TrivyScanOutput
+		var output types.TrivyScanOutput
 		if err := json.Unmarshal(b, &output); err != nil {
 			return "", nil, nil, nil, err
 		}
@@ -230,7 +237,7 @@ func scanImageTrivy(image string, format string, dockerConfig string) (string, *
 	return file.Name(), &startTime, &endTime, nil, nil
 }
 
-func scanImageGrype(image string, format string, dockerConfig string) (string, *time.Time, *time.Time, *rumbletypes.ImageScanSummary, error) {
+func scanImageGrype(image string, format string, dockerConfig string) (string, *time.Time, *time.Time, *types.ImageScanSummary, error) {
 	log.Printf("scanning %s with grype\n", image)
 	file, err := os.CreateTemp("", "grype-scan-")
 	if err != nil {
@@ -258,7 +265,7 @@ func scanImageGrype(image string, format string, dockerConfig string) (string, *
 	fmt.Println(string(b))
 	// Only attempt summary if the format is JSON
 	if format == "json" {
-		var output rumbletypes.GrypeScanOutput
+		var output types.GrypeScanOutput
 		if err := json.Unmarshal(b, &output); err != nil {
 			return "", nil, nil, nil, err
 		}
@@ -268,8 +275,8 @@ func scanImageGrype(image string, format string, dockerConfig string) (string, *
 	return file.Name(), &startTime, &endTime, nil, nil
 }
 
-func grypeOutputToSummary(image string, scanTime time.Time, output *rumbletypes.GrypeScanOutput) *rumbletypes.ImageScanSummary {
-	summary := &rumbletypes.ImageScanSummary{
+func grypeOutputToSummary(image string, scanTime time.Time, output *types.GrypeScanOutput) *types.ImageScanSummary {
+	summary := &types.ImageScanSummary{
 		Image:   image,
 		Scanner: "grype",
 		Time:    scanTime.UTC().Format("2006-01-02T15:04:05Z"),
@@ -305,8 +312,8 @@ func grypeOutputToSummary(image string, scanTime time.Time, output *rumbletypes.
 	return summary
 }
 
-func trivyOutputToSummary(image string, scanTime time.Time, output *rumbletypes.TrivyScanOutput, trivyVersion *rumbletypes.TrivyVersionOutput) *rumbletypes.ImageScanSummary {
-	summary := &rumbletypes.ImageScanSummary{
+func trivyOutputToSummary(image string, scanTime time.Time, output *types.TrivyScanOutput, trivyVersion *types.TrivyVersionOutput) *types.ImageScanSummary {
+	summary := &types.ImageScanSummary{
 		Image:              image,
 		Scanner:            "trivy",
 		Time:               scanTime.UTC().Format("2006-01-02T15:04:05Z"),

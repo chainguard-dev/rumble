@@ -79,9 +79,8 @@ jobs:
               -image "${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}" \
               -scanner "${scanner}"
           done
-          echo "success=true" >> $GITHUB_OUTPUT
       - uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
-        if: ${{ steps.rumble-chainguard.outputs.success != 'true' }}
+        if: ${{ failure() }}
         id: slack
         with:
           payload: '{"text": "[scan] failed for chainguard image ${{ matrix.ref }}: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
@@ -118,9 +117,8 @@ jobs:
               -image "${{ matrix.ref }}" \
               -scanner "${scanner}"
           done
-          echo "success=true" >> $GITHUB_OUTPUT
       - uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
-        if: ${{ steps.rumble-external.outputs.success != 'true' }}
+        if: ${{ failure() }}
         id: slack
         with:
           payload: '{"text": "[scan] failed for external image ${{ matrix.ref }}: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'

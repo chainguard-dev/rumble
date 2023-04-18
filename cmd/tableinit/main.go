@@ -5,13 +5,15 @@ import (
 	"os"
 
 	"cloud.google.com/go/bigquery"
-	rumbletypes "github.com/chainguard-dev/rumble/pkg/types"
+	"github.com/chainguard-dev/rumble/pkg/types"
 )
 
 var (
 	GcloudProject = os.Getenv("GCLOUD_PROJECT")
 	GcloudDataset = os.Getenv("GCLOUD_DATASET")
 	GcloudTable   = os.Getenv("GCLOUD_TABLE")
+
+	DoMigrate = os.Getenv("RUMBLE_MIGRATE")
 )
 
 func main() {
@@ -20,12 +22,13 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	schema, err := bigquery.InferSchema(rumbletypes.ImageScanSummary{})
+	schema, err := bigquery.InferSchema(types.ImageScanSummary{})
 	if err != nil {
 		panic(err)
 	}
 	dataset := client.Dataset(GcloudDataset)
 	table := dataset.Table(GcloudTable)
+
 	if err := table.Create(ctx, &bigquery.TableMetadata{Schema: schema}); err != nil {
 		panic(err)
 	}

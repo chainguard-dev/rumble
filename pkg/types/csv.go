@@ -7,6 +7,7 @@ type ImageScanSummary struct {
 	ScannerVersion   string `bigquery:"scanner_version"`
 	ScannerDbVersion string `bigquery:"scanner_db_version"`
 	Time             string `bigquery:"time"`
+	Created          string `bigquery:"created"`
 	LowCveCount      int    `bigquery:"low_cve_count"`
 	MedCveCount      int    `bigquery:"med_cve_count"`
 	HighCveCount     int    `bigquery:"high_cve_count"`
