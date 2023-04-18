@@ -31,7 +31,6 @@ debian:latest
 denoland/deno:latest
 dexidp/dex:latest
 docker:latest
-drupal:latest
 eclipse-mosquitto:latest
 eclipse-temurin:latest
 elasticsearch:8.7.0
