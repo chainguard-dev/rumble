@@ -1,0 +1,29 @@
+name: images-txt-presubmit
+on:
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@ac593985615ec2ede58e132d2e21d2b1cbd6127c # v3.3.0
+      - uses: imjasonh/setup-crane@00c9e93efa4e1138c9a7a5c594acd6c75a2fbf0c # v0.3
+      - name: Check images.txt uniqueness
+        run: |
+          set -ex
+          if [ $(sort images.txt | uniq -d | wc -l) -eq 0 ]; then
+            echo "All lines in images.txt are unique"
+          else
+            echo "There are duplicate lines in images.txt"
+            exit 1
+          fi
+      - name: 
+        run: |
+          set -ex
+          for i in $(cat images.txt); do
+            if [[ "${i}" == "thisdoesntexist:latest" ]]; then
+              echo "skipping ${i}"
+              continue
+            fi
+            crane digest $i
+          done
