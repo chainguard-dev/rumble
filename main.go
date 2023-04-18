@@ -56,6 +56,18 @@ func main() {
 			panic(err)
 		}
 	} else {
+		// Get the image created time
+		created, buildTimeErr := oci.ImageBuildTime(*image)
+		if buildTimeErr != nil {
+			panic(buildTimeErr)
+		}
+		fmt.Printf("Image %s built at: %s\n", *image, created)
+		if created != nil {
+			summary.Created = created.Format(time.RFC3339)
+		} else {
+			summary.Created = "1970-01-01T00:00:00Z"
+		}
+
 		// Print the summary
 		b, err := json.MarshalIndent(summary, "", "    ")
 		if err != nil {
@@ -82,12 +94,6 @@ func main() {
 }
 
 func scanImage(image string, scanner string, format string, dockerConfig string) (string, *time.Time, *time.Time, *types.ImageScanSummary, error) {
-	// Get the image created time
-	created, buildTimeErr := oci.ImageBuildTime(image)
-	if buildTimeErr != nil {
-		return "", nil, nil, nil, buildTimeErr
-	}
-	fmt.Printf("Image %s built at: %s\n", image, created)
 	var filename string
 	var startTime, endTime *time.Time
 	var summary *types.ImageScanSummary
@@ -102,11 +108,6 @@ func scanImage(image string, scanner string, format string, dockerConfig string)
 	}
 	if err != nil {
 		return "", nil, nil, nil, err
-	}
-	if created != nil {
-		summary.Created = created.Format(time.RFC3339)
-	} else {
-		summary.Created = "1970-01-01T00:00:00Z"
 	}
 	return filename, startTime, endTime, summary, nil
 }
