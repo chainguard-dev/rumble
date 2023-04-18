@@ -21,9 +21,5 @@ jobs:
         run: |
           set -ex
           for i in $(cat images.txt); do
-            if [[ "${i}" == "thisdoesntexist:latest" ]]; then
-              echo "skipping ${i}"
-              continue
-            fi
             crane digest $i
           done

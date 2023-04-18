@@ -134,4 +134,3 @@ xwiki:latest
 yourls:latest
 zookeeper:latest
 znc:latest
-thisdoesntexist:latest
