@@ -86,7 +86,6 @@ mono:latest
 mysql:latest
 nats:latest
 neo4j:latest
-nextcloud:latest
 nginx:latest
 nginx:alpine
 node:latest
