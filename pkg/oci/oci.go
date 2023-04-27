@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/google/go-containerregistry/pkg/authn"
 	"github.com/google/go-containerregistry/pkg/name"
 	"github.com/google/go-containerregistry/pkg/v1/remote"
 )
@@ -13,7 +14,7 @@ func ImageBuildTime(imageRef string) (*time.Time, error) {
 	if err != nil {
 		return nil, fmt.Errorf("parsing reference %q: %w", imageRef, err)
 	}
-	img, err := remote.Image(ref)
+	img, err := remote.Image(ref, remote.WithAuthFromKeychain(authn.DefaultKeychain))
 	if err != nil {
 		return nil, fmt.Errorf("remote.Image() %q: %w", imageRef, err)
 	}
