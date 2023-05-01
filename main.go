@@ -275,6 +275,14 @@ func scanImageGrype(image string, format string, dockerConfig string) (string, *
 			return "", nil, nil, nil, err
 		}
 		summary := grypeOutputToSummary(image, startTime, &output)
+
+		// Inject the raw Grype JSON output (minified)
+		var buff *bytes.Buffer = new(bytes.Buffer)
+		if err := json.Compact(buff, b); err != nil {
+			return "", nil, nil, nil, err
+		}
+		summary.RawGrypeJSON = buff.String()
+
 		return file.Name(), &startTime, &endTime, summary, err
 	}
 	return file.Name(), &startTime, &endTime, nil, nil
