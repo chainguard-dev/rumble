@@ -19,4 +19,6 @@ type ImageScanSummary struct {
 	UnknownCveCount int  `bigquery:"unknown_cve_count"`
 	TotCveCount     int  `bigquery:"tot_cve_count"`
 	Success         bool `bigquery:"success"`
+
+	RawGrypeJSON string `bigquery:"raw_grype_json"`
 }
