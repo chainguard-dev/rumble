@@ -37,4 +37,3 @@ runs:
     - -invocation-event-id=${{ inputs.invocation-event-id }}
     - -invocation-uri=${{ inputs.invocation-uri }}
     - -docker-config=${{ inputs.docker-config }}
-    - -attest
