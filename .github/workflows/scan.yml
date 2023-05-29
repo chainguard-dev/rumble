@@ -14,50 +14,35 @@ jobs:
   generate-matrix-chainguard:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.generate-matrix.outputs.matrix }}
+      shared-0: ${{ steps.generate-matrix-0.outputs.matrix }}
+      shared-1: ${{ steps.generate-matrix-1.outputs.matrix }}
     steps:
-      - uses: actions/setup-go@v3
-        with:
-          go-version: 1.19
       - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # v3.1.0
         with:
           repository: chainguard-images/images
-          path: chainguard-public-images
-      - id: monopod
-        run: |
-          set -x
-          cd chainguard-public-images/monopod/
-          go build -o /tmp/monopod monopod.go
-      - id: generate-matrix
-        run: |
-          set -x
-          cd chainguard-public-images/ 
-          echo "matrix=$(/tmp/monopod matrix)" >> $GITHUB_OUTPUT
-  generate-matrix-external:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.generate-matrix.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # v3.1.0
-      - id: generate-matrix
-        run: |
-          set -x
-          echo '{"include":[]}' > matrix.json
-          while read name
-          do
-            cat matrix.json | jq '.include += [{ref: "'${name}'"}]' > matrix.json.tmp
-            mv matrix.json.tmp matrix.json
-          done < images.txt
-          cat matrix.json | jq
-          echo "matrix=$(cat matrix.json | jq -c -M)" >> $GITHUB_OUTPUT
-  scan-chainguard:
+
+      - id: generate-matrix-0
+        uses: ./.github/actions/generate-matrix
+        with:
+          shard: 0
+          sharding-factor: 2
+          repository: chainguard-images/images
+
+      - id: generate-matrix-1
+        uses: ./.github/actions/generate-matrix
+        with:
+          shard: 1
+          sharding-factor: 2
+          repository: chainguard-images/images
+
+  scan-chainguard-0:
     runs-on: ubuntu-latest
     needs: generate-matrix-chainguard
     outputs:
       success: ${{ steps.rumble-chainguard.outputs.success }}
     strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.generate-matrix-chainguard.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.generate-matrix-chainguard.outputs.shard-0) }}
     permissions:
       id-token: write
       packages: write
@@ -87,6 +72,62 @@ jobs:
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
+  scan-chainguard-1:
+    runs-on: ubuntu-latest
+    needs: generate-matrix-chainguard
+    outputs:
+      success: ${{ steps.rumble-chainguard.outputs.success }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.generate-matrix-chainguard.outputs.shard-1) }}
+    permissions:
+      id-token: write
+      packages: write
+      contents: read
+    steps:
+      - name: Run rumble on image
+        id: rumble-chainguard
+        run: |
+          set -x
+          echo "${GOOGLE_APPLICATION_CREDENTIALS_BASE64}" | base64 -d > google-creds.json
+          echo "Scanning: ${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}"
+          env > github.env
+          echo "GOOGLE_APPLICATION_CREDENTIALS=/google-creds.json" >> github.env
+          for scanner in "grype" "trivy"; do
+            docker run --rm \
+              -v "${PWD}/google-creds.json":/google-creds.json \
+              --env-file github.env \
+              "${REF}" \
+              -image "${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}" \
+              -scanner "${scanner}"
+          done
+      - uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
+        if: ${{ failure() }}
+        id: slack
+        with:
+          payload: '{"text": "[scan] failed for chainguard image ${{ matrix.ref }}: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
+  generate-matrix-external:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.generate-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # v3.1.0
+      - id: generate-matrix
+        run: |
+          set -x
+          echo '{"include":[]}' > matrix.json
+          while read name
+          do
+            cat matrix.json | jq '.include += [{ref: "'${name}'"}]' > matrix.json.tmp
+            mv matrix.json.tmp matrix.json
+          done < images.txt
+          cat matrix.json | jq
+          echo "matrix=$(cat matrix.json | jq -c -M)" >> $GITHUB_OUTPUT
 
   scan-external:
     runs-on: ubuntu-latest
