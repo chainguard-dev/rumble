@@ -17,16 +17,14 @@ jobs:
       shared-0: ${{ steps.generate-matrix-0.outputs.matrix }}
       shared-1: ${{ steps.generate-matrix-1.outputs.matrix }}
     steps:
-      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # v3.1.0
-        with:
-          repository: chainguard-images/images
-
       - id: generate-matrix-0
         uses: ./.github/actions/generate-matrix
         with:
           shard: 0
           sharding-factor: 2
           repository: chainguard-images/images
+          overrideCheckoutRepository: chainguard-images/images
+          overrideCheckoutRef: main
 
       - id: generate-matrix-1
         uses: ./.github/actions/generate-matrix
@@ -34,6 +32,8 @@ jobs:
           shard: 1
           sharding-factor: 2
           repository: chainguard-images/images
+          overrideCheckoutRepository: chainguard-images/images
+          overrideCheckoutRef: main
 
   scan-chainguard-0:
     runs-on: ubuntu-latest
