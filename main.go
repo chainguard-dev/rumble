@@ -201,7 +201,7 @@ func scanImageTrivy(image string, format string, dockerConfig string) (string, *
 	if dockerConfig != "" {
 		env = append(env, fmt.Sprintf("DOCKER_CONFIG=%s", dockerConfig))
 	}
-	args := []string{"--debug", "image", "--offline-scan", "-f", format, "-o", file.Name(), image}
+	args := []string{"--debug", "image", "--timeout", "15m", "--offline-scan", "-f", format, "-o", file.Name(), image}
 	fmt.Printf("Running scan command \"trivy %s\"...\n", strings.Join(args, " "))
 	cmd := exec.Command("trivy", args...)
 	cmd.Stdout = os.Stdout
