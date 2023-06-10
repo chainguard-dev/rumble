@@ -14,40 +14,27 @@ jobs:
   generate-matrix-chainguard:
     runs-on: ubuntu-latest
     outputs:
-      shard-0: ${{ steps.generate-matrix-0.outputs.matrix }}
-      shard-1: ${{ steps.generate-matrix-1.outputs.matrix }}
+      images: ${{ steps.list-images.outputs.images }}
     steps:
-      # Needed for the actions below
-      - uses: actions/checkout@93ea575cb5d8a053eaa0ac8fa3b40d7e05a33cc8 # v3.1.0
+      - uses: chainguard-dev/actions/setup-chainctl@main
         with:
-          repository: chainguard-images/images
+          # This identity allows us to list the public Chainguard images.
+          identity: 720909c9f5279097d847ad02a2f24ba8f59de36a/a033a6fabe0bfa0d
+      - id: list-images
+        run: |
+          chainctl img ls --group 720909c9f5279097d847ad02a2f24ba8f59de36a -ojson > image-list.json
 
-      - id: generate-matrix-0
-        uses: ./.github/actions/generate-matrix
-        with:
-          shard: 0
-          sharding-factor: 2
-          repository: chainguard-images/images
-          overrideCheckoutRepository: chainguard-images/images
-          overrideCheckoutRef: main
+          echo images=$(cat image-list.json | jq -c '[ .[] | select(.tags[].name | contains("latest")) | "cgr.dev/chainguard/" + .repo.name + ":latest" ] | unique') >> $GITHUB_OUTPUT
 
-      - id: generate-matrix-1
-        uses: ./.github/actions/generate-matrix
-        with:
-          shard: 1
-          sharding-factor: 2
-          repository: chainguard-images/images
-          overrideCheckoutRepository: chainguard-images/images
-          overrideCheckoutRef: main
-
-  scan-chainguard-0:
+  scan-chainguard:
     runs-on: ubuntu-latest
     needs: generate-matrix-chainguard
     outputs:
       success: ${{ steps.rumble-chainguard.outputs.success }}
     strategy:
       fail-fast: false
-      matrix: ${{ fromJson(needs.generate-matrix-chainguard.outputs.shard-0) }}
+      matrix:
+        image: ${{ fromJson(needs.generate-matrix-chainguard.outputs.images) }}
     permissions:
       id-token: write
       packages: write
@@ -58,7 +45,7 @@ jobs:
         run: |
           set -x
           echo "${GOOGLE_APPLICATION_CREDENTIALS_BASE64}" | base64 -d > google-creds.json
-          echo "Scanning: ${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}"
+          echo "Scanning: ${{ matrix.image }}"
           env > github.env
           echo "GOOGLE_APPLICATION_CREDENTIALS=/google-creds.json" >> github.env
           for scanner in "grype" "trivy"; do
@@ -66,52 +53,14 @@ jobs:
               -v "${PWD}/google-creds.json":/google-creds.json \
               --env-file github.env \
               "${REF}" \
-              -image "${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}" \
+              -image ${{ matrix.image }}" \
               -scanner "${scanner}"
           done
       - uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
         if: ${{ failure() }}
         id: slack
         with:
-          payload: '{"text": "[scan] failed for chainguard image ${{ matrix.ref }}: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-
-  scan-chainguard-1:
-    runs-on: ubuntu-latest
-    needs: generate-matrix-chainguard
-    outputs:
-      success: ${{ steps.rumble-chainguard.outputs.success }}
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJson(needs.generate-matrix-chainguard.outputs.shard-1) }}
-    permissions:
-      id-token: write
-      packages: write
-      contents: read
-    steps:
-      - name: Run rumble on image
-        id: rumble-chainguard
-        run: |
-          set -x
-          echo "${GOOGLE_APPLICATION_CREDENTIALS_BASE64}" | base64 -d > google-creds.json
-          echo "Scanning: ${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}"
-          env > github.env
-          echo "GOOGLE_APPLICATION_CREDENTIALS=/google-creds.json" >> github.env
-          for scanner in "grype" "trivy"; do
-            docker run --rm \
-              -v "${PWD}/google-creds.json":/google-creds.json \
-              --env-file github.env \
-              "${REF}" \
-              -image "${{ matrix.apkoBaseTag }}:${{ matrix.apkoTargetTag }}" \
-              -scanner "${scanner}"
-          done
-      - uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
-        if: ${{ failure() }}
-        id: slack
-        with:
-          payload: '{"text": "[scan] failed for chainguard image ${{ matrix.ref }}: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
+          payload: '{"text": "[scan] failed for chainguard image ${{ matrix.image }}: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"}'
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
