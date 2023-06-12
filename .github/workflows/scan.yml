@@ -55,7 +55,7 @@ jobs:
               -v "${PWD}/google-creds.json":/google-creds.json \
               --env-file github.env \
               "${REF}" \
-              -image ${{ matrix.image }}" \
+              -image "${{ matrix.image }}" \
               -scanner "${scanner}"
           done
       - uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
