@@ -13,6 +13,8 @@ concurrency: scan
 jobs:
   generate-matrix-chainguard:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
     outputs:
       images: ${{ steps.list-images.outputs.images }}
     steps:
