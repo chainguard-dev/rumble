@@ -12,7 +12,7 @@ package:
   # thus listed as dependencies for this package
   dependencies:
     runtime:
-      - grype=0.60.0
+      - grype
       - trivy
       - cosign
 
