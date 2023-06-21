@@ -22,9 +22,10 @@ const (
 )
 
 var (
-	GcloudProject = os.Getenv("GCLOUD_PROJECT")
-	GcloudDataset = os.Getenv("GCLOUD_DATASET")
-	GcloudTable   = os.Getenv("GCLOUD_TABLE")
+	GcloudProject    = os.Getenv("GCLOUD_PROJECT")
+	GcloudDataset    = os.Getenv("GCLOUD_DATASET")
+	GcloudTable      = os.Getenv("GCLOUD_TABLE")
+	GcloudTableVulns = os.Getenv("GCLOUD_TABLE_VULNS")
 )
 
 func main() {
@@ -88,8 +89,59 @@ func main() {
 			if err := u.Put(ctx, summary); err != nil {
 				panic(err)
 			}
-		}
 
+			// If the Grype output is there, parse it and add a row for
+			// each vuln found
+			if summary.RawGrypeJSON != "" {
+				table := dataset.Table(GcloudTableVulns)
+				u := table.Inserter()
+				var output types.GrypeScanOutput
+				if err := json.Unmarshal([]byte(summary.RawGrypeJSON), &output); err != nil {
+					panic(err)
+				}
+				tmp := map[string]*types.Vuln{}
+				for _, match := range output.Matches {
+					var matchType string
+					for _, detail := range match.MatchDetails {
+						matchType = strings.TrimSuffix(detail.Matcher, "-matcher")
+						v := types.Vuln{
+							ScanID:        summary.ID,
+							Name:          detail.SearchedBy.Package.Name,
+							Installed:     detail.SearchedBy.Package.Version,
+							FixedIn:       strings.Join(match.Vulnerability.Fix.Versions, ","),
+							Type:          matchType,
+							Vulnerability: match.Vulnerability.ID,
+							Severity:      match.Vulnerability.Severity,
+							Time:          summary.Time,
+						}
+						v.SetPrimaryKey()
+						tmp[v.ID] = &v
+					}
+					if matchType == "" {
+						matchType = match.Artifact.Type
+					}
+					v := types.Vuln{
+						ScanID:        summary.ID,
+						Name:          match.Artifact.Name,
+						Installed:     match.Artifact.Version,
+						FixedIn:       strings.Join(match.Vulnerability.Fix.Versions, ","),
+						Type:          matchType,
+						Vulnerability: match.Vulnerability.ID,
+						Severity:      match.Vulnerability.Severity,
+						Time:          summary.Time,
+					}
+					v.SetPrimaryKey()
+					tmp[v.ID] = &v
+				}
+				for _, vuln := range tmp {
+					fmt.Printf("Adding vuln entry for \"%s %s %s %s %s\"\n",
+						vuln.Name, vuln.Installed, vuln.FixedIn, vuln.Vulnerability, vuln.Type)
+					if err := u.Put(ctx, vuln); err != nil {
+						panic(err)
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -109,6 +161,7 @@ func scanImage(image string, scanner string, format string, dockerConfig string)
 	if err != nil {
 		return "", nil, nil, nil, err
 	}
+	summary.SetPrimaryKey()
 	return filename, startTime, endTime, summary, nil
 }
 
