@@ -2,7 +2,10 @@ package types
 
 import (
 	"crypto/sha256"
+	"encoding/json"
 	"fmt"
+	"sort"
+	"strings"
 )
 
 type ImageScanSummary struct {
@@ -30,12 +33,42 @@ type ImageScanSummary struct {
 	RawGrypeJSON string `bigquery:"raw_grype_json"`
 }
 
-func (row *ImageScanSummary) SetPrimaryKey() {
-	h := sha256.New()
-	s := row.Image + "--" + row.Scanner + row.Time
-	h.Write([]byte(s))
-	bs := h.Sum(nil)
-	row.ID = fmt.Sprintf("%x", bs)
+func (row *ImageScanSummary) SetID() {
+	row.ID = sha256Sum(row.id())
+}
+
+func (row *ImageScanSummary) id() string {
+	return strings.Join([]string{row.Image, row.Scanner, row.Time}, "--")
+}
+
+func (row *ImageScanSummary) ExtractVulns() ([]*Vuln, error) {
+	var output GrypeScanOutput
+	if err := json.Unmarshal([]byte(row.RawGrypeJSON), &output); err != nil {
+		return nil, err
+	}
+	uniqueVulns := map[string]*Vuln{}
+	for _, match := range output.Matches {
+		v := Vuln{
+			ScanID:        row.ID,
+			Name:          match.Artifact.Name,
+			Installed:     match.Artifact.Version,
+			FixedIn:       strings.Join(match.Vulnerability.Fix.Versions, ","),
+			Type:          match.Artifact.Type,
+			Vulnerability: match.Vulnerability.ID,
+			Severity:      match.Vulnerability.Severity,
+			Time:          row.Time,
+		}
+		v.SetID()
+		uniqueVulns[v.ID] = &v
+	}
+	vulns := []*Vuln{}
+	for _, vuln := range uniqueVulns {
+		vulns = append(vulns, vuln)
+	}
+	sort.Slice(vulns, func(i, j int) bool {
+		return vulns[i].id() < vulns[j].id()
+	})
+	return vulns, nil
 }
 
 type Vuln struct {
@@ -50,10 +83,17 @@ type Vuln struct {
 	Time          string `bigquery:"time"`
 }
 
-func (row *Vuln) SetPrimaryKey() {
+func (row *Vuln) SetID() {
+	row.ID = sha256Sum(row.id())
+}
+
+func (row *Vuln) id() string {
+	return strings.Join([]string{row.Name, row.Installed, row.Vulnerability, row.Type, row.Time}, "--")
+}
+
+func sha256Sum(s string) string {
 	h := sha256.New()
-	s := row.Name + "--" + row.Installed + "--" + row.Vulnerability + "--" + row.Type + "--" + row.Time
 	h.Write([]byte(s))
 	bs := h.Sum(nil)
-	row.ID = fmt.Sprintf("%x", bs)
+	return fmt.Sprintf("%x", bs)
 }

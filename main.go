@@ -81,38 +81,19 @@ func main() {
 		}
 		fmt.Println(string(b))
 
-		// Individual vulns from the raw Grype JSON output
-		vulns := []*types.Vuln{}
-		if summary.RawGrypeJSON != "" {
-			var output types.GrypeScanOutput
-			if err := json.Unmarshal([]byte(summary.RawGrypeJSON), &output); err != nil {
-				panic(err)
-			}
-			uniqueVulns := map[string]*types.Vuln{}
-			for _, match := range output.Matches {
-				v := types.Vuln{
-					ScanID:        summary.ID,
-					Name:          match.Artifact.Name,
-					Installed:     match.Artifact.Version,
-					FixedIn:       strings.Join(match.Vulnerability.Fix.Versions, ","),
-					Type:          match.Artifact.Type,
-					Vulnerability: match.Vulnerability.ID,
-					Severity:      match.Vulnerability.Severity,
-					Time:          summary.Time,
-				}
-				v.SetPrimaryKey()
-				uniqueVulns[v.ID] = &v
-			}
-			for _, vuln := range uniqueVulns {
-				fmt.Printf("Adding vuln entry for \"%s %s %s %s %s\"\n",
-					vuln.Name, vuln.Installed, vuln.FixedIn, vuln.Vulnerability, vuln.Type)
-				vulns = append(vulns, vuln)
-			}
+		// Extract vulns from the raw scanner output
+		vulns, err := summary.ExtractVulns()
+		if err != nil {
+			panic(err)
+		}
+		for _, vuln := range vulns {
+			fmt.Printf("Adding vuln entry for \"%s %s %s %s %s\" (id=\"%s\")\n",
+				vuln.Name, vuln.Installed, vuln.FixedIn, vuln.Vulnerability, vuln.Type, vuln.ID)
 		}
 
 		// Upload to BigQuery
 		if *bigqueryUpload {
-			fmt.Printf("Adding 1 row to table \"%s\"\n", GcloudTable)
+			fmt.Printf("Adding 1 row to table \"%s\" (scan_id=\"%s\")\n", GcloudTable, summary.ID)
 			ctx := context.Background()
 			client, err := bigquery.NewClient(ctx, GcloudProject)
 			if err != nil {
@@ -155,7 +136,7 @@ func scanImage(image string, scanner string, format string, dockerConfig string)
 	if err != nil {
 		return "", nil, nil, nil, err
 	}
-	summary.SetPrimaryKey()
+	summary.SetID()
 	return filename, startTime, endTime, summary, nil
 }
 
