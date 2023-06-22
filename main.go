@@ -22,9 +22,14 @@ const (
 )
 
 var (
-	GcloudProject    = os.Getenv("GCLOUD_PROJECT")
-	GcloudDataset    = os.Getenv("GCLOUD_DATASET")
-	GcloudTable      = os.Getenv("GCLOUD_TABLE")
+	GcloudProject = os.Getenv("GCLOUD_PROJECT")
+	GcloudDataset = os.Getenv("GCLOUD_DATASET")
+
+	// This is the table that stores a row for each rumble run/scan
+	GcloudTable = os.Getenv("GCLOUD_TABLE")
+
+	// This is a table that holds individual vulns found in a single rumble run/scan
+	// The scan_id field on this table refers to the rumble run id (acting as a foreign key)
 	GcloudTableVulns = os.Getenv("GCLOUD_TABLE_VULNS")
 )
 
@@ -76,8 +81,38 @@ func main() {
 		}
 		fmt.Println(string(b))
 
+		// Individual vulns from the raw Grype JSON output
+		vulns := []*types.Vuln{}
+		if summary.RawGrypeJSON != "" {
+			var output types.GrypeScanOutput
+			if err := json.Unmarshal([]byte(summary.RawGrypeJSON), &output); err != nil {
+				panic(err)
+			}
+			uniqueVulns := map[string]*types.Vuln{}
+			for _, match := range output.Matches {
+				v := types.Vuln{
+					ScanID:        summary.ID,
+					Name:          match.Artifact.Name,
+					Installed:     match.Artifact.Version,
+					FixedIn:       strings.Join(match.Vulnerability.Fix.Versions, ","),
+					Type:          match.Artifact.Type,
+					Vulnerability: match.Vulnerability.ID,
+					Severity:      match.Vulnerability.Severity,
+					Time:          summary.Time,
+				}
+				v.SetPrimaryKey()
+				uniqueVulns[v.ID] = &v
+			}
+			for _, vuln := range uniqueVulns {
+				fmt.Printf("Adding vuln entry for \"%s %s %s %s %s\"\n",
+					vuln.Name, vuln.Installed, vuln.FixedIn, vuln.Vulnerability, vuln.Type)
+				vulns = append(vulns, vuln)
+			}
+		}
+
+		// Upload to BigQuery
 		if *bigqueryUpload {
-			// Upload to BigQuery
+			fmt.Printf("Adding 1 row to table \"%s\"\n", GcloudTable)
 			ctx := context.Background()
 			client, err := bigquery.NewClient(ctx, GcloudProject)
 			if err != nil {
@@ -85,60 +120,19 @@ func main() {
 			}
 			dataset := client.Dataset(GcloudDataset)
 			table := dataset.Table(GcloudTable)
-			u := table.Inserter()
-			if err := u.Put(ctx, summary); err != nil {
+			tableInserter := table.Inserter()
+			if err := tableInserter.Put(ctx, summary); err != nil {
 				panic(err)
 			}
 
-			// If the Grype output is there, parse it and add a row for
-			// each vuln found
-			if summary.RawGrypeJSON != "" {
-				table := dataset.Table(GcloudTableVulns)
-				u := table.Inserter()
-				var output types.GrypeScanOutput
-				if err := json.Unmarshal([]byte(summary.RawGrypeJSON), &output); err != nil {
+			// Add a row for each vuln found
+			numVulns := len(vulns)
+			if numVulns > 0 {
+				fmt.Printf("Adding %d row(s) to table \"%s\"\n", numVulns, GcloudTableVulns)
+				tableVulns := dataset.Table(GcloudTableVulns)
+				tableVulnsInserter := tableVulns.Inserter()
+				if err := tableVulnsInserter.Put(ctx, vulns); err != nil {
 					panic(err)
-				}
-				tmp := map[string]*types.Vuln{}
-				for _, match := range output.Matches {
-					var matchType string
-					for _, detail := range match.MatchDetails {
-						matchType = strings.TrimSuffix(detail.Matcher, "-matcher")
-						v := types.Vuln{
-							ScanID:        summary.ID,
-							Name:          detail.SearchedBy.Package.Name,
-							Installed:     detail.SearchedBy.Package.Version,
-							FixedIn:       strings.Join(match.Vulnerability.Fix.Versions, ","),
-							Type:          matchType,
-							Vulnerability: match.Vulnerability.ID,
-							Severity:      match.Vulnerability.Severity,
-							Time:          summary.Time,
-						}
-						v.SetPrimaryKey()
-						tmp[v.ID] = &v
-					}
-					if matchType == "" {
-						matchType = match.Artifact.Type
-					}
-					v := types.Vuln{
-						ScanID:        summary.ID,
-						Name:          match.Artifact.Name,
-						Installed:     match.Artifact.Version,
-						FixedIn:       strings.Join(match.Vulnerability.Fix.Versions, ","),
-						Type:          matchType,
-						Vulnerability: match.Vulnerability.ID,
-						Severity:      match.Vulnerability.Severity,
-						Time:          summary.Time,
-					}
-					v.SetPrimaryKey()
-					tmp[v.ID] = &v
-				}
-				for _, vuln := range tmp {
-					fmt.Printf("Adding vuln entry for \"%s %s %s %s %s\"\n",
-						vuln.Name, vuln.Installed, vuln.FixedIn, vuln.Vulnerability, vuln.Type)
-					if err := u.Put(ctx, vuln); err != nil {
-						panic(err)
-					}
 				}
 			}
 		}

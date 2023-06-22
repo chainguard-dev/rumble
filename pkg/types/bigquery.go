@@ -52,7 +52,7 @@ type Vuln struct {
 
 func (row *Vuln) SetPrimaryKey() {
 	h := sha256.New()
-	s := row.Name + "--" + row.Installed + row.Vulnerability + "--" + row.Type + "--" + row.Time
+	s := row.Name + "--" + row.Installed + "--" + row.Vulnerability + "--" + row.Type + "--" + row.Time
 	h.Write([]byte(s))
 	bs := h.Sum(nil)
 	row.ID = fmt.Sprintf("%x", bs)

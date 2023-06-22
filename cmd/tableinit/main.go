@@ -9,12 +9,15 @@ import (
 )
 
 var (
-	GcloudProject    = os.Getenv("GCLOUD_PROJECT")
-	GcloudDataset    = os.Getenv("GCLOUD_DATASET")
-	GcloudTable      = os.Getenv("GCLOUD_TABLE")
-	GcloudTableVulns = os.Getenv("GCLOUD_TABLE_VULNS")
+	GcloudProject = os.Getenv("GCLOUD_PROJECT")
+	GcloudDataset = os.Getenv("GCLOUD_DATASET")
 
-	DoMigrate = os.Getenv("RUMBLE_MIGRATE")
+	// This is the table that stores a row for each rumble run/scan
+	GcloudTable = os.Getenv("GCLOUD_TABLE")
+
+	// This is a table that holds individual vulns found in a single rumble run/scan
+	// The scan_id field on this table refers to the rumble run id (acting as a foreign key)
+	GcloudTableVulns = os.Getenv("GCLOUD_TABLE_VULNS")
 )
 
 func main() {

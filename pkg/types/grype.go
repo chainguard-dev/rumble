@@ -25,7 +25,6 @@ type GrypeScanOutputDescriptorDb struct {
 
 type GrypeScanOutputMatches struct {
 	Vulnerability GrypeScanOutputMatchesVulnerability  `json:"vulnerability"`
-	MatchDetails  []GrypeScanOutputMatchesMatchDetails `json:"matchDetails"`
 	Artifact      GrypeScanOutputMatchesArtifact       `json:"artifact"`
 }
 
@@ -43,20 +42,6 @@ type GrypeScanOutputMatchesVulnerability struct {
 
 type GrypeScanOutputMatchesVulnerabilityFix struct {
 	Versions []string `json:"versions"`
-}
-
-type GrypeScanOutputMatchesMatchDetails struct {
-	Matcher    string                                       `json:"matcher"`
-	SearchedBy GrypeScanOutputMatchesMatchDetailsSearchedBy `json:"searchedBy"`
-}
-
-type GrypeScanOutputMatchesMatchDetailsSearchedBy struct {
-	Package GrypeScanOutputMatchesMatchDetailsSearchedByPackage `json:"package"`
-}
-
-type GrypeScanOutputMatchesMatchDetailsSearchedByPackage struct {
-	Name    string `json:"name"`
-	Version string `json:"version"`
 }
 
 type SarifOutput struct {
