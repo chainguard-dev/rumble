@@ -8,22 +8,19 @@ import (
 const (
 	testGrypeScan = "testdata/grype-scan.json"
 
-	expectedVulnCount = 37
+	testTime   = "2023-06-22T02:38:46Z"
+	testScanID = "testing123"
 
-	vulnTypeApk    = "apk"
-	vulnTypeDotnet = "dotnet"
-	vulnTypeGo     = "go-module"
-	vulnTypeJava   = "java-archive"
-	vulnTypePython = "python"
+	expectedVulnCount = 37
 )
 
 var (
 	expectedVulnCountsByType = map[string]int{
-		vulnTypeApk:    14,
-		vulnTypeDotnet: 3,
-		vulnTypeGo:     8,
-		vulnTypeJava:   11,
-		vulnTypePython: 1,
+		"apk":          14,
+		"dotnet":       3,
+		"go-module":    8,
+		"java-archive": 11,
+		"python":       1,
 	}
 )
 
@@ -33,7 +30,8 @@ func TestVulnExtraction(t *testing.T) {
 		t.Errorf("expected no error on os.ReadFile(), got %v", err)
 	}
 	summary := ImageScanSummary{
-		ID:           "testing-123",
+		Time:         testTime,
+		ID:           testScanID,
 		RawGrypeJSON: string(b),
 	}
 	vulns, err := summary.ExtractVulns()
@@ -46,6 +44,19 @@ func TestVulnExtraction(t *testing.T) {
 	}
 	actualVulnCountsByType := map[string]int{}
 	for _, vuln := range vulns {
+		// Make sure the summary ID and time gets passed down
+		if vuln.ScanID != testScanID {
+			t.Errorf("vuln.ScanID is %s, wanted %s", vuln.ScanID, testScanID)
+		}
+		if vuln.Time != testTime {
+			t.Errorf("vuln.Time is %s, wanted %s", vuln.Time, testTime)
+		}
+		// Make sure that all fields are non-empty (besides FixedIn which might be missing)
+		for _, v := range []string{vuln.ID, vuln.Name, vuln.Installed, vuln.Type, vuln.Vulnerability, vuln.Severity} {
+			if v == "" {
+				t.Errorf("got empty value for required field %s", vuln.id())
+			}
+		}
 		if _, ok := actualVulnCountsByType[vuln.Type]; !ok {
 			actualVulnCountsByType[vuln.Type] = 0
 		}
@@ -60,5 +71,4 @@ func TestVulnExtraction(t *testing.T) {
 			t.Errorf("got %d %s vulns, wanted %d %s vulns", actual, k, expected, k)
 		}
 	}
-
 }
