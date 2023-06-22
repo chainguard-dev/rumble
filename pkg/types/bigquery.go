@@ -39,7 +39,7 @@ func (row *ImageScanSummary) SetPrimaryKey() {
 }
 
 type Vuln struct {
-	ID            string `bigquery:"id"`      // This is faux primary key, the shas256sum of (name + "--" + vulnerability + "--" + time)
+	ID            string `bigquery:"id"`      // This is faux primary key, the shas256sum of (name + "--" + installed + "--" + vulnerability + "--" + type + "--" + time)
 	ScanID        string `bigquery:"scan_id"` // This is faux foreign key to the table above
 	Name          string `bigquery:"name"`
 	Installed     string `bigquery:"installed"`
