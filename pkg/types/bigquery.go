@@ -42,6 +42,10 @@ func (row *ImageScanSummary) id() string {
 }
 
 func (row *ImageScanSummary) ExtractVulns() ([]*Vuln, error) {
+	// No Grype data present which we rely on for this info
+	if row.RawGrypeJSON == "" {
+		return []*Vuln{}, nil
+	}
 	var output GrypeScanOutput
 	if err := json.Unmarshal([]byte(row.RawGrypeJSON), &output); err != nil {
 		return nil, err
