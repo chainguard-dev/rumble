@@ -24,7 +24,13 @@ const (
 var (
 	GcloudProject = os.Getenv("GCLOUD_PROJECT")
 	GcloudDataset = os.Getenv("GCLOUD_DATASET")
-	GcloudTable   = os.Getenv("GCLOUD_TABLE")
+
+	// This is the table that stores a row for each rumble run/scan
+	GcloudTable = os.Getenv("GCLOUD_TABLE")
+
+	// This is a table that holds individual vulns found in a single rumble run/scan
+	// The scan_id field on this table refers to the rumble run id (acting as a foreign key)
+	GcloudTableVulns = os.Getenv("GCLOUD_TABLE_VULNS")
 )
 
 func main() {
@@ -75,8 +81,19 @@ func main() {
 		}
 		fmt.Println(string(b))
 
+		// Extract vulns from the raw scanner output
+		vulns, err := summary.ExtractVulns()
+		if err != nil {
+			panic(err)
+		}
+		for _, vuln := range vulns {
+			fmt.Printf("Adding vuln entry for \"%s %s %s %s %s\" (id=\"%s\")\n",
+				vuln.Name, vuln.Installed, vuln.FixedIn, vuln.Vulnerability, vuln.Type, vuln.ID)
+		}
+
+		// Upload to BigQuery
 		if *bigqueryUpload {
-			// Upload to BigQuery
+			fmt.Printf("Adding 1 row to table \"%s\" (scan_id=\"%s\")\n", GcloudTable, summary.ID)
 			ctx := context.Background()
 			client, err := bigquery.NewClient(ctx, GcloudProject)
 			if err != nil {
@@ -84,12 +101,22 @@ func main() {
 			}
 			dataset := client.Dataset(GcloudDataset)
 			table := dataset.Table(GcloudTable)
-			u := table.Inserter()
-			if err := u.Put(ctx, summary); err != nil {
+			tableInserter := table.Inserter()
+			if err := tableInserter.Put(ctx, summary); err != nil {
 				panic(err)
 			}
-		}
 
+			// Add a row for each vuln found
+			numVulns := len(vulns)
+			if numVulns > 0 {
+				fmt.Printf("Adding %d row(s) to table \"%s\"\n", numVulns, GcloudTableVulns)
+				tableVulns := dataset.Table(GcloudTableVulns)
+				tableVulnsInserter := tableVulns.Inserter()
+				if err := tableVulnsInserter.Put(ctx, vulns); err != nil {
+					panic(err)
+				}
+			}
+		}
 	}
 }
 
@@ -109,6 +136,7 @@ func scanImage(image string, scanner string, format string, dockerConfig string)
 	if err != nil {
 		return "", nil, nil, nil, err
 	}
+	summary.SetID()
 	return filename, startTime, endTime, summary, nil
 }
 
