@@ -93,6 +93,7 @@ func main() {
 
 		// Upload to BigQuery
 		if *bigqueryUpload {
+			summary.SetID()
 			fmt.Printf("Adding 1 row to table \"%s\" (scan_id=\"%s\")\n", GcloudTable, summary.ID)
 			ctx := context.Background()
 			client, err := bigquery.NewClient(ctx, GcloudProject)
@@ -136,7 +137,6 @@ func scanImage(image string, scanner string, format string, dockerConfig string)
 	if err != nil {
 		return "", nil, nil, nil, err
 	}
-	summary.SetID()
 	return filename, startTime, endTime, summary, nil
 }
 
