@@ -159,7 +159,7 @@ traefik:latest
 ubuntu:latest
 ubuntu/prometheus-alertmanager:latest
 varnish:latest
-vault:latest
+vault:1.13.3
 willwill/wait-for-it:latest
 websphere-liberty:latest
 wordpress:latest
