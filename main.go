@@ -36,6 +36,7 @@ var (
 func main() {
 	image := flag.String("image", "cgr.dev/chainguard/static:latest", "OCI image")
 	scanner := flag.String("scanner", "grype", "Which scanner to use, (\"trivy\" or \"grype\")")
+	syft := flag.Bool("syft", false, "If enabled, and scanner is grype, attempt to match package name per vuln")
 	attest := flag.Bool("attest", false, "If enabled, attempt to attest vuln results using cosign")
 	bigqueryUpload := flag.Bool("bigquery", true, "If enabled, attempt to upload results to BigQuery")
 	invocationURI := flag.String("invocation-uri", "unknown", "in-toto value for invocation uri")
@@ -72,6 +73,15 @@ func main() {
 			summary.Created = created.Format(time.RFC3339)
 		} else {
 			summary.Created = "1970-01-01T00:00:00Z"
+		}
+
+		// If using grype, and enabled, gather more data using syft
+		if *scanner == "grype" && *syft {
+			var err error
+			summary.RawSyftJSON, err = scanImageSyft(*image, *dockerConfig)
+			if err != nil {
+				panic(err)
+			}
 		}
 
 		// Print the summary
@@ -391,4 +401,33 @@ func trivyOutputToSummary(image string, scanTime time.Time, output *types.TrivyS
 	}
 	summary.TotCveCount = totalCveCount
 	return summary
+}
+
+func scanImageSyft(image string, dockerConfig string) (string, error) {
+	log.Printf("scanning %s with syft\n", image)
+	file, err := os.CreateTemp("", "syft-scan-")
+	if err != nil {
+		return "", err
+	}
+	env := os.Environ()
+	if dockerConfig != "" {
+		env = append(env, fmt.Sprintf("DOCKER_CONFIG=%s", dockerConfig))
+	}
+	args := []string{"-v", "-o", "json", "--file", file.Name(), image}
+	fmt.Printf("Running command \"syft %s\"...\n", strings.Join(args, " "))
+	cmd := exec.Command("syft", args...)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	if err := cmd.Run(); err != nil {
+		return "", err
+	}
+	b, err := os.ReadFile(file.Name())
+	if err != nil {
+		return "", err
+	}
+	var buff *bytes.Buffer = new(bytes.Buffer)
+	if err := json.Compact(buff, b); err != nil {
+		return "", err
+	}
+	return string(buff.Bytes()), nil
 }

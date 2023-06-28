@@ -31,6 +31,7 @@ type ImageScanSummary struct {
 	Success         bool `bigquery:"success"`
 
 	RawGrypeJSON string `bigquery:"raw_grype_json"`
+	RawSyftJSON  string `bigquery:"raw_syft_json"`
 }
 
 func (row *ImageScanSummary) SetID() {
@@ -46,6 +47,9 @@ func (row *ImageScanSummary) ExtractVulns() ([]*Vuln, error) {
 	if row.RawGrypeJSON == "" {
 		return []*Vuln{}, nil
 	}
+	if row.RawSyftJSON != "" {
+		// TODO: do something with this data
+	}
 	if row.ID == "" {
 		row.SetID()
 	}
@@ -56,14 +60,16 @@ func (row *ImageScanSummary) ExtractVulns() ([]*Vuln, error) {
 	uniqueVulns := map[string]*Vuln{}
 	for _, match := range output.Matches {
 		v := Vuln{
-			ScanID:        row.ID,
-			Name:          match.Artifact.Name,
-			Installed:     match.Artifact.Version,
-			FixedIn:       strings.Join(match.Vulnerability.Fix.Versions, ","),
-			Type:          match.Artifact.Type,
-			Vulnerability: match.Vulnerability.ID,
-			Severity:      match.Vulnerability.Severity,
-			Time:          row.Time,
+			ScanID:         row.ID,
+			Name:           match.Artifact.Name,
+			Installed:      match.Artifact.Version,
+			FixedIn:        strings.Join(match.Vulnerability.Fix.Versions, ","),
+			Type:           match.Artifact.Type,
+			Vulnerability:  match.Vulnerability.ID,
+			Severity:       match.Vulnerability.Severity,
+			Time:           row.Time,
+			PackageName:    "unknown", // TODO: something determined from row.RawSyftJSON
+			PackageVersion: "unknown", // TODO: something determined from row.RawSyftJSON
 		}
 		v.SetID()
 		uniqueVulns[v.ID] = &v
@@ -79,15 +85,17 @@ func (row *ImageScanSummary) ExtractVulns() ([]*Vuln, error) {
 }
 
 type Vuln struct {
-	ID            string `bigquery:"id"`      // This is faux primary key, the shas256sum of (name + "--" + installed + "--" + vulnerability + "--" + type + "--" + time)
-	ScanID        string `bigquery:"scan_id"` // This is faux foreign key to the table above
-	Name          string `bigquery:"name"`
-	Installed     string `bigquery:"installed"`
-	FixedIn       string `bigquery:"fixed_in"`
-	Type          string `bigquery:"type"`
-	Vulnerability string `bigquery:"vulnerability"`
-	Severity      string `bigquery:"severity"`
-	Time          string `bigquery:"time"`
+	ID             string `bigquery:"id"`      // This is faux primary key, the shas256sum of (name + "--" + installed + "--" + vulnerability + "--" + type + "--" + time)
+	ScanID         string `bigquery:"scan_id"` // This is faux foreign key to the table above
+	Name           string `bigquery:"name"`
+	Installed      string `bigquery:"installed"`
+	FixedIn        string `bigquery:"fixed_in"`
+	Type           string `bigquery:"type"`
+	Vulnerability  string `bigquery:"vulnerability"`
+	Severity       string `bigquery:"severity"`
+	Time           string `bigquery:"time"`
+	PackageName    string `bigquery:"package_name"`
+	PackageVersion string `bigquery:"package_version"`
 }
 
 func (row *Vuln) SetID() {
