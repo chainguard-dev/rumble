@@ -72,8 +72,8 @@ func (row *ImageScanSummary) ExtractVulns() ([]*Vuln, error) {
 			Vulnerability:  match.Vulnerability.ID,
 			Severity:       match.Vulnerability.Severity,
 			Time:           row.Time,
-			PackageName:    packageName,    // TODO: something determined from row.RawSyftJSON
-			PackageVersion: packageVersion, // TODO: something determined from row.RawSyftJSON
+			PackageName:    packageName,
+			PackageVersion: packageVersion,
 		}
 		v.SetID()
 		uniqueVulns[v.ID] = &v
@@ -123,8 +123,12 @@ const (
 )
 
 func determineDistroPackage(match *GrypeScanOutputMatches, grypeOutput *GrypeScanOutput, syftOutput *SyftScanOutput) (string, string) {
-	if grypeOutput == nil || syftOutput == nil {
+	if grypeOutput == nil || syftOutput == nil || match == nil {
 		return defaultDistroPackageName, defaultDistroPackageVersion
+	}
+
+	if match.Artifact.Type == "apk" {
+		return match.Artifact.Name, match.Artifact.Version
 	}
 
 	grypeArtifactID := match.Artifact.ID
@@ -147,7 +151,7 @@ func determineDistroPackage(match *GrypeScanOutputMatches, grypeOutput *GrypeSca
 	foundSyftArtifactRelationship := false
 	for _, relationship := range syftOutput.ArtifactRelationships {
 		// TODO: what if it is to self? (e.g. apk)
-		if relationship.Child == syftChildID {
+		if relationship.Child == syftChildID && relationship.Type == "ownership-by-file-overlap" {
 			syftArtifactRelationship = relationship
 			foundSyftArtifactRelationship = true
 			break

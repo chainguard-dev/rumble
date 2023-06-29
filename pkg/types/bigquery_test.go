@@ -64,7 +64,7 @@ func TestVulnExtraction(t *testing.T) {
 		}
 
 		// spot check a python vuln package extract
-		if vuln.Type == "python" {
+		if vuln.Type == "python" && vuln.Vulnerability == "CVE-2018-20225" {
 			if vuln.PackageName != "py3.11-pip" {
 				t.Errorf("expcted package name to be pip but got %s", vuln.PackageName)
 			}
@@ -73,7 +73,15 @@ func TestVulnExtraction(t *testing.T) {
 			}
 		}
 
-		// TODO: spot check apk vuln
+		// spot check apk vuln package extract
+		if vuln.Type == "apk" && vuln.Vulnerability == "CVE-2007-4559" {
+			if vuln.PackageName != "python-3.11" {
+				t.Errorf("expcted package name to be pip but got %s", vuln.PackageName)
+			}
+			if vuln.PackageVersion != "3.11.4-r0" {
+				t.Errorf("expcted package version to be 23.1.2 but got %s", vuln.PackageVersion)
+			}
+		}
 
 		if _, ok := actualVulnCountsByType[vuln.Type]; !ok {
 			actualVulnCountsByType[vuln.Type] = 0
