@@ -254,7 +254,6 @@ func scanImageTrivy(image string, format string, dockerConfig string) (string, *
 	if err != nil {
 		return "", nil, nil, nil, err
 	}
-	fmt.Println(string(b))
 
 	// Get the trivy version
 	var out bytes.Buffer
@@ -305,7 +304,6 @@ func scanImageGrype(image string, format string, dockerConfig string) (string, *
 	if err != nil {
 		return "", nil, nil, nil, err
 	}
-	fmt.Println(string(b))
 	// Only attempt summary if the format is JSON
 	if format == "json" {
 		var output types.GrypeScanOutput
