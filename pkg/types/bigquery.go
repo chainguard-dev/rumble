@@ -47,18 +47,22 @@ func (row *ImageScanSummary) ExtractVulns() ([]*Vuln, error) {
 	if row.RawGrypeJSON == "" {
 		return []*Vuln{}, nil
 	}
-	if row.RawSyftJSON != "" {
-		// TODO: do something with this data
-	}
 	if row.ID == "" {
 		row.SetID()
 	}
-	var output GrypeScanOutput
-	if err := json.Unmarshal([]byte(row.RawGrypeJSON), &output); err != nil {
+	var grypeOutput GrypeScanOutput
+	if err := json.Unmarshal([]byte(row.RawGrypeJSON), &grypeOutput); err != nil {
 		return nil, err
 	}
+	var syftOutput SyftScanOutput
+	if row.RawSyftJSON != "" {
+		if err := json.Unmarshal([]byte(row.RawSyftJSON), &syftOutput); err != nil {
+			return nil, err
+		}
+	}
 	uniqueVulns := map[string]*Vuln{}
-	for _, match := range output.Matches {
+	for _, match := range grypeOutput.Matches {
+		packageName, packageVersion := determineDistroPackage(&match, &grypeOutput, &syftOutput)
 		v := Vuln{
 			ScanID:         row.ID,
 			Name:           match.Artifact.Name,
@@ -68,8 +72,8 @@ func (row *ImageScanSummary) ExtractVulns() ([]*Vuln, error) {
 			Vulnerability:  match.Vulnerability.ID,
 			Severity:       match.Vulnerability.Severity,
 			Time:           row.Time,
-			PackageName:    "unknown", // TODO: something determined from row.RawSyftJSON
-			PackageVersion: "unknown", // TODO: something determined from row.RawSyftJSON
+			PackageName:    packageName,    // TODO: something determined from row.RawSyftJSON
+			PackageVersion: packageVersion, // TODO: something determined from row.RawSyftJSON
 		}
 		v.SetID()
 		uniqueVulns[v.ID] = &v
@@ -111,4 +115,61 @@ func sha256Sum(s string) string {
 	h.Write([]byte(s))
 	bs := h.Sum(nil)
 	return fmt.Sprintf("%x", bs)
+}
+
+const (
+	defaultDistroPackageName    = "unknown"
+	defaultDistroPackageVersion = "unknown"
+)
+
+func determineDistroPackage(match *GrypeScanOutputMatches, grypeOutput *GrypeScanOutput, syftOutput *SyftScanOutput) (string, string) {
+	if grypeOutput == nil || syftOutput == nil {
+		return defaultDistroPackageName, defaultDistroPackageVersion
+	}
+
+	grypeArtifactID := match.Artifact.ID
+
+	var syftArtifact SyftScanOutputArtifact
+	foundSyftArtifact := false
+	for _, artifact := range syftOutput.Artifacts {
+		if artifact.ID == grypeArtifactID {
+			syftArtifact = artifact
+			foundSyftArtifact = true
+			break
+		}
+	}
+	if !foundSyftArtifact {
+		return defaultDistroPackageName, defaultDistroPackageVersion
+	}
+
+	syftChildID := syftArtifact.ID
+	var syftArtifactRelationship SyftScanOutputArtifactRelationship
+	foundSyftArtifactRelationship := false
+	for _, relationship := range syftOutput.ArtifactRelationships {
+		// TODO: what if it is to self? (e.g. apk)
+		if relationship.Child == syftChildID {
+			syftArtifactRelationship = relationship
+			foundSyftArtifactRelationship = true
+			break
+		}
+	}
+	if !foundSyftArtifactRelationship {
+		return defaultDistroPackageName, defaultDistroPackageVersion
+	}
+
+	syftParentID := syftArtifactRelationship.Parent
+	var syftArtifactParent SyftScanOutputArtifact
+	foundSyftArtifactParent := false
+	for _, artifact := range syftOutput.Artifacts {
+		if artifact.ID == syftParentID {
+			syftArtifactParent = artifact
+			foundSyftArtifactParent = true
+			break
+		}
+	}
+	if !foundSyftArtifactParent {
+		return defaultDistroPackageName, defaultDistroPackageVersion
+	}
+
+	return syftArtifactParent.Name, syftArtifactParent.Version
 }
