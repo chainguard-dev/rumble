@@ -2,6 +2,109 @@
  "matches": [
   {
    "vulnerability": {
+    "id": "CVE-2007-4559",
+    "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2007-4559",
+    "namespace": "nvd:cpe",
+    "severity": "Medium",
+    "urls": [
+     "http://mail.python.org/pipermail/python-dev/2007-August/074290.html",
+     "http://mail.python.org/pipermail/python-dev/2007-August/074292.html",
+     "http://www.vupen.com/english/advisories/2007/3022",
+     "https://bugzilla.redhat.com/show_bug.cgi?id=263261"
+    ],
+    "description": "Directory traversal vulnerability in the (1) extract and (2) extractall functions in the tarfile module in Python allows user-assisted remote attackers to overwrite arbitrary files via a .. (dot dot) sequence in filenames in a TAR archive, a related issue to CVE-2001-1267.",
+    "cvss": [
+     {
+      "source": "nvd@nist.gov",
+      "type": "Primary",
+      "version": "2.0",
+      "vector": "AV:N/AC:M/Au:N/C:P/I:P/A:P",
+      "metrics": {
+       "baseScore": 6.8,
+       "exploitabilityScore": 8.6,
+       "impactScore": 6.4
+      },
+      "vendorMetadata": {}
+     }
+    ],
+    "fix": {
+     "versions": [],
+     "state": "unknown"
+    },
+    "advisories": []
+   },
+   "relatedVulnerabilities": [],
+   "matchDetails": [
+    {
+     "type": "cpe-match",
+     "matcher": "apk-matcher",
+     "searchedBy": {
+      "namespace": "nvd:cpe",
+      "cpes": [
+       "cpe:2.3:a:python_software_foundation:python:3.11.4-r0:*:*:*:*:*:*:*"
+      ],
+      "Package": {
+       "name": "python-3.11",
+       "version": "3.11.4-r0"
+      }
+     },
+     "found": {
+      "vulnerabilityID": "CVE-2007-4559",
+      "versionConstraint": "none (unknown)",
+      "cpes": [
+       "cpe:2.3:a:python_software_foundation:python:*:*:*:*:*:*:*:*"
+      ]
+     }
+    }
+   ],
+   "artifact": {
+    "id": "70f862a85e8ae2ad",
+    "name": "python-3.11",
+    "version": "3.11.4-r0",
+    "type": "apk",
+    "locations": [
+     {
+      "path": "/lib/apk/db/installed",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
+     }
+    ],
+    "language": "",
+    "licenses": [
+     "PSF-2.0"
+    ],
+    "cpes": [
+     "cpe:2.3:a:python-software-foundation:python-3.11:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python-software-foundation:python_3.11:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python_software_foundation:python-3.11:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python_software_foundation:python_3.11:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python-software-foundation:python:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python_software_foundation:python:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python-software:python-3.11:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python-software:python_3.11:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python_software:python-3.11:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python_software:python_3.11:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python-3.11:python-3.11:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python-3.11:python_3.11:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python_3.11:python-3.11:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python_3.11:python_3.11:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python-software:python:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python_software:python:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python-3.11:python:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python:python-3.11:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python:python_3.11:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python_3.11:python:3.11.4-r0:*:*:*:*:*:*:*",
+     "cpe:2.3:a:python:python:3.11.4-r0:*:*:*:*:*:*:*"
+    ],
+    "purl": "pkg:apk/wolfi/python-3.11@3.11.4-r0?arch=aarch64&distro=wolfi-20230201",
+    "upstreams": [
+     {
+      "name": "python-3.11"
+     }
+    ]
+   }
+  },
+  {
+   "vulnerability": {
     "id": "CVE-2018-20225",
     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2018-20225",
     "namespace": "nvd:cpe",
@@ -77,11 +180,11 @@
     "locations": [
      {
       "path": "/usr/lib/python3.11/site-packages/pip-23.1.2-py3.11.egg-info/PKG-INFO",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      },
      {
       "path": "/usr/lib/python3.11/site-packages/pip-23.1.2-py3.11.egg-info/top_level.txt",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "python",
@@ -223,11 +326,11 @@
      "searchedBy": {
       "namespace": "nvd:cpe",
       "cpes": [
-       "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*"
+       "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*"
       ],
       "Package": {
        "name": "maven-resolver-api",
-       "version": "1.9.7"
+       "version": "1.9.13"
       }
      },
      "found": {
@@ -240,14 +343,14 @@
     }
    ],
    "artifact": {
-    "id": "8c1c4f39a2ff2a88",
+    "id": "21287e01ff136976",
     "name": "maven-resolver-api",
-    "version": "1.9.7",
+    "version": "1.9.13",
     "type": "java-archive",
     "locations": [
      {
-      "path": "/usr/share/java/maven/lib/maven-resolver-api-1.9.7.jar",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/java/maven/lib/maven-resolver-api-1.9.13.jar",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "java",
@@ -255,23 +358,23 @@
      "\"Apache-2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.txt\""
     ],
     "cpes": [
-     "cpe:2.3:a:apache:maven-resolver-api:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven_resolver_api:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:api:1.9.7:*:*:*:*:*:*:*"
+     "cpe:2.3:a:apache:maven-resolver-api:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven_resolver_api:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:api:1.9.13:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-api@1.9.7",
+    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-api@1.9.13",
     "upstreams": [],
     "metadataType": "JavaMetadata",
     "metadata": {
-     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-api-1.9.7.jar",
+     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-api-1.9.13.jar",
      "pomArtifactID": "maven-resolver-api",
      "pomGroupID": "org.apache.maven.resolver",
      "manifestName": "",
      "archiveDigests": [
       {
        "algorithm": "sha1",
-       "value": "473a080621096b1488cb287ee5c4ad9b63795bba"
+       "value": "3f270f7122047e4113ca7d66ad6f86a33c88c9ac"
       }
      ]
     }
@@ -370,11 +473,11 @@
      "searchedBy": {
       "namespace": "nvd:cpe",
       "cpes": [
-       "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*"
+       "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*"
       ],
       "Package": {
        "name": "maven-resolver-connector-basic",
-       "version": "1.9.7"
+       "version": "1.9.13"
       }
      },
      "found": {
@@ -387,14 +490,14 @@
     }
    ],
    "artifact": {
-    "id": "53e5248901425195",
+    "id": "bd85b38f478effda",
     "name": "maven-resolver-connector-basic",
-    "version": "1.9.7",
+    "version": "1.9.13",
     "type": "java-archive",
     "locations": [
      {
-      "path": "/usr/share/java/maven/lib/maven-resolver-connector-basic-1.9.7.jar",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/java/maven/lib/maven-resolver-connector-basic-1.9.13.jar",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "java",
@@ -402,23 +505,23 @@
      "\"Apache-2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.txt\""
     ],
     "cpes": [
-     "cpe:2.3:a:apache:maven-resolver-connector-basic:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven_resolver_connector_basic:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:basic:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*"
+     "cpe:2.3:a:apache:maven-resolver-connector-basic:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven_resolver_connector_basic:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:basic:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-connector-basic@1.9.7",
+    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-connector-basic@1.9.13",
     "upstreams": [],
     "metadataType": "JavaMetadata",
     "metadata": {
-     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-connector-basic-1.9.7.jar",
+     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-connector-basic-1.9.13.jar",
      "pomArtifactID": "maven-resolver-connector-basic",
      "pomGroupID": "org.apache.maven.resolver",
      "manifestName": "",
      "archiveDigests": [
       {
        "algorithm": "sha1",
-       "value": "3f1523254b400f89e290c3274c4458ba111e6d57"
+       "value": "09ab55b836913b98321101b23b4c61d8485a589d"
       }
      ]
     }
@@ -517,11 +620,11 @@
      "searchedBy": {
       "namespace": "nvd:cpe",
       "cpes": [
-       "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*"
+       "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*"
       ],
       "Package": {
        "name": "maven-resolver-impl",
-       "version": "1.9.7"
+       "version": "1.9.13"
       }
      },
      "found": {
@@ -534,14 +637,14 @@
     }
    ],
    "artifact": {
-    "id": "d39c32f51b340c74",
+    "id": "3ed2c45044313618",
     "name": "maven-resolver-impl",
-    "version": "1.9.7",
+    "version": "1.9.13",
     "type": "java-archive",
     "locations": [
      {
-      "path": "/usr/share/java/maven/lib/maven-resolver-impl-1.9.7.jar",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/java/maven/lib/maven-resolver-impl-1.9.13.jar",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "java",
@@ -549,23 +652,23 @@
      "\"Apache-2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.txt\""
     ],
     "cpes": [
-     "cpe:2.3:a:apache:maven-resolver-impl:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven_resolver_impl:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:impl:1.9.7:*:*:*:*:*:*:*"
+     "cpe:2.3:a:apache:maven-resolver-impl:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven_resolver_impl:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:impl:1.9.13:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-impl@1.9.7",
+    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-impl@1.9.13",
     "upstreams": [],
     "metadataType": "JavaMetadata",
     "metadata": {
-     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-impl-1.9.7.jar",
+     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-impl-1.9.13.jar",
      "pomArtifactID": "maven-resolver-impl",
      "pomGroupID": "org.apache.maven.resolver",
      "manifestName": "",
      "archiveDigests": [
       {
        "algorithm": "sha1",
-       "value": "56f6babfb1fa6d34849e834433b572fb743e7f4d"
+       "value": "9b1249902065aea64cbf1c5306dc43e8d7dbac4e"
       }
      ]
     }
@@ -664,11 +767,11 @@
      "searchedBy": {
       "namespace": "nvd:cpe",
       "cpes": [
-       "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*"
+       "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*"
       ],
       "Package": {
        "name": "maven-resolver-named-locks",
-       "version": "1.9.7"
+       "version": "1.9.13"
       }
      },
      "found": {
@@ -681,14 +784,14 @@
     }
    ],
    "artifact": {
-    "id": "8deb46ace1b2ccd0",
+    "id": "994d7424e6c88aa9",
     "name": "maven-resolver-named-locks",
-    "version": "1.9.7",
+    "version": "1.9.13",
     "type": "java-archive",
     "locations": [
      {
-      "path": "/usr/share/java/maven/lib/maven-resolver-named-locks-1.9.7.jar",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/java/maven/lib/maven-resolver-named-locks-1.9.13.jar",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "java",
@@ -696,22 +799,22 @@
      "\"Apache-2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.txt\""
     ],
     "cpes": [
-     "cpe:2.3:a:apache:maven-resolver-named-locks:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven_resolver_named_locks:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*"
+     "cpe:2.3:a:apache:maven-resolver-named-locks:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven_resolver_named_locks:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-named-locks@1.9.7",
+    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-named-locks@1.9.13",
     "upstreams": [],
     "metadataType": "JavaMetadata",
     "metadata": {
-     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-named-locks-1.9.7.jar",
+     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-named-locks-1.9.13.jar",
      "pomArtifactID": "maven-resolver-named-locks",
      "pomGroupID": "org.apache.maven.resolver",
      "manifestName": "",
      "archiveDigests": [
       {
        "algorithm": "sha1",
-       "value": "8f6c65ff4c677e45b0907bba3cec3449d21135ff"
+       "value": "5de261851d65144303f75aeeeb075f327fba2952"
       }
      ]
     }
@@ -810,11 +913,11 @@
      "searchedBy": {
       "namespace": "nvd:cpe",
       "cpes": [
-       "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*"
+       "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*"
       ],
       "Package": {
        "name": "maven-resolver-spi",
-       "version": "1.9.7"
+       "version": "1.9.13"
       }
      },
      "found": {
@@ -827,14 +930,14 @@
     }
    ],
    "artifact": {
-    "id": "80139b1544ec22d1",
+    "id": "5848f589119533e8",
     "name": "maven-resolver-spi",
-    "version": "1.9.7",
+    "version": "1.9.13",
     "type": "java-archive",
     "locations": [
      {
-      "path": "/usr/share/java/maven/lib/maven-resolver-spi-1.9.7.jar",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/java/maven/lib/maven-resolver-spi-1.9.13.jar",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "java",
@@ -842,23 +945,23 @@
      "\"Apache-2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.txt\""
     ],
     "cpes": [
-     "cpe:2.3:a:apache:maven-resolver-spi:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven_resolver_spi:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:spi:1.9.7:*:*:*:*:*:*:*"
+     "cpe:2.3:a:apache:maven-resolver-spi:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven_resolver_spi:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:spi:1.9.13:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-spi@1.9.7",
+    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-spi@1.9.13",
     "upstreams": [],
     "metadataType": "JavaMetadata",
     "metadata": {
-     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-spi-1.9.7.jar",
+     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-spi-1.9.13.jar",
      "pomArtifactID": "maven-resolver-spi",
      "pomGroupID": "org.apache.maven.resolver",
      "manifestName": "",
      "archiveDigests": [
       {
        "algorithm": "sha1",
-       "value": "5e273840daf376dc188c0f71d027df400de215c2"
+       "value": "112758c5e9b8eb9002bf129102d22cb887e3025c"
       }
      ]
     }
@@ -957,11 +1060,11 @@
      "searchedBy": {
       "namespace": "nvd:cpe",
       "cpes": [
-       "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*"
+       "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*"
       ],
       "Package": {
        "name": "maven-resolver-transport-file",
-       "version": "1.9.7"
+       "version": "1.9.13"
       }
      },
      "found": {
@@ -974,14 +1077,14 @@
     }
    ],
    "artifact": {
-    "id": "426da819c57ff64e",
+    "id": "aa55f602a895d56c",
     "name": "maven-resolver-transport-file",
-    "version": "1.9.7",
+    "version": "1.9.13",
     "type": "java-archive",
     "locations": [
      {
-      "path": "/usr/share/java/maven/lib/maven-resolver-transport-file-1.9.7.jar",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/java/maven/lib/maven-resolver-transport-file-1.9.13.jar",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "java",
@@ -989,23 +1092,23 @@
      "\"Apache-2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.txt\""
     ],
     "cpes": [
-     "cpe:2.3:a:apache:maven-resolver-transport-file:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven_resolver_transport_file:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:file:1.9.7:*:*:*:*:*:*:*"
+     "cpe:2.3:a:apache:maven-resolver-transport-file:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven_resolver_transport_file:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:file:1.9.13:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-transport-file@1.9.7",
+    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-transport-file@1.9.13",
     "upstreams": [],
     "metadataType": "JavaMetadata",
     "metadata": {
-     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-transport-file-1.9.7.jar",
+     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-transport-file-1.9.13.jar",
      "pomArtifactID": "maven-resolver-transport-file",
      "pomGroupID": "org.apache.maven.resolver",
      "manifestName": "",
      "archiveDigests": [
       {
        "algorithm": "sha1",
-       "value": "f244c4ce62e889914b0e5ddc400e2dfa974ed136"
+       "value": "68da2730dc3e968aba581f7e432fb14a4a7c4477"
       }
      ]
     }
@@ -1104,11 +1207,11 @@
      "searchedBy": {
       "namespace": "nvd:cpe",
       "cpes": [
-       "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*"
+       "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*"
       ],
       "Package": {
        "name": "maven-resolver-transport-http",
-       "version": "1.9.7"
+       "version": "1.9.13"
       }
      },
      "found": {
@@ -1121,14 +1224,14 @@
     }
    ],
    "artifact": {
-    "id": "86f9bf72d32e0ad1",
+    "id": "593a69f2da687dba",
     "name": "maven-resolver-transport-http",
-    "version": "1.9.7",
+    "version": "1.9.13",
     "type": "java-archive",
     "locations": [
      {
-      "path": "/usr/share/java/maven/lib/maven-resolver-transport-http-1.9.7.jar",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/java/maven/lib/maven-resolver-transport-http-1.9.13.jar",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "java",
@@ -1136,23 +1239,23 @@
      "\"Apache-2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.txt\""
     ],
     "cpes": [
-     "cpe:2.3:a:apache:maven-resolver-transport-http:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven_resolver_transport_http:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:http:1.9.7:*:*:*:*:*:*:*"
+     "cpe:2.3:a:apache:maven-resolver-transport-http:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven_resolver_transport_http:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:http:1.9.13:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-transport-http@1.9.7",
+    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-transport-http@1.9.13",
     "upstreams": [],
     "metadataType": "JavaMetadata",
     "metadata": {
-     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-transport-http-1.9.7.jar",
+     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-transport-http-1.9.13.jar",
      "pomArtifactID": "maven-resolver-transport-http",
      "pomGroupID": "org.apache.maven.resolver",
      "manifestName": "",
      "archiveDigests": [
       {
        "algorithm": "sha1",
-       "value": "6690b4934de8d3a448cc5649776c2b326a10f614"
+       "value": "20a9313dc425956f9f9472c487986652363ac5b5"
       }
      ]
     }
@@ -1251,11 +1354,11 @@
      "searchedBy": {
       "namespace": "nvd:cpe",
       "cpes": [
-       "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*"
+       "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*"
       ],
       "Package": {
        "name": "maven-resolver-transport-wagon",
-       "version": "1.9.7"
+       "version": "1.9.13"
       }
      },
      "found": {
@@ -1268,14 +1371,14 @@
     }
    ],
    "artifact": {
-    "id": "e8ed643ea728b5b0",
+    "id": "b39825f991ddc232",
     "name": "maven-resolver-transport-wagon",
-    "version": "1.9.7",
+    "version": "1.9.13",
     "type": "java-archive",
     "locations": [
      {
-      "path": "/usr/share/java/maven/lib/maven-resolver-transport-wagon-1.9.7.jar",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/java/maven/lib/maven-resolver-transport-wagon-1.9.13.jar",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "java",
@@ -1283,23 +1386,23 @@
      "\"Apache-2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.txt\""
     ],
     "cpes": [
-     "cpe:2.3:a:apache:maven-resolver-transport-wagon:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven_resolver_transport_wagon:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:wagon:1.9.7:*:*:*:*:*:*:*"
+     "cpe:2.3:a:apache:maven-resolver-transport-wagon:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven_resolver_transport_wagon:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:wagon:1.9.13:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-transport-wagon@1.9.7",
+    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-transport-wagon@1.9.13",
     "upstreams": [],
     "metadataType": "JavaMetadata",
     "metadata": {
-     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-transport-wagon-1.9.7.jar",
+     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-transport-wagon-1.9.13.jar",
      "pomArtifactID": "maven-resolver-transport-wagon",
      "pomGroupID": "org.apache.maven.resolver",
      "manifestName": "",
      "archiveDigests": [
       {
        "algorithm": "sha1",
-       "value": "bccd6c18a08efcdbf662dce7a0fabcf0f0d2a694"
+       "value": "d21763da9046a2378a857cd22c46486f7b1908e5"
       }
      ]
     }
@@ -1398,11 +1501,11 @@
      "searchedBy": {
       "namespace": "nvd:cpe",
       "cpes": [
-       "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*"
+       "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*"
       ],
       "Package": {
        "name": "maven-resolver-util",
-       "version": "1.9.7"
+       "version": "1.9.13"
       }
      },
      "found": {
@@ -1415,14 +1518,14 @@
     }
    ],
    "artifact": {
-    "id": "f52993b839f77b9e",
+    "id": "a09e8debd09bc260",
     "name": "maven-resolver-util",
-    "version": "1.9.7",
+    "version": "1.9.13",
     "type": "java-archive",
     "locations": [
      {
-      "path": "/usr/share/java/maven/lib/maven-resolver-util-1.9.7.jar",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/java/maven/lib/maven-resolver-util-1.9.13.jar",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "java",
@@ -1430,23 +1533,23 @@
      "\"Apache-2.0\";link=\"https://www.apache.org/licenses/LICENSE-2.0.txt\""
     ],
     "cpes": [
-     "cpe:2.3:a:apache:maven-resolver-util:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven_resolver_util:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:maven:1.9.7:*:*:*:*:*:*:*",
-     "cpe:2.3:a:apache:util:1.9.7:*:*:*:*:*:*:*"
+     "cpe:2.3:a:apache:maven-resolver-util:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven_resolver_util:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:maven:1.9.13:*:*:*:*:*:*:*",
+     "cpe:2.3:a:apache:util:1.9.13:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-util@1.9.7",
+    "purl": "pkg:maven/org.apache.maven.resolver/maven-resolver-util@1.9.13",
     "upstreams": [],
     "metadataType": "JavaMetadata",
     "metadata": {
-     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-util-1.9.7.jar",
+     "virtualPath": "/usr/share/java/maven/lib/maven-resolver-util-1.9.13.jar",
      "pomArtifactID": "maven-resolver-util",
      "pomGroupID": "org.apache.maven.resolver",
      "manifestName": "",
      "archiveDigests": [
       {
        "algorithm": "sha1",
-       "value": "d89f2049506b43bfff1d280dda960ef5c86002d9"
+       "value": "edac336095d491fdd5c7572aec7f4547df4a8531"
       }
      ]
     }
@@ -1569,7 +1672,7 @@
     "locations": [
      {
       "path": "/usr/share/java/maven/lib/maven-shared-utils-3.3.4.jar",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "java",
@@ -1598,1324 +1701,36 @@
   },
   {
    "vulnerability": {
-    "id": "CVE-2023-1732",
-    "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-1732",
+    "id": "CVE-2023-2976",
+    "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-2976",
     "namespace": "nvd:cpe",
     "severity": "High",
     "urls": [
-     "https://github.com/cloudflare/circl/security/advisories/GHSA-2q89-485c-9j2x"
+     "https://github.com/google/guava/issues/2575"
     ],
-    "description": "When sampling randomness for a shared secret, the implementation of Kyber and FrodoKEM, did not check whether crypto/rand.Read() returns an error. In rare deployment cases (error thrown by the Read() function), this could lead to a predictable shared secret.\n\nThe tkn20 and blindrsa components did not check whether enough randomness was returned from the user provided randomness source. Typically the user provides crypto/rand.Reader, which in the vast majority of cases will always return the right number random bytes. In the cases where it does not, or the user provides a source that does not, the blinding for blindrsa is weak and integrity of the plaintext is not ensured in tkn20.\n\n",
+    "description": "Use of Java's default temporary directory for file creation in `FileBackedOutputStream` in Google Guava versions 1.0 to 31.1 on Unix systems and Android Ice Cream Sandwich allows other users and apps on the machine with access to the default Java temporary directory to be able to access the files created by the class.\n\nEven though the security vulnerability is fixed in version 32.0.0, we recommend using version 32.0.1 as version 32.0.0 breaks some functionality under Windows.\n\n",
     "cvss": [
      {
       "source": "nvd@nist.gov",
       "type": "Primary",
       "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:N",
+      "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
       "metrics": {
-       "baseScore": 8.2,
-       "exploitabilityScore": 3.9,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {}
-     },
-     {
-      "source": "cna@cloudflare.com",
-      "type": "Secondary",
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-      "metrics": {
-       "baseScore": 5.3,
-       "exploitabilityScore": 1,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {}
-     }
-    ],
-    "fix": {
-     "versions": [],
-     "state": "unknown"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [],
-   "matchDetails": [
-    {
-     "type": "cpe-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "namespace": "nvd:cpe",
-      "cpes": [
-       "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
-      ],
-      "Package": {
-       "name": "github.com/cloudflare/circl",
-       "version": "v1.1.0"
-      }
-     },
-     "found": {
-      "vulnerabilityID": "CVE-2023-1732",
-      "versionConstraint": "< 1.3.3 (unknown)",
-      "cpes": [
-       "cpe:2.3:a:cloudflare:circl:*:*:*:*:*:go:*:*"
-      ]
-     }
-    }
-   ],
-   "artifact": {
-    "id": "4bc93231ccf28502",
-    "name": "github.com/cloudflare/circl",
-    "version": "v1.1.0",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi-language-python",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/github.com/cloudflare/circl@v1.1.0",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:bZgT/A+cikZnKIwn7xL2OBj012Bmvho/o6RpRvv3GKY=",
-     "mainModule": "github.com/pulumi/pulumi/sdk/v3"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-1732",
-    "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-1732",
-    "namespace": "nvd:cpe",
-    "severity": "High",
-    "urls": [
-     "https://github.com/cloudflare/circl/security/advisories/GHSA-2q89-485c-9j2x"
-    ],
-    "description": "When sampling randomness for a shared secret, the implementation of Kyber and FrodoKEM, did not check whether crypto/rand.Read() returns an error. In rare deployment cases (error thrown by the Read() function), this could lead to a predictable shared secret.\n\nThe tkn20 and blindrsa components did not check whether enough randomness was returned from the user provided randomness source. Typically the user provides crypto/rand.Reader, which in the vast majority of cases will always return the right number random bytes. In the cases where it does not, or the user provides a source that does not, the blinding for blindrsa is weak and integrity of the plaintext is not ensured in tkn20.\n\n",
-    "cvss": [
-     {
-      "source": "nvd@nist.gov",
-      "type": "Primary",
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:N",
-      "metrics": {
-       "baseScore": 8.2,
-       "exploitabilityScore": 3.9,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {}
-     },
-     {
-      "source": "cna@cloudflare.com",
-      "type": "Secondary",
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-      "metrics": {
-       "baseScore": 5.3,
-       "exploitabilityScore": 1,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {}
-     }
-    ],
-    "fix": {
-     "versions": [],
-     "state": "unknown"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [],
-   "matchDetails": [
-    {
-     "type": "cpe-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "namespace": "nvd:cpe",
-      "cpes": [
-       "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
-      ],
-      "Package": {
-       "name": "github.com/cloudflare/circl",
-       "version": "v1.1.0"
-      }
-     },
-     "found": {
-      "vulnerabilityID": "CVE-2023-1732",
-      "versionConstraint": "< 1.3.3 (unknown)",
-      "cpes": [
-       "cpe:2.3:a:cloudflare:circl:*:*:*:*:*:go:*:*"
-      ]
-     }
-    }
-   ],
-   "artifact": {
-    "id": "325a5c50535bab15",
-    "name": "github.com/cloudflare/circl",
-    "version": "v1.1.0",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/github.com/cloudflare/circl@v1.1.0",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:bZgT/A+cikZnKIwn7xL2OBj012Bmvho/o6RpRvv3GKY=",
-     "mainModule": "github.com/pulumi/pulumi/pkg/v3"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-1732",
-    "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-1732",
-    "namespace": "nvd:cpe",
-    "severity": "High",
-    "urls": [
-     "https://github.com/cloudflare/circl/security/advisories/GHSA-2q89-485c-9j2x"
-    ],
-    "description": "When sampling randomness for a shared secret, the implementation of Kyber and FrodoKEM, did not check whether crypto/rand.Read() returns an error. In rare deployment cases (error thrown by the Read() function), this could lead to a predictable shared secret.\n\nThe tkn20 and blindrsa components did not check whether enough randomness was returned from the user provided randomness source. Typically the user provides crypto/rand.Reader, which in the vast majority of cases will always return the right number random bytes. In the cases where it does not, or the user provides a source that does not, the blinding for blindrsa is weak and integrity of the plaintext is not ensured in tkn20.\n\n",
-    "cvss": [
-     {
-      "source": "nvd@nist.gov",
-      "type": "Primary",
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:N",
-      "metrics": {
-       "baseScore": 8.2,
-       "exploitabilityScore": 3.9,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {}
-     },
-     {
-      "source": "cna@cloudflare.com",
-      "type": "Secondary",
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-      "metrics": {
-       "baseScore": 5.3,
-       "exploitabilityScore": 1,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {}
-     }
-    ],
-    "fix": {
-     "versions": [],
-     "state": "unknown"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [],
-   "matchDetails": [
-    {
-     "type": "cpe-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "namespace": "nvd:cpe",
-      "cpes": [
-       "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
-      ],
-      "Package": {
-       "name": "github.com/cloudflare/circl",
-       "version": "v1.1.0"
-      }
-     },
-     "found": {
-      "vulnerabilityID": "CVE-2023-1732",
-      "versionConstraint": "< 1.3.3 (unknown)",
-      "cpes": [
-       "cpe:2.3:a:cloudflare:circl:*:*:*:*:*:go:*:*"
-      ]
-     }
-    }
-   ],
-   "artifact": {
-    "id": "9cfeb6dc4e7a20d8",
-    "name": "github.com/cloudflare/circl",
-    "version": "v1.1.0",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi-language-go",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/github.com/cloudflare/circl@v1.1.0",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:bZgT/A+cikZnKIwn7xL2OBj012Bmvho/o6RpRvv3GKY=",
-     "mainModule": "github.com/pulumi/pulumi/sdk/v3"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-1732",
-    "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-1732",
-    "namespace": "nvd:cpe",
-    "severity": "High",
-    "urls": [
-     "https://github.com/cloudflare/circl/security/advisories/GHSA-2q89-485c-9j2x"
-    ],
-    "description": "When sampling randomness for a shared secret, the implementation of Kyber and FrodoKEM, did not check whether crypto/rand.Read() returns an error. In rare deployment cases (error thrown by the Read() function), this could lead to a predictable shared secret.\n\nThe tkn20 and blindrsa components did not check whether enough randomness was returned from the user provided randomness source. Typically the user provides crypto/rand.Reader, which in the vast majority of cases will always return the right number random bytes. In the cases where it does not, or the user provides a source that does not, the blinding for blindrsa is weak and integrity of the plaintext is not ensured in tkn20.\n\n",
-    "cvss": [
-     {
-      "source": "nvd@nist.gov",
-      "type": "Primary",
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:N",
-      "metrics": {
-       "baseScore": 8.2,
-       "exploitabilityScore": 3.9,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {}
-     },
-     {
-      "source": "cna@cloudflare.com",
-      "type": "Secondary",
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-      "metrics": {
-       "baseScore": 5.3,
-       "exploitabilityScore": 1,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {}
-     }
-    ],
-    "fix": {
-     "versions": [],
-     "state": "unknown"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [],
-   "matchDetails": [
-    {
-     "type": "cpe-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "namespace": "nvd:cpe",
-      "cpes": [
-       "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
-      ],
-      "Package": {
-       "name": "github.com/cloudflare/circl",
-       "version": "v1.1.0"
-      }
-     },
-     "found": {
-      "vulnerabilityID": "CVE-2023-1732",
-      "versionConstraint": "< 1.3.3 (unknown)",
-      "cpes": [
-       "cpe:2.3:a:cloudflare:circl:*:*:*:*:*:go:*:*"
-      ]
-     }
-    }
-   ],
-   "artifact": {
-    "id": "2c372f2feb5a9fe1",
-    "name": "github.com/cloudflare/circl",
-    "version": "v1.1.0",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi-language-java",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/github.com/cloudflare/circl@v1.1.0",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:bZgT/A+cikZnKIwn7xL2OBj012Bmvho/o6RpRvv3GKY=",
-     "mainModule": "github.com/pulumi/pulumi-java/pkg"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-1732",
-    "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-1732",
-    "namespace": "nvd:cpe",
-    "severity": "High",
-    "urls": [
-     "https://github.com/cloudflare/circl/security/advisories/GHSA-2q89-485c-9j2x"
-    ],
-    "description": "When sampling randomness for a shared secret, the implementation of Kyber and FrodoKEM, did not check whether crypto/rand.Read() returns an error. In rare deployment cases (error thrown by the Read() function), this could lead to a predictable shared secret.\n\nThe tkn20 and blindrsa components did not check whether enough randomness was returned from the user provided randomness source. Typically the user provides crypto/rand.Reader, which in the vast majority of cases will always return the right number random bytes. In the cases where it does not, or the user provides a source that does not, the blinding for blindrsa is weak and integrity of the plaintext is not ensured in tkn20.\n\n",
-    "cvss": [
-     {
-      "source": "nvd@nist.gov",
-      "type": "Primary",
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:N",
-      "metrics": {
-       "baseScore": 8.2,
-       "exploitabilityScore": 3.9,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {}
-     },
-     {
-      "source": "cna@cloudflare.com",
-      "type": "Secondary",
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-      "metrics": {
-       "baseScore": 5.3,
-       "exploitabilityScore": 1,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {}
-     }
-    ],
-    "fix": {
-     "versions": [],
-     "state": "unknown"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [],
-   "matchDetails": [
-    {
-     "type": "cpe-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "namespace": "nvd:cpe",
-      "cpes": [
-       "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
-      ],
-      "Package": {
-       "name": "github.com/cloudflare/circl",
-       "version": "v1.1.0"
-      }
-     },
-     "found": {
-      "vulnerabilityID": "CVE-2023-1732",
-      "versionConstraint": "< 1.3.3 (unknown)",
-      "cpes": [
-       "cpe:2.3:a:cloudflare:circl:*:*:*:*:*:go:*:*"
-      ]
-     }
-    }
-   ],
-   "artifact": {
-    "id": "1b6920842ce32345",
-    "name": "github.com/cloudflare/circl",
-    "version": "v1.1.0",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi-language-nodejs",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/github.com/cloudflare/circl@v1.1.0",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:bZgT/A+cikZnKIwn7xL2OBj012Bmvho/o6RpRvv3GKY=",
-     "mainModule": "github.com/pulumi/pulumi/sdk/v3"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-1732",
-    "dataSource": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1732",
-    "namespace": "wolfi:distro:wolfi:rolling",
-    "severity": "High",
-    "urls": [
-     "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1732"
-    ],
-    "cvss": [],
-    "fix": {
-     "versions": [
-      "0.9.3-r2"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-1732",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-1732",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "https://github.com/cloudflare/circl/security/advisories/GHSA-2q89-485c-9j2x"
-     ],
-     "description": "When sampling randomness for a shared secret, the implementation of Kyber and FrodoKEM, did not check whether crypto/rand.Read() returns an error. In rare deployment cases (error thrown by the Read() function), this could lead to a predictable shared secret.\n\nThe tkn20 and blindrsa components did not check whether enough randomness was returned from the user provided randomness source. Typically the user provides crypto/rand.Reader, which in the vast majority of cases will always return the right number random bytes. In the cases where it does not, or the user provides a source that does not, the blinding for blindrsa is weak and integrity of the plaintext is not ensured in tkn20.\n\n",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:N",
-       "metrics": {
-        "baseScore": 8.2,
-        "exploitabilityScore": 3.9,
-        "impactScore": 4.2
-       },
-       "vendorMetadata": {}
-      },
-      {
-       "source": "cna@cloudflare.com",
-       "type": "Secondary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-       "metrics": {
-        "baseScore": 5.3,
-        "exploitabilityScore": 1,
-        "impactScore": 4.2
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-indirect-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "pulumi-language-java",
-       "version": "0.9.2-r1"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 0.9.3-r2 (apk)",
-      "vulnerabilityID": "CVE-2023-1732"
-     }
-    },
-    {
-     "type": "exact-direct-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "pulumi-language-java",
-       "version": "0.9.2-r1"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 0.9.3-r2 (apk)",
-      "vulnerabilityID": "CVE-2023-1732"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "4d1a3fc45cde3b96",
-    "name": "pulumi-language-java",
-    "version": "0.9.2-r1",
-    "type": "apk",
-    "locations": [
-     {
-      "path": "/lib/apk/db/installed",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "",
-    "licenses": [
-     "Apache-2.0"
-    ],
-    "cpes": [
-     "cpe:2.3:a:pulumi-language-java:pulumi-language-java:0.9.2-r1:*:*:*:*:*:*:*",
-     "cpe:2.3:a:pulumi-language-java:pulumi_language_java:0.9.2-r1:*:*:*:*:*:*:*",
-     "cpe:2.3:a:pulumi_language_java:pulumi-language-java:0.9.2-r1:*:*:*:*:*:*:*",
-     "cpe:2.3:a:pulumi_language_java:pulumi_language_java:0.9.2-r1:*:*:*:*:*:*:*",
-     "cpe:2.3:a:pulumi-language:pulumi-language-java:0.9.2-r1:*:*:*:*:*:*:*",
-     "cpe:2.3:a:pulumi-language:pulumi_language_java:0.9.2-r1:*:*:*:*:*:*:*",
-     "cpe:2.3:a:pulumi_language:pulumi-language-java:0.9.2-r1:*:*:*:*:*:*:*",
-     "cpe:2.3:a:pulumi_language:pulumi_language_java:0.9.2-r1:*:*:*:*:*:*:*",
-     "cpe:2.3:a:pulumi:pulumi-language-java:0.9.2-r1:*:*:*:*:*:*:*",
-     "cpe:2.3:a:pulumi:pulumi_language_java:0.9.2-r1:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:apk/wolfi/pulumi-language-java@0.9.2-r1?arch=aarch64&distro=wolfi-20230201",
-    "upstreams": [
-     {
-      "name": "pulumi-language-java"
-     }
-    ]
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-1972",
-    "dataSource": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1972",
-    "namespace": "wolfi:distro:wolfi:rolling",
-    "severity": "Medium",
-    "urls": [
-     "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1972"
-    ],
-    "cvss": [],
-    "fix": {
-     "versions": [
-      "2.40-r3"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-1972",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-1972",
-     "namespace": "nvd:cpe",
-     "severity": "Medium",
-     "urls": [
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2185646",
-      "https://sourceware.org/bugzilla/show_bug.cgi?id=30285"
-     ],
-     "description": "A potential heap based buffer overflow was found in _bfd_elf_slurp_version_tables() in bfd/elf.c. This may lead to loss of availability.",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 6.5,
-        "exploitabilityScore": 2.8,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-indirect-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "binutils",
-       "version": "2.40-r2"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 2.40-r3 (apk)",
-      "vulnerabilityID": "CVE-2023-1972"
-     }
-    },
-    {
-     "type": "exact-direct-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "binutils",
-       "version": "2.40-r2"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 2.40-r3 (apk)",
-      "vulnerabilityID": "CVE-2023-1972"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "bad2ac0432cbaa9a",
-    "name": "binutils",
-    "version": "2.40-r2",
-    "type": "apk",
-    "locations": [
-     {
-      "path": "/lib/apk/db/installed",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "",
-    "licenses": [
-     "GPL-3.0-or-later"
-    ],
-    "cpes": [
-     "cpe:2.3:a:binutils:binutils:2.40-r2:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:apk/wolfi/binutils@2.40-r2?arch=aarch64&distro=wolfi-20230201",
-    "upstreams": [
-     {
-      "name": "binutils"
-     }
-    ]
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-1972",
-    "dataSource": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1972",
-    "namespace": "wolfi:distro:wolfi:rolling",
-    "severity": "Medium",
-    "urls": [
-     "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-1972"
-    ],
-    "cvss": [],
-    "fix": {
-     "versions": [
-      "2.40-r3"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-1972",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-1972",
-     "namespace": "nvd:cpe",
-     "severity": "Medium",
-     "urls": [
-      "https://bugzilla.redhat.com/show_bug.cgi?id=2185646",
-      "https://sourceware.org/bugzilla/show_bug.cgi?id=30285"
-     ],
-     "description": "A potential heap based buffer overflow was found in _bfd_elf_slurp_version_tables() in bfd/elf.c. This may lead to loss of availability.",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 6.5,
-        "exploitabilityScore": 2.8,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-indirect-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "binutils",
-       "version": "2.40-r2"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 2.40-r3 (apk)",
-      "vulnerabilityID": "CVE-2023-1972"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "fd8cb182886e3c93",
-    "name": "binutils-gold",
-    "version": "2.40-r2",
-    "type": "apk",
-    "locations": [
-     {
-      "path": "/lib/apk/db/installed",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "",
-    "licenses": [
-     "GPL-3.0-or-later"
-    ],
-    "cpes": [
-     "cpe:2.3:a:binutils-gold:binutils-gold:2.40-r2:*:*:*:*:*:*:*",
-     "cpe:2.3:a:binutils-gold:binutils_gold:2.40-r2:*:*:*:*:*:*:*",
-     "cpe:2.3:a:binutils_gold:binutils-gold:2.40-r2:*:*:*:*:*:*:*",
-     "cpe:2.3:a:binutils_gold:binutils_gold:2.40-r2:*:*:*:*:*:*:*",
-     "cpe:2.3:a:binutils:binutils-gold:2.40-r2:*:*:*:*:*:*:*",
-     "cpe:2.3:a:binutils:binutils_gold:2.40-r2:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:apk/wolfi/binutils-gold@2.40-r2?arch=aarch64&upstream=binutils&distro=wolfi-20230201",
-    "upstreams": [
-     {
-      "name": "binutils"
-     }
-    ]
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-2650",
-    "dataSource": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650",
-    "namespace": "wolfi:distro:wolfi:rolling",
-    "severity": "High",
-    "urls": [
-     "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650"
-    ],
-    "cvss": [],
-    "fix": {
-     "versions": [
-      "3.1.1-r0"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-2650",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-2650",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "http://www.openwall.com/lists/oss-security/2023/05/30/1",
-      "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=423a2bc737a908ad0c77bda470b2b59dc879936b",
-      "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=9e209944b35cf82368071f160a744b6178f9b098",
-      "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=db779b0e10b047f2585615e0b8f2acdf21f8544a",
-      "https://lists.debian.org/debian-lts-announce/2023/06/msg00011.html",
-      "https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2023-0009",
-      "https://www.debian.org/security/2023/dsa-5417",
-      "https://www.openssl.org/news/secadv/20230530.txt"
-     ],
-     "description": "Issue summary: Processing some specially crafted ASN.1 object identifiers or\ndata containing them may be very slow.\n\nImpact summary: Applications that use OBJ_obj2txt() directly, or use any of\nthe OpenSSL subsystems OCSP, PKCS7/SMIME, CMS, CMP/CRMF or TS with no message\nsize limit may experience notable to very long delays when processing those\nmessages, which may lead to a Denial of Service.\n\nAn OBJECT IDENTIFIER is composed of a series of numbers - sub-identifiers -\nmost of which have no size limit.  OBJ_obj2txt() may be used to translate\nan ASN.1 OBJECT IDENTIFIER given in DER encoding form (using the OpenSSL\ntype ASN1_OBJECT) to its canonical numeric text form, which are the\nsub-identifiers of the OBJECT IDENTIFIER in decimal form, separated by\nperiods.\n\nWhen one of the sub-identifiers in the OBJECT IDENTIFIER is very large\n(these are sizes that are seen as absurdly large, taking up tens or hundreds\nof KiBs), the translation to a decimal number in text may take a very long\ntime.  The time complexity is O(n^2) with 'n' being the size of the\nsub-identifiers in bytes (*).\n\nWith OpenSSL 3.0, support to fetch cryptographic algorithms using names /\nidentifiers in string form was introduced.  This includes using OBJECT\nIDENTIFIERs in canonical numeric text form as identifiers for fetching\nalgorithms.\n\nSuch OBJECT IDENTIFIERs may be received through the ASN.1 structure\nAlgorithmIdentifier, which is commonly used in multiple protocols to specify\nwhat cryptographic algorithm should be used to sign or verify, encrypt or\ndecrypt, or digest passed data.\n\nApplications that call OBJ_obj2txt() directly with untrusted data are\naffected, with any version of OpenSSL.  If the use is for the mere purpose\nof display, the severity is considered low.\n\nIn OpenSSL 3.0 and newer, this affects the subsystems OCSP, PKCS7/SMIME,\nCMS, CMP/CRMF or TS.  It also impacts anything that processes X.509\ncertificates, including simple things like verifying its signature.\n\nThe impact on TLS is relatively low, because all versions of OpenSSL have a\n100KiB limit on the peer's certificate chain.  Additionally, this only\nimpacts clients, or servers that have explicitly enabled client\nauthentication.\n\nIn OpenSSL 1.1.1 and 1.0.2, this only affects displaying diverse objects,\nsuch as X.509 certificates.  This is assumed to not happen in such a way\nthat it would cause a Denial of Service, so these versions are considered\nnot affected by this issue in such a way that it would be cause for concern,\nand the severity is therefore considered low.",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-indirect-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "openssl",
-       "version": "3.1.0-r5"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 3.1.1-r0 (apk)",
-      "vulnerabilityID": "CVE-2023-2650"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "3b0f7a125cb6579f",
-    "name": "libcrypto3",
-    "version": "3.1.0-r5",
-    "type": "apk",
-    "locations": [
-     {
-      "path": "/lib/apk/db/installed",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "",
-    "licenses": [
-     "Apache-2.0"
-    ],
-    "cpes": [
-     "cpe:2.3:a:libcrypto3:libcrypto3:3.1.0-r5:*:*:*:*:*:*:*",
-     "cpe:2.3:a:libcrypto3:libcrypto:3.1.0-r5:*:*:*:*:*:*:*",
-     "cpe:2.3:a:libcrypto:libcrypto3:3.1.0-r5:*:*:*:*:*:*:*",
-     "cpe:2.3:a:libcrypto:libcrypto:3.1.0-r5:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:apk/wolfi/libcrypto3@3.1.0-r5?arch=aarch64&upstream=openssl&distro=wolfi-20230201",
-    "upstreams": [
-     {
-      "name": "openssl"
-     }
-    ]
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-2650",
-    "dataSource": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650",
-    "namespace": "wolfi:distro:wolfi:rolling",
-    "severity": "High",
-    "urls": [
-     "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650"
-    ],
-    "cvss": [],
-    "fix": {
-     "versions": [
-      "3.1.1-r0"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-2650",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-2650",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "http://www.openwall.com/lists/oss-security/2023/05/30/1",
-      "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=423a2bc737a908ad0c77bda470b2b59dc879936b",
-      "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=9e209944b35cf82368071f160a744b6178f9b098",
-      "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=db779b0e10b047f2585615e0b8f2acdf21f8544a",
-      "https://lists.debian.org/debian-lts-announce/2023/06/msg00011.html",
-      "https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2023-0009",
-      "https://www.debian.org/security/2023/dsa-5417",
-      "https://www.openssl.org/news/secadv/20230530.txt"
-     ],
-     "description": "Issue summary: Processing some specially crafted ASN.1 object identifiers or\ndata containing them may be very slow.\n\nImpact summary: Applications that use OBJ_obj2txt() directly, or use any of\nthe OpenSSL subsystems OCSP, PKCS7/SMIME, CMS, CMP/CRMF or TS with no message\nsize limit may experience notable to very long delays when processing those\nmessages, which may lead to a Denial of Service.\n\nAn OBJECT IDENTIFIER is composed of a series of numbers - sub-identifiers -\nmost of which have no size limit.  OBJ_obj2txt() may be used to translate\nan ASN.1 OBJECT IDENTIFIER given in DER encoding form (using the OpenSSL\ntype ASN1_OBJECT) to its canonical numeric text form, which are the\nsub-identifiers of the OBJECT IDENTIFIER in decimal form, separated by\nperiods.\n\nWhen one of the sub-identifiers in the OBJECT IDENTIFIER is very large\n(these are sizes that are seen as absurdly large, taking up tens or hundreds\nof KiBs), the translation to a decimal number in text may take a very long\ntime.  The time complexity is O(n^2) with 'n' being the size of the\nsub-identifiers in bytes (*).\n\nWith OpenSSL 3.0, support to fetch cryptographic algorithms using names /\nidentifiers in string form was introduced.  This includes using OBJECT\nIDENTIFIERs in canonical numeric text form as identifiers for fetching\nalgorithms.\n\nSuch OBJECT IDENTIFIERs may be received through the ASN.1 structure\nAlgorithmIdentifier, which is commonly used in multiple protocols to specify\nwhat cryptographic algorithm should be used to sign or verify, encrypt or\ndecrypt, or digest passed data.\n\nApplications that call OBJ_obj2txt() directly with untrusted data are\naffected, with any version of OpenSSL.  If the use is for the mere purpose\nof display, the severity is considered low.\n\nIn OpenSSL 3.0 and newer, this affects the subsystems OCSP, PKCS7/SMIME,\nCMS, CMP/CRMF or TS.  It also impacts anything that processes X.509\ncertificates, including simple things like verifying its signature.\n\nThe impact on TLS is relatively low, because all versions of OpenSSL have a\n100KiB limit on the peer's certificate chain.  Additionally, this only\nimpacts clients, or servers that have explicitly enabled client\nauthentication.\n\nIn OpenSSL 1.1.1 and 1.0.2, this only affects displaying diverse objects,\nsuch as X.509 certificates.  This is assumed to not happen in such a way\nthat it would cause a Denial of Service, so these versions are considered\nnot affected by this issue in such a way that it would be cause for concern,\nand the severity is therefore considered low.",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-indirect-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "openssl",
-       "version": "3.1.0-r5"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 3.1.1-r0 (apk)",
-      "vulnerabilityID": "CVE-2023-2650"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "8f2b6da2b132d4d1",
-    "name": "libssl3",
-    "version": "3.1.0-r5",
-    "type": "apk",
-    "locations": [
-     {
-      "path": "/lib/apk/db/installed",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "",
-    "licenses": [
-     "Apache-2.0"
-    ],
-    "cpes": [
-     "cpe:2.3:a:libssl3:libssl3:3.1.0-r5:*:*:*:*:*:*:*",
-     "cpe:2.3:a:libssl3:libssl:3.1.0-r5:*:*:*:*:*:*:*",
-     "cpe:2.3:a:libssl:libssl3:3.1.0-r5:*:*:*:*:*:*:*",
-     "cpe:2.3:a:libssl:libssl:3.1.0-r5:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:apk/wolfi/libssl3@3.1.0-r5?arch=aarch64&upstream=openssl&distro=wolfi-20230201",
-    "upstreams": [
-     {
-      "name": "openssl"
-     }
-    ]
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-2650",
-    "dataSource": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650",
-    "namespace": "wolfi:distro:wolfi:rolling",
-    "severity": "High",
-    "urls": [
-     "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-2650"
-    ],
-    "cvss": [],
-    "fix": {
-     "versions": [
-      "3.1.1-r0"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-2650",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-2650",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "http://www.openwall.com/lists/oss-security/2023/05/30/1",
-      "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=423a2bc737a908ad0c77bda470b2b59dc879936b",
-      "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=9e209944b35cf82368071f160a744b6178f9b098",
-      "https://git.openssl.org/gitweb/?p=openssl.git;a=commitdiff;h=db779b0e10b047f2585615e0b8f2acdf21f8544a",
-      "https://lists.debian.org/debian-lts-announce/2023/06/msg00011.html",
-      "https://psirt.global.sonicwall.com/vuln-detail/SNWLID-2023-0009",
-      "https://www.debian.org/security/2023/dsa-5417",
-      "https://www.openssl.org/news/secadv/20230530.txt"
-     ],
-     "description": "Issue summary: Processing some specially crafted ASN.1 object identifiers or\ndata containing them may be very slow.\n\nImpact summary: Applications that use OBJ_obj2txt() directly, or use any of\nthe OpenSSL subsystems OCSP, PKCS7/SMIME, CMS, CMP/CRMF or TS with no message\nsize limit may experience notable to very long delays when processing those\nmessages, which may lead to a Denial of Service.\n\nAn OBJECT IDENTIFIER is composed of a series of numbers - sub-identifiers -\nmost of which have no size limit.  OBJ_obj2txt() may be used to translate\nan ASN.1 OBJECT IDENTIFIER given in DER encoding form (using the OpenSSL\ntype ASN1_OBJECT) to its canonical numeric text form, which are the\nsub-identifiers of the OBJECT IDENTIFIER in decimal form, separated by\nperiods.\n\nWhen one of the sub-identifiers in the OBJECT IDENTIFIER is very large\n(these are sizes that are seen as absurdly large, taking up tens or hundreds\nof KiBs), the translation to a decimal number in text may take a very long\ntime.  The time complexity is O(n^2) with 'n' being the size of the\nsub-identifiers in bytes (*).\n\nWith OpenSSL 3.0, support to fetch cryptographic algorithms using names /\nidentifiers in string form was introduced.  This includes using OBJECT\nIDENTIFIERs in canonical numeric text form as identifiers for fetching\nalgorithms.\n\nSuch OBJECT IDENTIFIERs may be received through the ASN.1 structure\nAlgorithmIdentifier, which is commonly used in multiple protocols to specify\nwhat cryptographic algorithm should be used to sign or verify, encrypt or\ndecrypt, or digest passed data.\n\nApplications that call OBJ_obj2txt() directly with untrusted data are\naffected, with any version of OpenSSL.  If the use is for the mere purpose\nof display, the severity is considered low.\n\nIn OpenSSL 3.0 and newer, this affects the subsystems OCSP, PKCS7/SMIME,\nCMS, CMP/CRMF or TS.  It also impacts anything that processes X.509\ncertificates, including simple things like verifying its signature.\n\nThe impact on TLS is relatively low, because all versions of OpenSSL have a\n100KiB limit on the peer's certificate chain.  Additionally, this only\nimpacts clients, or servers that have explicitly enabled client\nauthentication.\n\nIn OpenSSL 1.1.1 and 1.0.2, this only affects displaying diverse objects,\nsuch as X.509 certificates.  This is assumed to not happen in such a way\nthat it would cause a Denial of Service, so these versions are considered\nnot affected by this issue in such a way that it would be cause for concern,\nand the severity is therefore considered low.",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-indirect-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "openssl",
-       "version": "3.1.0-r5"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 3.1.1-r0 (apk)",
-      "vulnerabilityID": "CVE-2023-2650"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "c3f7e18b8987e558",
-    "name": "openssl-config",
-    "version": "3.1.0-r5",
-    "type": "apk",
-    "locations": [
-     {
-      "path": "/lib/apk/db/installed",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "",
-    "licenses": [
-     "Apache-2.0"
-    ],
-    "cpes": [
-     "cpe:2.3:a:openssl-config:openssl-config:3.1.0-r5:*:*:*:*:*:*:*",
-     "cpe:2.3:a:openssl-config:openssl_config:3.1.0-r5:*:*:*:*:*:*:*",
-     "cpe:2.3:a:openssl_config:openssl-config:3.1.0-r5:*:*:*:*:*:*:*",
-     "cpe:2.3:a:openssl_config:openssl_config:3.1.0-r5:*:*:*:*:*:*:*",
-     "cpe:2.3:a:openssl:openssl-config:3.1.0-r5:*:*:*:*:*:*:*",
-     "cpe:2.3:a:openssl:openssl_config:3.1.0-r5:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:apk/wolfi/openssl-config@3.1.0-r5?arch=aarch64&upstream=openssl&distro=wolfi-20230201",
-    "upstreams": [
-     {
-      "name": "openssl"
-     }
-    ]
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-29402",
-    "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29402",
-    "namespace": "nvd:cpe",
-    "severity": "Critical",
-    "urls": [
-     "https://go.dev/cl/501226",
-     "https://go.dev/issue/60167",
-     "https://groups.google.com/g/golang-announce/c/q5135a9d924/m/j0ZoAJOHAwAJ",
-     "https://pkg.go.dev/vuln/GO-2023-1839"
-    ],
-    "description": "The go command may generate unexpected code at build time when using cgo. This may result in unexpected behavior when running a go program which uses cgo. This may occur when running an untrusted module which contains directories with newline characters in their names. Modules which are retrieved using the go command, i.e. via \"go get\", are not affected (modules retrieved using GOPATH-mode, i.e. GO111MODULE=off, may be affected).",
-    "cvss": [
-     {
-      "source": "nvd@nist.gov",
-      "type": "Primary",
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-      "metrics": {
-       "baseScore": 9.8,
-       "exploitabilityScore": 3.9,
-       "impactScore": 5.9
-      },
-      "vendorMetadata": {}
-     }
-    ],
-    "fix": {
-     "versions": [],
-     "state": "unknown"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [],
-   "matchDetails": [
-    {
-     "type": "cpe-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "namespace": "nvd:cpe",
-      "cpes": [
-       "cpe:2.3:a:golang:go:1.20.4-r0:*:*:*:*:*:*:*"
-      ],
-      "Package": {
-       "name": "go-1.20",
-       "version": "1.20.4-r0"
-      }
-     },
-     "found": {
-      "vulnerabilityID": "CVE-2023-29402",
-      "versionConstraint": "< 1.19.10 || >= 1.20.0, < 1.20.5 (unknown)",
-      "cpes": [
-       "cpe:2.3:a:golang:go:*:*:*:*:*:*:*:*"
-      ]
-     }
-    }
-   ],
-   "artifact": {
-    "id": "09921aa42cc41223",
-    "name": "go-1.20",
-    "version": "1.20.4-r0",
-    "type": "apk",
-    "locations": [
-     {
-      "path": "/lib/apk/db/installed",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "",
-    "licenses": [
-     "BSD-3-Clause"
-    ],
-    "cpes": [
-     "cpe:2.3:a:go-1.20:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go-1.20:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go_1.20:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go_1.20:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:golang:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:golang:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go-1.20:go:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go_1.20:go:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:golang:go:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go:go:1.20.4-r0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:apk/wolfi/go-1.20@1.20.4-r0?arch=aarch64&distro=wolfi-20230201",
-    "upstreams": [
-     {
-      "name": "go-1.20"
-     }
-    ]
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-29403",
-    "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29403",
-    "namespace": "nvd:cpe",
-    "severity": "High",
-    "urls": [
-     "https://go.dev/cl/501223",
-     "https://go.dev/issue/60272",
-     "https://groups.google.com/g/golang-announce/c/q5135a9d924/m/j0ZoAJOHAwAJ",
-     "https://pkg.go.dev/vuln/GO-2023-1840"
-    ],
-    "description": "On Unix platforms, the Go runtime does not behave differently when a binary is run with the setuid/setgid bits. This can be dangerous in certain cases, such as when dumping memory state, or assuming the status of standard i/o file descriptors. If a setuid/setgid binary is executed with standard I/O file descriptors closed, opening any files can result in unexpected content being read or written with elevated privileges. Similarly, if a setuid/setgid program is terminated, either via panic or signal, it may leak the contents of its registers.",
-    "cvss": [
-     {
-      "source": "nvd@nist.gov",
-      "type": "Primary",
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H",
-      "metrics": {
-       "baseScore": 7.8,
+       "baseScore": 7.1,
        "exploitabilityScore": 1.8,
-       "impactScore": 5.9
+       "impactScore": 5.2
       },
       "vendorMetadata": {}
-     }
-    ],
-    "fix": {
-     "versions": [],
-     "state": "unknown"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [],
-   "matchDetails": [
-    {
-     "type": "cpe-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "namespace": "nvd:cpe",
-      "cpes": [
-       "cpe:2.3:a:golang:go:1.20.4-r0:*:*:*:*:*:*:*"
-      ],
-      "Package": {
-       "name": "go-1.20",
-       "version": "1.20.4-r0"
-      }
      },
-     "found": {
-      "vulnerabilityID": "CVE-2023-29403",
-      "versionConstraint": "< 1.19.10 || >= 1.20.0, < 1.20.5 (unknown)",
-      "cpes": [
-       "cpe:2.3:a:golang:go:*:*:*:*:*:*:*:*"
-      ]
-     }
-    }
-   ],
-   "artifact": {
-    "id": "09921aa42cc41223",
-    "name": "go-1.20",
-    "version": "1.20.4-r0",
-    "type": "apk",
-    "locations": [
      {
-      "path": "/lib/apk/db/installed",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "",
-    "licenses": [
-     "BSD-3-Clause"
-    ],
-    "cpes": [
-     "cpe:2.3:a:go-1.20:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go-1.20:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go_1.20:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go_1.20:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:golang:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:golang:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go-1.20:go:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go_1.20:go:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:golang:go:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go:go:1.20.4-r0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:apk/wolfi/go-1.20@1.20.4-r0?arch=aarch64&distro=wolfi-20230201",
-    "upstreams": [
-     {
-      "name": "go-1.20"
-     }
-    ]
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-29404",
-    "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29404",
-    "namespace": "nvd:cpe",
-    "severity": "Critical",
-    "urls": [
-     "https://go.dev/cl/501225",
-     "https://go.dev/issue/60305",
-     "https://groups.google.com/g/golang-announce/c/q5135a9d924/m/j0ZoAJOHAwAJ",
-     "https://pkg.go.dev/vuln/GO-2023-1841"
-    ],
-    "description": "The go command may execute arbitrary code at build time when using cgo. This may occur when running \"go get\" on a malicious module, or when running any other command which builds untrusted code. This is can by triggered by linker flags, specified via a \"#cgo LDFLAGS\" directive. The arguments for a number of flags which are non-optional are incorrectly considered optional, allowing disallowed flags to be smuggled through the LDFLAGS sanitization. This affects usage of both the gc and gccgo compilers.",
-    "cvss": [
-     {
-      "source": "nvd@nist.gov",
-      "type": "Primary",
+      "source": "cve-coordination@google.com",
+      "type": "Secondary",
       "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+      "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N",
       "metrics": {
-       "baseScore": 9.8,
-       "exploitabilityScore": 3.9,
-       "impactScore": 5.9
+       "baseScore": 5.5,
+       "exploitabilityScore": 1.8,
+       "impactScore": 3.6
       },
       "vendorMetadata": {}
      }
@@ -2930,300 +1745,90 @@
    "matchDetails": [
     {
      "type": "cpe-match",
-     "matcher": "apk-matcher",
+     "matcher": "java-matcher",
      "searchedBy": {
       "namespace": "nvd:cpe",
       "cpes": [
-       "cpe:2.3:a:golang:go:1.20.4-r0:*:*:*:*:*:*:*"
+       "cpe:2.3:a:google:guava:31.1-jre:*:*:*:*:*:*:*"
       ],
       "Package": {
-       "name": "go-1.20",
-       "version": "1.20.4-r0"
+       "name": "guava",
+       "version": "31.1-jre"
       }
      },
      "found": {
-      "vulnerabilityID": "CVE-2023-29404",
-      "versionConstraint": "< 1.19.10 || >= 1.20.0, < 1.20.5 (unknown)",
+      "vulnerabilityID": "CVE-2023-2976",
+      "versionConstraint": "< 32.0.1 (unknown)",
       "cpes": [
-       "cpe:2.3:a:golang:go:*:*:*:*:*:*:*:*"
+       "cpe:2.3:a:google:guava:*:*:*:*:*:*:*:*"
       ]
      }
     }
    ],
    "artifact": {
-    "id": "09921aa42cc41223",
-    "name": "go-1.20",
-    "version": "1.20.4-r0",
-    "type": "apk",
+    "id": "08d82665076506d6",
+    "name": "guava",
+    "version": "31.1-jre",
+    "type": "java-archive",
     "locations": [
      {
-      "path": "/lib/apk/db/installed",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/java/maven/lib/guava-31.1-jre.jar",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
-    "language": "",
+    "language": "java",
     "licenses": [
-     "BSD-3-Clause"
+     "http://www.apache.org/licenses/LICENSE-2.0.txt"
     ],
     "cpes": [
-     "cpe:2.3:a:go-1.20:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go-1.20:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go_1.20:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go_1.20:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:golang:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:golang:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go-1.20:go:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go_1.20:go:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:golang:go:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go:go:1.20.4-r0:*:*:*:*:*:*:*"
+     "cpe:2.3:a:google:guava:31.1-jre:*:*:*:*:*:*:*",
+     "cpe:2.3:a:guava:guava:31.1-jre:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:apk/wolfi/go-1.20@1.20.4-r0?arch=aarch64&distro=wolfi-20230201",
-    "upstreams": [
-     {
-      "name": "go-1.20"
-     }
-    ]
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-29405",
-    "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29405",
-    "namespace": "nvd:cpe",
-    "severity": "Critical",
-    "urls": [
-     "https://go.dev/cl/501224",
-     "https://go.dev/issue/60306",
-     "https://groups.google.com/g/golang-announce/c/q5135a9d924/m/j0ZoAJOHAwAJ",
-     "https://pkg.go.dev/vuln/GO-2023-1842"
-    ],
-    "description": "The go command may execute arbitrary code at build time when using cgo. This may occur when running \"go get\" on a malicious module, or when running any other command which builds untrusted code. This is can by triggered by linker flags, specified via a \"#cgo LDFLAGS\" directive. Flags containing embedded spaces are mishandled, allowing disallowed flags to be smuggled through the LDFLAGS sanitization by including them in the argument of another flag. This only affects usage of the gccgo compiler.",
-    "cvss": [
-     {
-      "source": "nvd@nist.gov",
-      "type": "Primary",
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
-      "metrics": {
-       "baseScore": 9.8,
-       "exploitabilityScore": 3.9,
-       "impactScore": 5.9
-      },
-      "vendorMetadata": {}
-     }
-    ],
-    "fix": {
-     "versions": [],
-     "state": "unknown"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [],
-   "matchDetails": [
-    {
-     "type": "cpe-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "namespace": "nvd:cpe",
-      "cpes": [
-       "cpe:2.3:a:golang:go:1.20.4-r0:*:*:*:*:*:*:*"
-      ],
-      "Package": {
-       "name": "go-1.20",
-       "version": "1.20.4-r0"
-      }
-     },
-     "found": {
-      "vulnerabilityID": "CVE-2023-29405",
-      "versionConstraint": "< 1.19.10 || >= 1.20.0, < 1.20.5 (unknown)",
-      "cpes": [
-       "cpe:2.3:a:golang:go:*:*:*:*:*:*:*:*"
-      ]
-     }
-    }
-   ],
-   "artifact": {
-    "id": "09921aa42cc41223",
-    "name": "go-1.20",
-    "version": "1.20.4-r0",
-    "type": "apk",
-    "locations": [
-     {
-      "path": "/lib/apk/db/installed",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "",
-    "licenses": [
-     "BSD-3-Clause"
-    ],
-    "cpes": [
-     "cpe:2.3:a:go-1.20:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go-1.20:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go_1.20:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go_1.20:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:golang:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:golang:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go-1.20:go:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go:go-1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go:go_1.20:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go_1.20:go:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:golang:go:1.20.4-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:go:go:1.20.4-r0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:apk/wolfi/go-1.20@1.20.4-r0?arch=aarch64&distro=wolfi-20230201",
-    "upstreams": [
-     {
-      "name": "go-1.20"
-     }
-    ]
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-31124",
-    "dataSource": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-31124",
-    "namespace": "wolfi:distro:wolfi:rolling",
-    "severity": "Low",
-    "urls": [
-     "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-31124"
-    ],
-    "cvss": [],
-    "fix": {
-     "versions": [
-      "1.19.1-r0"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-31124",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-31124",
-     "namespace": "nvd:cpe",
-     "severity": "Low",
-     "urls": [
-      "https://github.com/c-ares/c-ares/releases/tag/cares-1_19_1",
-      "https://github.com/c-ares/c-ares/security/advisories/GHSA-54xr-f67r-4pc4",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/B5Z5XFNXTNPTCBBVXFDNZQVLLIE6VRBY/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/UBFWILTA33LOSV23P44FGTQQIDRJHIY7/"
-     ],
-     "description": "c-ares is an asynchronous resolver library. When cross-compiling c-ares and using the autotools build system, CARES_RANDOM_FILE will not be set, as seen when cross compiling aarch64 android.  This will downgrade to using rand() as a fallback which could allow an attacker to take advantage of the lack of entropy by not using a CSPRNG. This issue was patched in version 1.19.1.\n",
-     "cvss": [
+    "purl": "pkg:maven/com.google.guava/guava@31.1-jre",
+    "upstreams": [],
+    "metadataType": "JavaMetadata",
+    "metadata": {
+     "virtualPath": "/usr/share/java/maven/lib/guava-31.1-jre.jar",
+     "pomArtifactID": "guava",
+     "pomGroupID": "com.google.guava",
+     "manifestName": "",
+     "archiveDigests": [
       {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N",
-       "metrics": {
-        "baseScore": 3.7,
-        "exploitabilityScore": 2.2,
-        "impactScore": 1.4
-       },
-       "vendorMetadata": {}
-      },
-      {
-       "source": "security-advisories@github.com",
-       "type": "Secondary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:N",
-       "metrics": {
-        "baseScore": 3.7,
-        "exploitabilityScore": 2.2,
-        "impactScore": 1.4
-       },
-       "vendorMetadata": {}
+       "algorithm": "sha1",
+       "value": "60458f877d055d0c9114d9e1a2efb737b4bc282c"
       }
      ]
     }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-indirect-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "c-ares",
-       "version": "1.19.0-r0"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 1.19.1-r0 (apk)",
-      "vulnerabilityID": "CVE-2023-31124"
-     }
-    },
-    {
-     "type": "exact-direct-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "c-ares",
-       "version": "1.19.0-r0"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 1.19.1-r0 (apk)",
-      "vulnerabilityID": "CVE-2023-31124"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "355aee4479bddd2f",
-    "name": "c-ares",
-    "version": "1.19.0-r0",
-    "type": "apk",
-    "locations": [
-     {
-      "path": "/lib/apk/db/installed",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "",
-    "licenses": [
-     "MIT"
-    ],
-    "cpes": [
-     "cpe:2.3:a:c-ares:c-ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c-ares:c_ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c_ares:c-ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c_ares:c_ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c:c-ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c:c_ares:1.19.0-r0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:apk/wolfi/c-ares@1.19.0-r0?arch=aarch64&distro=wolfi-20230201",
-    "upstreams": [
-     {
-      "name": "c-ares"
-     }
-    ]
    }
   },
   {
    "vulnerability": {
-    "id": "CVE-2023-31130",
-    "dataSource": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-31130",
-    "namespace": "wolfi:distro:wolfi:rolling",
-    "severity": "Medium",
+    "id": "GHSA-6qmf-mmc7-6c2p",
+    "dataSource": "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p",
+    "namespace": "github:language:dotnet",
+    "severity": "High",
     "urls": [
-     "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-31130"
+     "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p"
     ],
-    "cvss": [],
+    "description": "NuGet Client Remote Code Execution Vulnerability",
+    "cvss": [
+     {
+      "version": "3.1",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
+      "metrics": {
+       "baseScore": 7.1,
+       "exploitabilityScore": 1.2,
+       "impactScore": 5.9
+      },
+      "vendorMetadata": {
+       "base_severity": "High",
+       "status": "N/A"
+      }
+     }
+    ],
     "fix": {
      "versions": [
-      "1.19.1-r0"
+      "6.4.2"
      ],
      "state": "fixed"
     },
@@ -3231,445 +1836,26 @@
    },
    "relatedVulnerabilities": [
     {
-     "id": "CVE-2023-31130",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-31130",
+     "id": "CVE-2023-29337",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29337",
      "namespace": "nvd:cpe",
-     "severity": "Medium",
+     "severity": "High",
      "urls": [
-      "https://github.com/c-ares/c-ares/releases/tag/cares-1_19_1",
-      "https://github.com/c-ares/c-ares/security/advisories/GHSA-x6mf-cxr9-8q6v",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/B5Z5XFNXTNPTCBBVXFDNZQVLLIE6VRBY/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/UBFWILTA33LOSV23P44FGTQQIDRJHIY7/",
-      "https://www.debian.org/security/2023/dsa-5419"
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-29337"
      ],
-     "description": "c-ares is an asynchronous resolver library. ares_inet_net_pton() is vulnerable to a buffer underflow for certain ipv6 addresses, in particular \"0::00:00:00/2\" was found to cause an issue.  C-ares only uses this function internally for configuration purposes which would require an administrator to configure such an address via ares_set_sortlist(). However, users may externally use ares_inet_net_pton() for other purposes and thus be vulnerable to more severe issues. This issue has been fixed in 1.19.1.\n",
+     "description": "NuGet Client Remote Code Execution Vulnerability",
      "cvss": [
       {
-       "source": "nvd@nist.gov",
+       "source": "secure@microsoft.com",
        "type": "Primary",
        "version": "3.1",
-       "vector": "CVSS:3.1/AV:L/AC:H/PR:H/UI:N/S:U/C:H/I:H/A:H",
+       "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
        "metrics": {
-        "baseScore": 6.4,
-        "exploitabilityScore": 0.5,
+        "baseScore": 7.1,
+        "exploitabilityScore": 1.2,
         "impactScore": 5.9
        },
        "vendorMetadata": {}
-      },
-      {
-       "source": "security-advisories@github.com",
-       "type": "Secondary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:L/AC:H/PR:H/UI:N/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 4.1,
-        "exploitabilityScore": 0.5,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-indirect-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "c-ares",
-       "version": "1.19.0-r0"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 1.19.1-r0 (apk)",
-      "vulnerabilityID": "CVE-2023-31130"
-     }
-    },
-    {
-     "type": "exact-direct-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "c-ares",
-       "version": "1.19.0-r0"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 1.19.1-r0 (apk)",
-      "vulnerabilityID": "CVE-2023-31130"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "355aee4479bddd2f",
-    "name": "c-ares",
-    "version": "1.19.0-r0",
-    "type": "apk",
-    "locations": [
-     {
-      "path": "/lib/apk/db/installed",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "",
-    "licenses": [
-     "MIT"
-    ],
-    "cpes": [
-     "cpe:2.3:a:c-ares:c-ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c-ares:c_ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c_ares:c-ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c_ares:c_ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c:c-ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c:c_ares:1.19.0-r0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:apk/wolfi/c-ares@1.19.0-r0?arch=aarch64&distro=wolfi-20230201",
-    "upstreams": [
-     {
-      "name": "c-ares"
-     }
-    ]
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-31147",
-    "dataSource": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-31147",
-    "namespace": "wolfi:distro:wolfi:rolling",
-    "severity": "Medium",
-    "urls": [
-     "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-31147"
-    ],
-    "cvss": [],
-    "fix": {
-     "versions": [
-      "1.19.1-r0"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-31147",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-31147",
-     "namespace": "nvd:cpe",
-     "severity": "Medium",
-     "urls": [
-      "https://github.com/c-ares/c-ares/releases/tag/cares-1_19_1",
-      "https://github.com/c-ares/c-ares/security/advisories/GHSA-8r8p-23f3-64c2",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/B5Z5XFNXTNPTCBBVXFDNZQVLLIE6VRBY/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/UBFWILTA33LOSV23P44FGTQQIDRJHIY7/"
-     ],
-     "description": "c-ares is an asynchronous resolver library. When /dev/urandom or RtlGenRandom() are unavailable, c-ares uses rand() to generate random numbers used for DNS query ids. This is not a CSPRNG, and it is also not seeded by srand() so will generate predictable output. Input from the random number generator is fed into a non-compilant RC4 implementation and may not be as strong as the original RC4 implementation. No attempt is made to look for modern OS-provided CSPRNGs like arc4random() that is widely available. This issue has been fixed in version 1.19.1.",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N",
-       "metrics": {
-        "baseScore": 6.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 2.5
-       },
-       "vendorMetadata": {}
-      },
-      {
-       "source": "security-advisories@github.com",
-       "type": "Secondary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N",
-       "metrics": {
-        "baseScore": 5.9,
-        "exploitabilityScore": 2.2,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-indirect-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "c-ares",
-       "version": "1.19.0-r0"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 1.19.1-r0 (apk)",
-      "vulnerabilityID": "CVE-2023-31147"
-     }
-    },
-    {
-     "type": "exact-direct-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "c-ares",
-       "version": "1.19.0-r0"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 1.19.1-r0 (apk)",
-      "vulnerabilityID": "CVE-2023-31147"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "355aee4479bddd2f",
-    "name": "c-ares",
-    "version": "1.19.0-r0",
-    "type": "apk",
-    "locations": [
-     {
-      "path": "/lib/apk/db/installed",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "",
-    "licenses": [
-     "MIT"
-    ],
-    "cpes": [
-     "cpe:2.3:a:c-ares:c-ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c-ares:c_ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c_ares:c-ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c_ares:c_ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c:c-ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c:c_ares:1.19.0-r0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:apk/wolfi/c-ares@1.19.0-r0?arch=aarch64&distro=wolfi-20230201",
-    "upstreams": [
-     {
-      "name": "c-ares"
-     }
-    ]
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "CVE-2023-32067",
-    "dataSource": "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-32067",
-    "namespace": "wolfi:distro:wolfi:rolling",
-    "severity": "High",
-    "urls": [
-     "http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2023-32067"
-    ],
-    "cvss": [],
-    "fix": {
-     "versions": [
-      "1.19.1-r0"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-32067",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-32067",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "https://github.com/c-ares/c-ares/releases/tag/cares-1_19_1",
-      "https://github.com/c-ares/c-ares/security/advisories/GHSA-9g78-jv2r-p7vc",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/B5Z5XFNXTNPTCBBVXFDNZQVLLIE6VRBY/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/UBFWILTA33LOSV23P44FGTQQIDRJHIY7/",
-      "https://www.debian.org/security/2023/dsa-5419"
-     ],
-     "description": "c-ares is an asynchronous resolver library. c-ares is vulnerable to denial of service. If a target resolver sends a query, the attacker forges a malformed UDP packet with a length of 0 and returns them to the target resolver. The target resolver erroneously interprets the 0 length as a graceful shutdown of the connection. This issue has been patched in version 1.19.1.",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      },
-      {
-       "source": "security-advisories@github.com",
-       "type": "Secondary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-indirect-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "c-ares",
-       "version": "1.19.0-r0"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 1.19.1-r0 (apk)",
-      "vulnerabilityID": "CVE-2023-32067"
-     }
-    },
-    {
-     "type": "exact-direct-match",
-     "matcher": "apk-matcher",
-     "searchedBy": {
-      "distro": {
-       "type": "wolfi",
-       "version": "20230201"
-      },
-      "namespace": "wolfi:distro:wolfi:rolling",
-      "package": {
-       "name": "c-ares",
-       "version": "1.19.0-r0"
-      }
-     },
-     "found": {
-      "versionConstraint": "< 1.19.1-r0 (apk)",
-      "vulnerabilityID": "CVE-2023-32067"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "355aee4479bddd2f",
-    "name": "c-ares",
-    "version": "1.19.0-r0",
-    "type": "apk",
-    "locations": [
-     {
-      "path": "/lib/apk/db/installed",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "",
-    "licenses": [
-     "MIT"
-    ],
-    "cpes": [
-     "cpe:2.3:a:c-ares:c-ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c-ares:c_ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c_ares:c-ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c_ares:c_ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c:c-ares:1.19.0-r0:*:*:*:*:*:*:*",
-     "cpe:2.3:a:c:c_ares:1.19.0-r0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:apk/wolfi/c-ares@1.19.0-r0?arch=aarch64&distro=wolfi-20230201",
-    "upstreams": [
-     {
-      "name": "c-ares"
-     }
-    ]
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "GHSA-2q89-485c-9j2x",
-    "dataSource": "https://github.com/advisories/GHSA-2q89-485c-9j2x",
-    "namespace": "github:language:go",
-    "severity": "Medium",
-    "urls": [
-     "https://github.com/advisories/GHSA-2q89-485c-9j2x"
-    ],
-    "description": "Improper random reading in CIRCL",
-    "cvss": [
-     {
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-      "metrics": {
-       "baseScore": 5.3,
-       "exploitabilityScore": 1,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {
-       "base_severity": "Medium",
-       "status": "N/A"
-      }
-     }
-    ],
-    "fix": {
-     "versions": [
-      "1.3.3"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-1732",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-1732",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "https://github.com/cloudflare/circl/security/advisories/GHSA-2q89-485c-9j2x"
-     ],
-     "description": "When sampling randomness for a shared secret, the implementation of Kyber and FrodoKEM, did not check whether crypto/rand.Read() returns an error. In rare deployment cases (error thrown by the Read() function), this could lead to a predictable shared secret.\n\nThe tkn20 and blindrsa components did not check whether enough randomness was returned from the user provided randomness source. Typically the user provides crypto/rand.Reader, which in the vast majority of cases will always return the right number random bytes. In the cases where it does not, or the user provides a source that does not, the blinding for blindrsa is weak and integrity of the plaintext is not ensured in tkn20.\n\n",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:N",
-       "metrics": {
-        "baseScore": 8.2,
-        "exploitabilityScore": 3.9,
-        "impactScore": 4.2
-       },
-       "vendorMetadata": {}
-      },
-      {
-       "source": "cna@cloudflare.com",
-       "type": "Secondary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-       "metrics": {
-        "baseScore": 5.3,
-        "exploitabilityScore": 1,
-        "impactScore": 4.2
-       },
-       "vendorMetadata": {}
       }
      ]
     }
@@ -3677,530 +1863,59 @@
    "matchDetails": [
     {
      "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
+     "matcher": "dotnet-matcher",
      "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
+      "language": "dotnet",
+      "namespace": "github:language:dotnet",
       "package": {
-       "name": "github.com/cloudflare/circl",
-       "version": "v1.1.0"
+       "name": "NuGet.Commands",
+       "version": "6.4.2-rc.32767"
       }
      },
      "found": {
-      "versionConstraint": "<1.3.3 (unknown)",
-      "vulnerabilityID": "GHSA-2q89-485c-9j2x"
+      "versionConstraint": ">=6.4.0,<6.4.2 (unknown)",
+      "vulnerabilityID": "GHSA-6qmf-mmc7-6c2p"
      }
     }
    ],
    "artifact": {
-    "id": "2c372f2feb5a9fe1",
-    "name": "github.com/cloudflare/circl",
-    "version": "v1.1.0",
-    "type": "go-module",
+    "id": "afada2df88879786",
+    "name": "NuGet.Commands",
+    "version": "6.4.2-rc.32767",
+    "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/bin/pulumi-language-java",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/MSBuild.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
-    "language": "go",
+    "language": "dotnet",
     "licenses": [],
     "cpes": [
-     "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
+     "cpe:2.3:a:NuGet.Commands:NuGet.Commands:6.4.2-rc.32767:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:golang/github.com/cloudflare/circl@v1.1.0",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:bZgT/A+cikZnKIwn7xL2OBj012Bmvho/o6RpRvv3GKY=",
-     "mainModule": "github.com/pulumi/pulumi-java/pkg"
-    }
+    "purl": "pkg:nuget/NuGet.Commands@6.4.2-rc.32767",
+    "upstreams": []
    }
   },
   {
    "vulnerability": {
-    "id": "GHSA-2q89-485c-9j2x",
-    "dataSource": "https://github.com/advisories/GHSA-2q89-485c-9j2x",
-    "namespace": "github:language:go",
-    "severity": "Medium",
-    "urls": [
-     "https://github.com/advisories/GHSA-2q89-485c-9j2x"
-    ],
-    "description": "Improper random reading in CIRCL",
-    "cvss": [
-     {
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-      "metrics": {
-       "baseScore": 5.3,
-       "exploitabilityScore": 1,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {
-       "base_severity": "Medium",
-       "status": "N/A"
-      }
-     }
-    ],
-    "fix": {
-     "versions": [
-      "1.3.3"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-1732",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-1732",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "https://github.com/cloudflare/circl/security/advisories/GHSA-2q89-485c-9j2x"
-     ],
-     "description": "When sampling randomness for a shared secret, the implementation of Kyber and FrodoKEM, did not check whether crypto/rand.Read() returns an error. In rare deployment cases (error thrown by the Read() function), this could lead to a predictable shared secret.\n\nThe tkn20 and blindrsa components did not check whether enough randomness was returned from the user provided randomness source. Typically the user provides crypto/rand.Reader, which in the vast majority of cases will always return the right number random bytes. In the cases where it does not, or the user provides a source that does not, the blinding for blindrsa is weak and integrity of the plaintext is not ensured in tkn20.\n\n",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:N",
-       "metrics": {
-        "baseScore": 8.2,
-        "exploitabilityScore": 3.9,
-        "impactScore": 4.2
-       },
-       "vendorMetadata": {}
-      },
-      {
-       "source": "cna@cloudflare.com",
-       "type": "Secondary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-       "metrics": {
-        "baseScore": 5.3,
-        "exploitabilityScore": 1,
-        "impactScore": 4.2
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
-      "package": {
-       "name": "github.com/cloudflare/circl",
-       "version": "v1.1.0"
-      }
-     },
-     "found": {
-      "versionConstraint": "<1.3.3 (unknown)",
-      "vulnerabilityID": "GHSA-2q89-485c-9j2x"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "4bc93231ccf28502",
-    "name": "github.com/cloudflare/circl",
-    "version": "v1.1.0",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi-language-python",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/github.com/cloudflare/circl@v1.1.0",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:bZgT/A+cikZnKIwn7xL2OBj012Bmvho/o6RpRvv3GKY=",
-     "mainModule": "github.com/pulumi/pulumi/sdk/v3"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "GHSA-2q89-485c-9j2x",
-    "dataSource": "https://github.com/advisories/GHSA-2q89-485c-9j2x",
-    "namespace": "github:language:go",
-    "severity": "Medium",
-    "urls": [
-     "https://github.com/advisories/GHSA-2q89-485c-9j2x"
-    ],
-    "description": "Improper random reading in CIRCL",
-    "cvss": [
-     {
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-      "metrics": {
-       "baseScore": 5.3,
-       "exploitabilityScore": 1,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {
-       "base_severity": "Medium",
-       "status": "N/A"
-      }
-     }
-    ],
-    "fix": {
-     "versions": [
-      "1.3.3"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-1732",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-1732",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "https://github.com/cloudflare/circl/security/advisories/GHSA-2q89-485c-9j2x"
-     ],
-     "description": "When sampling randomness for a shared secret, the implementation of Kyber and FrodoKEM, did not check whether crypto/rand.Read() returns an error. In rare deployment cases (error thrown by the Read() function), this could lead to a predictable shared secret.\n\nThe tkn20 and blindrsa components did not check whether enough randomness was returned from the user provided randomness source. Typically the user provides crypto/rand.Reader, which in the vast majority of cases will always return the right number random bytes. In the cases where it does not, or the user provides a source that does not, the blinding for blindrsa is weak and integrity of the plaintext is not ensured in tkn20.\n\n",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:N",
-       "metrics": {
-        "baseScore": 8.2,
-        "exploitabilityScore": 3.9,
-        "impactScore": 4.2
-       },
-       "vendorMetadata": {}
-      },
-      {
-       "source": "cna@cloudflare.com",
-       "type": "Secondary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-       "metrics": {
-        "baseScore": 5.3,
-        "exploitabilityScore": 1,
-        "impactScore": 4.2
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
-      "package": {
-       "name": "github.com/cloudflare/circl",
-       "version": "v1.1.0"
-      }
-     },
-     "found": {
-      "versionConstraint": "<1.3.3 (unknown)",
-      "vulnerabilityID": "GHSA-2q89-485c-9j2x"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "1b6920842ce32345",
-    "name": "github.com/cloudflare/circl",
-    "version": "v1.1.0",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi-language-nodejs",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/github.com/cloudflare/circl@v1.1.0",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:bZgT/A+cikZnKIwn7xL2OBj012Bmvho/o6RpRvv3GKY=",
-     "mainModule": "github.com/pulumi/pulumi/sdk/v3"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "GHSA-2q89-485c-9j2x",
-    "dataSource": "https://github.com/advisories/GHSA-2q89-485c-9j2x",
-    "namespace": "github:language:go",
-    "severity": "Medium",
-    "urls": [
-     "https://github.com/advisories/GHSA-2q89-485c-9j2x"
-    ],
-    "description": "Improper random reading in CIRCL",
-    "cvss": [
-     {
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-      "metrics": {
-       "baseScore": 5.3,
-       "exploitabilityScore": 1,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {
-       "base_severity": "Medium",
-       "status": "N/A"
-      }
-     }
-    ],
-    "fix": {
-     "versions": [
-      "1.3.3"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-1732",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-1732",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "https://github.com/cloudflare/circl/security/advisories/GHSA-2q89-485c-9j2x"
-     ],
-     "description": "When sampling randomness for a shared secret, the implementation of Kyber and FrodoKEM, did not check whether crypto/rand.Read() returns an error. In rare deployment cases (error thrown by the Read() function), this could lead to a predictable shared secret.\n\nThe tkn20 and blindrsa components did not check whether enough randomness was returned from the user provided randomness source. Typically the user provides crypto/rand.Reader, which in the vast majority of cases will always return the right number random bytes. In the cases where it does not, or the user provides a source that does not, the blinding for blindrsa is weak and integrity of the plaintext is not ensured in tkn20.\n\n",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:N",
-       "metrics": {
-        "baseScore": 8.2,
-        "exploitabilityScore": 3.9,
-        "impactScore": 4.2
-       },
-       "vendorMetadata": {}
-      },
-      {
-       "source": "cna@cloudflare.com",
-       "type": "Secondary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-       "metrics": {
-        "baseScore": 5.3,
-        "exploitabilityScore": 1,
-        "impactScore": 4.2
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
-      "package": {
-       "name": "github.com/cloudflare/circl",
-       "version": "v1.1.0"
-      }
-     },
-     "found": {
-      "versionConstraint": "<1.3.3 (unknown)",
-      "vulnerabilityID": "GHSA-2q89-485c-9j2x"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "325a5c50535bab15",
-    "name": "github.com/cloudflare/circl",
-    "version": "v1.1.0",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/github.com/cloudflare/circl@v1.1.0",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:bZgT/A+cikZnKIwn7xL2OBj012Bmvho/o6RpRvv3GKY=",
-     "mainModule": "github.com/pulumi/pulumi/pkg/v3"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "GHSA-2q89-485c-9j2x",
-    "dataSource": "https://github.com/advisories/GHSA-2q89-485c-9j2x",
-    "namespace": "github:language:go",
-    "severity": "Medium",
-    "urls": [
-     "https://github.com/advisories/GHSA-2q89-485c-9j2x"
-    ],
-    "description": "Improper random reading in CIRCL",
-    "cvss": [
-     {
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-      "metrics": {
-       "baseScore": 5.3,
-       "exploitabilityScore": 1,
-       "impactScore": 4.2
-      },
-      "vendorMetadata": {
-       "base_severity": "Medium",
-       "status": "N/A"
-      }
-     }
-    ],
-    "fix": {
-     "versions": [
-      "1.3.3"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-1732",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-1732",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "https://github.com/cloudflare/circl/security/advisories/GHSA-2q89-485c-9j2x"
-     ],
-     "description": "When sampling randomness for a shared secret, the implementation of Kyber and FrodoKEM, did not check whether crypto/rand.Read() returns an error. In rare deployment cases (error thrown by the Read() function), this could lead to a predictable shared secret.\n\nThe tkn20 and blindrsa components did not check whether enough randomness was returned from the user provided randomness source. Typically the user provides crypto/rand.Reader, which in the vast majority of cases will always return the right number random bytes. In the cases where it does not, or the user provides a source that does not, the blinding for blindrsa is weak and integrity of the plaintext is not ensured in tkn20.\n\n",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:H/A:N",
-       "metrics": {
-        "baseScore": 8.2,
-        "exploitabilityScore": 3.9,
-        "impactScore": 4.2
-       },
-       "vendorMetadata": {}
-      },
-      {
-       "source": "cna@cloudflare.com",
-       "type": "Secondary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:L/AC:H/PR:N/UI:R/S:U/C:L/I:H/A:N",
-       "metrics": {
-        "baseScore": 5.3,
-        "exploitabilityScore": 1,
-        "impactScore": 4.2
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
-      "package": {
-       "name": "github.com/cloudflare/circl",
-       "version": "v1.1.0"
-      }
-     },
-     "found": {
-      "versionConstraint": "<1.3.3 (unknown)",
-      "vulnerabilityID": "GHSA-2q89-485c-9j2x"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "9cfeb6dc4e7a20d8",
-    "name": "github.com/cloudflare/circl",
-    "version": "v1.1.0",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi-language-go",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:cloudflare:circl:v1.1.0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/github.com/cloudflare/circl@v1.1.0",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:bZgT/A+cikZnKIwn7xL2OBj012Bmvho/o6RpRvv3GKY=",
-     "mainModule": "github.com/pulumi/pulumi/sdk/v3"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "GHSA-555c-2p6r-68mm",
-    "dataSource": "https://github.com/advisories/GHSA-555c-2p6r-68mm",
+    "id": "GHSA-6qmf-mmc7-6c2p",
+    "dataSource": "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p",
     "namespace": "github:language:dotnet",
     "severity": "High",
     "urls": [
-     "https://github.com/advisories/GHSA-555c-2p6r-68mm"
+     "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p"
     ],
-    "description": ".NET Denial of Service vulnerability",
+    "description": "NuGet Client Remote Code Execution Vulnerability",
     "cvss": [
      {
       "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
       "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
+       "baseScore": 7.1,
+       "exploitabilityScore": 1.2,
+       "impactScore": 5.9
       },
       "vendorMetadata": {
        "base_severity": "High",
@@ -4210,7 +1925,7 @@
     ],
     "fix": {
      "versions": [
-      "7.0.2"
+      "6.4.2"
      ],
      "state": "fixed"
     },
@@ -4218,24 +1933,24 @@
    },
    "relatedVulnerabilities": [
     {
-     "id": "CVE-2023-29331",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29331",
+     "id": "CVE-2023-29337",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29337",
      "namespace": "nvd:cpe",
      "severity": "High",
      "urls": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-29331"
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-29337"
      ],
-     "description": ".NET, .NET Framework, and Visual Studio Denial of Service Vulnerability",
+     "description": "NuGet Client Remote Code Execution Vulnerability",
      "cvss": [
       {
        "source": "secure@microsoft.com",
        "type": "Primary",
        "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
        "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
+        "baseScore": 7.1,
+        "exploitabilityScore": 1.2,
+        "impactScore": 5.9
        },
        "vendorMetadata": {}
       }
@@ -4250,54 +1965,54 @@
       "language": "dotnet",
       "namespace": "github:language:dotnet",
       "package": {
-       "name": "System.Security.Cryptography.Pkcs",
-       "version": "7.0.1"
+       "name": "NuGet.Commands",
+       "version": "6.4.2-rc.32767"
       }
      },
      "found": {
-      "versionConstraint": ">=7.0.0,<=7.0.1 (unknown)",
-      "vulnerabilityID": "GHSA-555c-2p6r-68mm"
+      "versionConstraint": ">=6.4.0,<6.4.2 (unknown)",
+      "vulnerabilityID": "GHSA-6qmf-mmc7-6c2p"
      }
     }
    ],
    "artifact": {
-    "id": "690a4d259213c55c",
-    "name": "System.Security.Cryptography.Pkcs",
-    "version": "7.0.1",
+    "id": "d866ca3e7bc42aec",
+    "name": "NuGet.Commands",
+    "version": "6.4.2-rc.32767",
     "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/share/dotnet/sdk/7.0.105/dotnet.deps.json",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/dotnet.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "dotnet",
     "licenses": [],
     "cpes": [
-     "cpe:2.3:a:System.Security.Cryptography.Pkcs:System.Security.Cryptography.Pkcs:7.0.1:*:*:*:*:*:*:*"
+     "cpe:2.3:a:NuGet.Commands:NuGet.Commands:6.4.2-rc.32767:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:nuget/System.Security.Cryptography.Pkcs@7.0.1",
+    "purl": "pkg:nuget/NuGet.Commands@6.4.2-rc.32767",
     "upstreams": []
    }
   },
   {
    "vulnerability": {
-    "id": "GHSA-555c-2p6r-68mm",
-    "dataSource": "https://github.com/advisories/GHSA-555c-2p6r-68mm",
+    "id": "GHSA-6qmf-mmc7-6c2p",
+    "dataSource": "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p",
     "namespace": "github:language:dotnet",
     "severity": "High",
     "urls": [
-     "https://github.com/advisories/GHSA-555c-2p6r-68mm"
+     "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p"
     ],
-    "description": ".NET Denial of Service vulnerability",
+    "description": "NuGet Client Remote Code Execution Vulnerability",
     "cvss": [
      {
       "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
       "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
+       "baseScore": 7.1,
+       "exploitabilityScore": 1.2,
+       "impactScore": 5.9
       },
       "vendorMetadata": {
        "base_severity": "High",
@@ -4307,7 +2022,7 @@
     ],
     "fix": {
      "versions": [
-      "7.0.2"
+      "6.4.2"
      ],
      "state": "fixed"
     },
@@ -4315,24 +2030,24 @@
    },
    "relatedVulnerabilities": [
     {
-     "id": "CVE-2023-29331",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29331",
+     "id": "CVE-2023-29337",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29337",
      "namespace": "nvd:cpe",
      "severity": "High",
      "urls": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-29331"
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-29337"
      ],
-     "description": ".NET, .NET Framework, and Visual Studio Denial of Service Vulnerability",
+     "description": "NuGet Client Remote Code Execution Vulnerability",
      "cvss": [
       {
        "source": "secure@microsoft.com",
        "type": "Primary",
        "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
        "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
+        "baseScore": 7.1,
+        "exploitabilityScore": 1.2,
+        "impactScore": 5.9
        },
        "vendorMetadata": {}
       }
@@ -4347,54 +2062,54 @@
       "language": "dotnet",
       "namespace": "github:language:dotnet",
       "package": {
-       "name": "System.Security.Cryptography.Pkcs",
-       "version": "7.0.1"
+       "name": "NuGet.Commands",
+       "version": "6.4.2-rc.32767"
       }
      },
      "found": {
-      "versionConstraint": ">=7.0.0,<=7.0.1 (unknown)",
-      "vulnerabilityID": "GHSA-555c-2p6r-68mm"
+      "versionConstraint": ">=6.4.0,<6.4.2 (unknown)",
+      "vulnerabilityID": "GHSA-6qmf-mmc7-6c2p"
      }
     }
    ],
    "artifact": {
-    "id": "d5900bdc88ecd05f",
-    "name": "System.Security.Cryptography.Pkcs",
-    "version": "7.0.1",
+    "id": "3f3bd7616ee299c8",
+    "name": "NuGet.Commands",
+    "version": "6.4.2-rc.32767",
     "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/share/dotnet/sdk/7.0.105/NuGet.CommandLine.XPlat.deps.json",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/NuGet.CommandLine.XPlat.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "dotnet",
     "licenses": [],
     "cpes": [
-     "cpe:2.3:a:System.Security.Cryptography.Pkcs:System.Security.Cryptography.Pkcs:7.0.1:*:*:*:*:*:*:*"
+     "cpe:2.3:a:NuGet.Commands:NuGet.Commands:6.4.2-rc.32767:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:nuget/System.Security.Cryptography.Pkcs@7.0.1",
+    "purl": "pkg:nuget/NuGet.Commands@6.4.2-rc.32767",
     "upstreams": []
    }
   },
   {
    "vulnerability": {
-    "id": "GHSA-555c-2p6r-68mm",
-    "dataSource": "https://github.com/advisories/GHSA-555c-2p6r-68mm",
+    "id": "GHSA-6qmf-mmc7-6c2p",
+    "dataSource": "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p",
     "namespace": "github:language:dotnet",
     "severity": "High",
     "urls": [
-     "https://github.com/advisories/GHSA-555c-2p6r-68mm"
+     "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p"
     ],
-    "description": ".NET Denial of Service vulnerability",
+    "description": "NuGet Client Remote Code Execution Vulnerability",
     "cvss": [
      {
       "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
       "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
+       "baseScore": 7.1,
+       "exploitabilityScore": 1.2,
+       "impactScore": 5.9
       },
       "vendorMetadata": {
        "base_severity": "High",
@@ -4404,7 +2119,7 @@
     ],
     "fix": {
      "versions": [
-      "7.0.2"
+      "6.4.2"
      ],
      "state": "fixed"
     },
@@ -4412,24 +2127,24 @@
    },
    "relatedVulnerabilities": [
     {
-     "id": "CVE-2023-29331",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29331",
+     "id": "CVE-2023-29337",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29337",
      "namespace": "nvd:cpe",
      "severity": "High",
      "urls": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-29331"
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-29337"
      ],
-     "description": ".NET, .NET Framework, and Visual Studio Denial of Service Vulnerability",
+     "description": "NuGet Client Remote Code Execution Vulnerability",
      "cvss": [
       {
        "source": "secure@microsoft.com",
        "type": "Primary",
        "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
        "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
+        "baseScore": 7.1,
+        "exploitabilityScore": 1.2,
+        "impactScore": 5.9
        },
        "vendorMetadata": {}
       }
@@ -4444,54 +2159,54 @@
       "language": "dotnet",
       "namespace": "github:language:dotnet",
       "package": {
-       "name": "System.Security.Cryptography.Pkcs",
-       "version": "7.0.1"
+       "name": "NuGet.Common",
+       "version": "6.4.2-rc.32767"
       }
      },
      "found": {
-      "versionConstraint": ">=7.0.0,<=7.0.1 (unknown)",
-      "vulnerabilityID": "GHSA-555c-2p6r-68mm"
+      "versionConstraint": ">=6.4.0,<6.4.2 (unknown)",
+      "vulnerabilityID": "GHSA-6qmf-mmc7-6c2p"
      }
     }
    ],
    "artifact": {
-    "id": "80b8192296413239",
-    "name": "System.Security.Cryptography.Pkcs",
-    "version": "7.0.1",
+    "id": "15e8b75dc525c16b",
+    "name": "NuGet.Common",
+    "version": "6.4.2-rc.32767",
     "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/share/dotnet/sdk/7.0.105/FSharp/fsc.deps.json",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/MSBuild.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "dotnet",
     "licenses": [],
     "cpes": [
-     "cpe:2.3:a:System.Security.Cryptography.Pkcs:System.Security.Cryptography.Pkcs:7.0.1:*:*:*:*:*:*:*"
+     "cpe:2.3:a:NuGet.Common:NuGet.Common:6.4.2-rc.32767:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:nuget/System.Security.Cryptography.Pkcs@7.0.1",
+    "purl": "pkg:nuget/NuGet.Common@6.4.2-rc.32767",
     "upstreams": []
    }
   },
   {
    "vulnerability": {
-    "id": "GHSA-555c-2p6r-68mm",
-    "dataSource": "https://github.com/advisories/GHSA-555c-2p6r-68mm",
+    "id": "GHSA-6qmf-mmc7-6c2p",
+    "dataSource": "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p",
     "namespace": "github:language:dotnet",
     "severity": "High",
     "urls": [
-     "https://github.com/advisories/GHSA-555c-2p6r-68mm"
+     "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p"
     ],
-    "description": ".NET Denial of Service vulnerability",
+    "description": "NuGet Client Remote Code Execution Vulnerability",
     "cvss": [
      {
       "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
       "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
+       "baseScore": 7.1,
+       "exploitabilityScore": 1.2,
+       "impactScore": 5.9
       },
       "vendorMetadata": {
        "base_severity": "High",
@@ -4501,7 +2216,7 @@
     ],
     "fix": {
      "versions": [
-      "7.0.2"
+      "6.4.2"
      ],
      "state": "fixed"
     },
@@ -4509,24 +2224,24 @@
    },
    "relatedVulnerabilities": [
     {
-     "id": "CVE-2023-29331",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29331",
+     "id": "CVE-2023-29337",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29337",
      "namespace": "nvd:cpe",
      "severity": "High",
      "urls": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-29331"
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-29337"
      ],
-     "description": ".NET, .NET Framework, and Visual Studio Denial of Service Vulnerability",
+     "description": "NuGet Client Remote Code Execution Vulnerability",
      "cvss": [
       {
        "source": "secure@microsoft.com",
        "type": "Primary",
        "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
        "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
+        "baseScore": 7.1,
+        "exploitabilityScore": 1.2,
+        "impactScore": 5.9
        },
        "vendorMetadata": {}
       }
@@ -4541,54 +2256,54 @@
       "language": "dotnet",
       "namespace": "github:language:dotnet",
       "package": {
-       "name": "System.Security.Cryptography.Pkcs",
-       "version": "7.0.1"
+       "name": "NuGet.Common",
+       "version": "6.4.2-rc.32767"
       }
      },
      "found": {
-      "versionConstraint": ">=7.0.0,<=7.0.1 (unknown)",
-      "vulnerabilityID": "GHSA-555c-2p6r-68mm"
+      "versionConstraint": ">=6.4.0,<6.4.2 (unknown)",
+      "vulnerabilityID": "GHSA-6qmf-mmc7-6c2p"
      }
     }
    ],
    "artifact": {
-    "id": "e981799b8502df74",
-    "name": "System.Security.Cryptography.Pkcs",
-    "version": "7.0.1",
+    "id": "a30b941fb242f59a",
+    "name": "NuGet.Common",
+    "version": "6.4.2-rc.32767",
     "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/share/dotnet/sdk/7.0.105/FSharp/fsi.deps.json",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/dotnet.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "dotnet",
     "licenses": [],
     "cpes": [
-     "cpe:2.3:a:System.Security.Cryptography.Pkcs:System.Security.Cryptography.Pkcs:7.0.1:*:*:*:*:*:*:*"
+     "cpe:2.3:a:NuGet.Common:NuGet.Common:6.4.2-rc.32767:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:nuget/System.Security.Cryptography.Pkcs@7.0.1",
+    "purl": "pkg:nuget/NuGet.Common@6.4.2-rc.32767",
     "upstreams": []
    }
   },
   {
    "vulnerability": {
-    "id": "GHSA-555c-2p6r-68mm",
-    "dataSource": "https://github.com/advisories/GHSA-555c-2p6r-68mm",
+    "id": "GHSA-6qmf-mmc7-6c2p",
+    "dataSource": "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p",
     "namespace": "github:language:dotnet",
     "severity": "High",
     "urls": [
-     "https://github.com/advisories/GHSA-555c-2p6r-68mm"
+     "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p"
     ],
-    "description": ".NET Denial of Service vulnerability",
+    "description": "NuGet Client Remote Code Execution Vulnerability",
     "cvss": [
      {
       "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
       "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
+       "baseScore": 7.1,
+       "exploitabilityScore": 1.2,
+       "impactScore": 5.9
       },
       "vendorMetadata": {
        "base_severity": "High",
@@ -4598,7 +2313,7 @@
     ],
     "fix": {
      "versions": [
-      "7.0.2"
+      "6.4.2"
      ],
      "state": "fixed"
     },
@@ -4606,24 +2321,24 @@
    },
    "relatedVulnerabilities": [
     {
-     "id": "CVE-2023-29331",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29331",
+     "id": "CVE-2023-29337",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29337",
      "namespace": "nvd:cpe",
      "severity": "High",
      "urls": [
-      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-29331"
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-29337"
      ],
-     "description": ".NET, .NET Framework, and Visual Studio Denial of Service Vulnerability",
+     "description": "NuGet Client Remote Code Execution Vulnerability",
      "cvss": [
       {
        "source": "secure@microsoft.com",
        "type": "Primary",
        "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
        "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
+        "baseScore": 7.1,
+        "exploitabilityScore": 1.2,
+        "impactScore": 5.9
        },
        "vendorMetadata": {}
       }
@@ -4638,54 +2353,54 @@
       "language": "dotnet",
       "namespace": "github:language:dotnet",
       "package": {
-       "name": "System.Security.Cryptography.Pkcs",
-       "version": "7.0.1"
+       "name": "NuGet.Common",
+       "version": "6.4.2-rc.32767"
       }
      },
      "found": {
-      "versionConstraint": ">=7.0.0,<=7.0.1 (unknown)",
-      "vulnerabilityID": "GHSA-555c-2p6r-68mm"
+      "versionConstraint": ">=6.4.0,<6.4.2 (unknown)",
+      "vulnerabilityID": "GHSA-6qmf-mmc7-6c2p"
      }
     }
    ],
    "artifact": {
-    "id": "2c986875a192ea02",
-    "name": "System.Security.Cryptography.Pkcs",
-    "version": "7.0.1",
+    "id": "831a34319d4e1335",
+    "name": "NuGet.Common",
+    "version": "6.4.2-rc.32767",
     "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/share/dotnet/sdk/7.0.105/MSBuild.deps.json",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/NuGet.CommandLine.XPlat.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "dotnet",
     "licenses": [],
     "cpes": [
-     "cpe:2.3:a:System.Security.Cryptography.Pkcs:System.Security.Cryptography.Pkcs:7.0.1:*:*:*:*:*:*:*"
+     "cpe:2.3:a:NuGet.Common:NuGet.Common:6.4.2-rc.32767:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:nuget/System.Security.Cryptography.Pkcs@7.0.1",
+    "purl": "pkg:nuget/NuGet.Common@6.4.2-rc.32767",
     "upstreams": []
    }
   },
   {
    "vulnerability": {
-    "id": "GHSA-69cg-p879-7622",
-    "dataSource": "https://github.com/advisories/GHSA-69cg-p879-7622",
-    "namespace": "github:language:go",
+    "id": "GHSA-6qmf-mmc7-6c2p",
+    "dataSource": "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p",
+    "namespace": "github:language:dotnet",
     "severity": "High",
     "urls": [
-     "https://github.com/advisories/GHSA-69cg-p879-7622"
+     "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p"
     ],
-    "description": "golang.org/x/net/http2 Denial of Service vulnerability",
+    "description": "NuGet Client Remote Code Execution Vulnerability",
     "cvss": [
      {
       "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
       "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
+       "baseScore": 7.1,
+       "exploitabilityScore": 1.2,
+       "impactScore": 5.9
       },
       "vendorMetadata": {
        "base_severity": "High",
@@ -4695,7 +2410,7 @@
     ],
     "fix": {
      "versions": [
-      "0.0.0-20220906165146-f3363e06e74c"
+      "6.4.2"
      ],
      "state": "fixed"
     },
@@ -4703,29 +2418,24 @@
    },
    "relatedVulnerabilities": [
     {
-     "id": "CVE-2022-27664",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2022-27664",
+     "id": "CVE-2023-29337",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29337",
      "namespace": "nvd:cpe",
      "severity": "High",
      "urls": [
-      "https://groups.google.com/g/golang-announce",
-      "https://groups.google.com/g/golang-announce/c/x49AQzIVX-s",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/JXKTHIGE5F576MAPFYCIJXNRGBSPISUF/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/TXS2OQ57KZC5XZKK5UW4SYKPVQAHIOJX/",
-      "https://security.gentoo.org/glsa/202209-26",
-      "https://security.netapp.com/advisory/ntap-20220923-0004/"
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-29337"
      ],
-     "description": "In net/http in Go before 1.18.6 and 1.19.x before 1.19.1, attackers can cause a denial of service because an HTTP/2 connection can hang during closing if shutdown were preempted by a fatal error.",
+     "description": "NuGet Client Remote Code Execution Vulnerability",
      "cvss": [
       {
-       "source": "nvd@nist.gov",
+       "source": "secure@microsoft.com",
        "type": "Primary",
        "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
        "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
+        "baseScore": 7.1,
+        "exploitabilityScore": 1.2,
+        "impactScore": 5.9
        },
        "vendorMetadata": {}
       }
@@ -4735,66 +2445,59 @@
    "matchDetails": [
     {
      "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
+     "matcher": "dotnet-matcher",
      "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
+      "language": "dotnet",
+      "namespace": "github:language:dotnet",
       "package": {
-       "name": "golang.org/x/net",
-       "version": "v0.0.0-20220722155237-a158d28d115b"
+       "name": "NuGet.Protocol",
+       "version": "6.4.2-rc.32767"
       }
      },
      "found": {
-      "versionConstraint": "<0.0.0-20220906165146-f3363e06e74c (unknown)",
-      "vulnerabilityID": "GHSA-69cg-p879-7622"
+      "versionConstraint": ">=6.4.0,<6.4.2 (unknown)",
+      "vulnerabilityID": "GHSA-6qmf-mmc7-6c2p"
      }
     }
    ],
    "artifact": {
-    "id": "f330e05b1117726b",
-    "name": "golang.org/x/net",
-    "version": "v0.0.0-20220722155237-a158d28d115b",
-    "type": "go-module",
+    "id": "8a0f23654f89e08e",
+    "name": "NuGet.Protocol",
+    "version": "6.4.2-rc.32767",
+    "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/bin/pulumi-language-dotnet",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/dotnet.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
-    "language": "go",
+    "language": "dotnet",
     "licenses": [],
     "cpes": [
-     "cpe:2.3:a:golang:x/net:v0.0.0-20220722155237-a158d28d115b:*:*:*:*:*:*:*"
+     "cpe:2.3:a:NuGet.Protocol:NuGet.Protocol:6.4.2-rc.32767:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:golang/golang.org/x/net@v0.0.0-20220722155237-a158d28d115b",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:PxfKdU9lEEDYjdIzOtC4qFWgkU2rGHdKlKowJSMN9h0=",
-     "mainModule": "github.com/pulumi/pulumi-dotnet/pulumi-language-dotnet"
-    }
+    "purl": "pkg:nuget/NuGet.Protocol@6.4.2-rc.32767",
+    "upstreams": []
    }
   },
   {
    "vulnerability": {
-    "id": "GHSA-69ch-w2m2-3vjp",
-    "dataSource": "https://github.com/advisories/GHSA-69ch-w2m2-3vjp",
-    "namespace": "github:language:go",
+    "id": "GHSA-6qmf-mmc7-6c2p",
+    "dataSource": "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p",
+    "namespace": "github:language:dotnet",
     "severity": "High",
     "urls": [
-     "https://github.com/advisories/GHSA-69ch-w2m2-3vjp"
+     "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p"
     ],
-    "description": "Denial of service in golang.org/x/text/language",
+    "description": "NuGet Client Remote Code Execution Vulnerability",
     "cvss": [
      {
       "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
       "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
+       "baseScore": 7.1,
+       "exploitabilityScore": 1.2,
+       "impactScore": 5.9
       },
       "vendorMetadata": {
        "base_severity": "High",
@@ -4804,7 +2507,7 @@
     ],
     "fix": {
      "versions": [
-      "0.3.8"
+      "6.4.2"
      ],
      "state": "fixed"
     },
@@ -4812,27 +2515,24 @@
    },
    "relatedVulnerabilities": [
     {
-     "id": "CVE-2022-32149",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2022-32149",
+     "id": "CVE-2023-29337",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29337",
      "namespace": "nvd:cpe",
      "severity": "High",
      "urls": [
-      "https://go.dev/cl/442235",
-      "https://go.dev/issue/56152",
-      "https://groups.google.com/g/golang-announce/c/-hjNw559_tE/m/KlGTfid5CAAJ",
-      "https://pkg.go.dev/vuln/GO-2022-1059"
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-29337"
      ],
-     "description": "An attacker may cause a denial of service by crafting an Accept-Language header which ParseAcceptLanguage will take significant time to parse.",
+     "description": "NuGet Client Remote Code Execution Vulnerability",
      "cvss": [
       {
-       "source": "nvd@nist.gov",
+       "source": "secure@microsoft.com",
        "type": "Primary",
        "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
        "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
+        "baseScore": 7.1,
+        "exploitabilityScore": 1.2,
+        "impactScore": 5.9
        },
        "vendorMetadata": {}
       }
@@ -4842,66 +2542,59 @@
    "matchDetails": [
     {
      "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
+     "matcher": "dotnet-matcher",
      "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
+      "language": "dotnet",
+      "namespace": "github:language:dotnet",
       "package": {
-       "name": "golang.org/x/text",
-       "version": "v0.3.6"
+       "name": "NuGet.Protocol",
+       "version": "6.4.2-rc.32767"
       }
      },
      "found": {
-      "versionConstraint": "<0.3.8 (unknown)",
-      "vulnerabilityID": "GHSA-69ch-w2m2-3vjp"
+      "versionConstraint": ">=6.4.0,<6.4.2 (unknown)",
+      "vulnerabilityID": "GHSA-6qmf-mmc7-6c2p"
      }
     }
    ],
    "artifact": {
-    "id": "c1a3d13f2786257a",
-    "name": "golang.org/x/text",
-    "version": "v0.3.6",
-    "type": "go-module",
+    "id": "1b8908af251b25a6",
+    "name": "NuGet.Protocol",
+    "version": "6.4.2-rc.32767",
+    "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/bin/pulumi-language-nodejs",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/MSBuild.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
-    "language": "go",
+    "language": "dotnet",
     "licenses": [],
     "cpes": [
-     "cpe:2.3:a:golang:x/text:v0.3.6:*:*:*:*:*:*:*"
+     "cpe:2.3:a:NuGet.Protocol:NuGet.Protocol:6.4.2-rc.32767:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:golang/golang.org/x/text@v0.3.6",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:aRYxNxv6iGQlyVaZmk6ZgYEDa+Jg18DxebPSrd6bg1M=",
-     "mainModule": "github.com/pulumi/pulumi/sdk/v3"
-    }
+    "purl": "pkg:nuget/NuGet.Protocol@6.4.2-rc.32767",
+    "upstreams": []
    }
   },
   {
    "vulnerability": {
-    "id": "GHSA-69ch-w2m2-3vjp",
-    "dataSource": "https://github.com/advisories/GHSA-69ch-w2m2-3vjp",
-    "namespace": "github:language:go",
+    "id": "GHSA-6qmf-mmc7-6c2p",
+    "dataSource": "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p",
+    "namespace": "github:language:dotnet",
     "severity": "High",
     "urls": [
-     "https://github.com/advisories/GHSA-69ch-w2m2-3vjp"
+     "https://github.com/advisories/GHSA-6qmf-mmc7-6c2p"
     ],
-    "description": "Denial of service in golang.org/x/text/language",
+    "description": "NuGet Client Remote Code Execution Vulnerability",
     "cvss": [
      {
       "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+      "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
       "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
+       "baseScore": 7.1,
+       "exploitabilityScore": 1.2,
+       "impactScore": 5.9
       },
       "vendorMetadata": {
        "base_severity": "High",
@@ -4911,7 +2604,7 @@
     ],
     "fix": {
      "versions": [
-      "0.3.8"
+      "6.4.2"
      ],
      "state": "fixed"
     },
@@ -4919,27 +2612,24 @@
    },
    "relatedVulnerabilities": [
     {
-     "id": "CVE-2022-32149",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2022-32149",
+     "id": "CVE-2023-29337",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-29337",
      "namespace": "nvd:cpe",
      "severity": "High",
      "urls": [
-      "https://go.dev/cl/442235",
-      "https://go.dev/issue/56152",
-      "https://groups.google.com/g/golang-announce/c/-hjNw559_tE/m/KlGTfid5CAAJ",
-      "https://pkg.go.dev/vuln/GO-2022-1059"
+      "https://msrc.microsoft.com/update-guide/vulnerability/CVE-2023-29337"
      ],
-     "description": "An attacker may cause a denial of service by crafting an Accept-Language header which ParseAcceptLanguage will take significant time to parse.",
+     "description": "NuGet Client Remote Code Execution Vulnerability",
      "cvss": [
       {
-       "source": "nvd@nist.gov",
+       "source": "secure@microsoft.com",
        "type": "Primary",
        "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+       "vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:R/S:U/C:H/I:H/A:H",
        "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
+        "baseScore": 7.1,
+        "exploitabilityScore": 1.2,
+        "impactScore": 5.9
        },
        "vendorMetadata": {}
       }
@@ -4949,153 +2639,39 @@
    "matchDetails": [
     {
      "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
+     "matcher": "dotnet-matcher",
      "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
+      "language": "dotnet",
+      "namespace": "github:language:dotnet",
       "package": {
-       "name": "golang.org/x/text",
-       "version": "v0.3.6"
+       "name": "NuGet.Protocol",
+       "version": "6.4.2-rc.32767"
       }
      },
      "found": {
-      "versionConstraint": "<0.3.8 (unknown)",
-      "vulnerabilityID": "GHSA-69ch-w2m2-3vjp"
+      "versionConstraint": ">=6.4.0,<6.4.2 (unknown)",
+      "vulnerabilityID": "GHSA-6qmf-mmc7-6c2p"
      }
     }
    ],
    "artifact": {
-    "id": "ea8c54647dbe266a",
-    "name": "golang.org/x/text",
-    "version": "v0.3.6",
-    "type": "go-module",
+    "id": "a7cac0e3dc4c4a7e",
+    "name": "NuGet.Protocol",
+    "version": "6.4.2-rc.32767",
+    "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/bin/pulumi-language-python",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/NuGet.CommandLine.XPlat.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
-    "language": "go",
+    "language": "dotnet",
     "licenses": [],
     "cpes": [
-     "cpe:2.3:a:golang:x/text:v0.3.6:*:*:*:*:*:*:*"
+     "cpe:2.3:a:NuGet.Protocol:NuGet.Protocol:6.4.2-rc.32767:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:golang/golang.org/x/text@v0.3.6",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:aRYxNxv6iGQlyVaZmk6ZgYEDa+Jg18DxebPSrd6bg1M=",
-     "mainModule": "github.com/pulumi/pulumi/sdk/v3"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "GHSA-69ch-w2m2-3vjp",
-    "dataSource": "https://github.com/advisories/GHSA-69ch-w2m2-3vjp",
-    "namespace": "github:language:go",
-    "severity": "High",
-    "urls": [
-     "https://github.com/advisories/GHSA-69ch-w2m2-3vjp"
-    ],
-    "description": "Denial of service in golang.org/x/text/language",
-    "cvss": [
-     {
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-      "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
-      },
-      "vendorMetadata": {
-       "base_severity": "High",
-       "status": "N/A"
-      }
-     }
-    ],
-    "fix": {
-     "versions": [
-      "0.3.8"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2022-32149",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2022-32149",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "https://go.dev/cl/442235",
-      "https://go.dev/issue/56152",
-      "https://groups.google.com/g/golang-announce/c/-hjNw559_tE/m/KlGTfid5CAAJ",
-      "https://pkg.go.dev/vuln/GO-2022-1059"
-     ],
-     "description": "An attacker may cause a denial of service by crafting an Accept-Language header which ParseAcceptLanguage will take significant time to parse.",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
-      "package": {
-       "name": "golang.org/x/text",
-       "version": "v0.3.6"
-      }
-     },
-     "found": {
-      "versionConstraint": "<0.3.8 (unknown)",
-      "vulnerabilityID": "GHSA-69ch-w2m2-3vjp"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "745839ae69370f4a",
-    "name": "golang.org/x/text",
-    "version": "v0.3.6",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi-language-go",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:golang:x/text:v0.3.6:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/golang.org/x/text@v0.3.6",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:aRYxNxv6iGQlyVaZmk6ZgYEDa+Jg18DxebPSrd6bg1M=",
-     "mainModule": "github.com/pulumi/pulumi/sdk/v3"
-    }
+    "purl": "pkg:nuget/NuGet.Protocol@6.4.2-rc.32767",
+    "upstreams": []
    }
   },
   {
@@ -5136,12 +2712,24 @@
      "id": "CVE-2023-2976",
      "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-2976",
      "namespace": "nvd:cpe",
-     "severity": "Medium",
+     "severity": "High",
      "urls": [
       "https://github.com/google/guava/issues/2575"
      ],
      "description": "Use of Java's default temporary directory for file creation in `FileBackedOutputStream` in Google Guava versions 1.0 to 31.1 on Unix systems and Android Ice Cream Sandwich allows other users and apps on the machine with access to the default Java temporary directory to be able to access the files created by the class.\n\nEven though the security vulnerability is fixed in version 32.0.0, we recommend using version 32.0.1 as version 32.0.0 breaks some functionality under Windows.\n\n",
      "cvss": [
+      {
+       "source": "nvd@nist.gov",
+       "type": "Primary",
+       "version": "3.1",
+       "vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:H/A:N",
+       "metrics": {
+        "baseScore": 7.1,
+        "exploitabilityScore": 1.8,
+        "impactScore": 5.2
+       },
+       "vendorMetadata": {}
+      },
       {
        "source": "cve-coordination@google.com",
        "type": "Secondary",
@@ -5166,7 +2754,7 @@
       "namespace": "github:language:java",
       "package": {
        "name": "guava",
-       "version": "30.1-jre"
+       "version": "31.1-jre"
       }
      },
      "found": {
@@ -5176,14 +2764,14 @@
     }
    ],
    "artifact": {
-    "id": "cb64510420813655",
+    "id": "08d82665076506d6",
     "name": "guava",
-    "version": "30.1-jre",
+    "version": "31.1-jre",
     "type": "java-archive",
     "locations": [
      {
-      "path": "/usr/share/java/maven/lib/guava-30.1-jre.jar",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/java/maven/lib/guava-31.1-jre.jar",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "java",
@@ -5191,21 +2779,21 @@
      "http://www.apache.org/licenses/LICENSE-2.0.txt"
     ],
     "cpes": [
-     "cpe:2.3:a:google:guava:30.1-jre:*:*:*:*:*:*:*",
-     "cpe:2.3:a:guava:guava:30.1-jre:*:*:*:*:*:*:*"
+     "cpe:2.3:a:google:guava:31.1-jre:*:*:*:*:*:*:*",
+     "cpe:2.3:a:guava:guava:31.1-jre:*:*:*:*:*:*:*"
     ],
-    "purl": "pkg:maven/com.google.guava/guava@30.1-jre",
+    "purl": "pkg:maven/com.google.guava/guava@31.1-jre",
     "upstreams": [],
     "metadataType": "JavaMetadata",
     "metadata": {
-     "virtualPath": "/usr/share/java/maven/lib/guava-30.1-jre.jar",
+     "virtualPath": "/usr/share/java/maven/lib/guava-31.1-jre.jar",
      "pomArtifactID": "guava",
      "pomGroupID": "com.google.guava",
      "manifestName": "",
      "archiveDigests": [
       {
        "algorithm": "sha1",
-       "value": "00d0c3ce2311c9e36e73228da25a6e99b2ab826f"
+       "value": "60458f877d055d0c9114d9e1a2efb737b4bc282c"
       }
      ]
     }
@@ -5303,14 +2891,14 @@
     }
    ],
    "artifact": {
-    "id": "a0adf102e968dfcb",
+    "id": "4d5865ecaaf41d10",
     "name": "System.Net.Http",
     "version": "4.3.0",
     "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/share/dotnet/sdk/7.0.105/dotnet-watch.deps.json",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/DotnetTools/dotnet-watch/7.0.108-servicing.23319.9/tools/net7.0/any/dotnet-watch.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "dotnet",
@@ -5414,14 +3002,14 @@
     }
    ],
    "artifact": {
-    "id": "b219c16d085a7e7f",
+    "id": "a9216385353263d5",
     "name": "System.Net.Http",
     "version": "4.3.0",
     "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/share/dotnet/sdk/7.0.105/DotnetTools/dotnet-watch/7.0.105-servicing.23177.17/tools/net7.0/any/dotnet-watch.deps.json",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/dotnet-watch.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "dotnet",
@@ -5525,14 +3113,14 @@
     }
    ],
    "artifact": {
-    "id": "2671a04049ee460b",
+    "id": "ec0ae07aaaa50352",
     "name": "System.Net.Http",
     "version": "4.3.0",
     "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/share/dotnet/sdk/7.0.105/DotnetTools/dotnet-format/dotnet-format.deps.json",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/DotnetTools/dotnet-format/dotnet-format.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "dotnet",
@@ -5546,6 +3134,111 @@
   },
   {
    "vulnerability": {
+    "id": "GHSA-c2qf-rxjj-qqgw",
+    "dataSource": "https://github.com/advisories/GHSA-c2qf-rxjj-qqgw",
+    "namespace": "github:language:javascript",
+    "severity": "Medium",
+    "urls": [
+     "https://github.com/advisories/GHSA-c2qf-rxjj-qqgw"
+    ],
+    "description": "semver vulnerable to Regular Expression Denial of Service",
+    "cvss": [
+     {
+      "version": "3.1",
+      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+      "metrics": {
+       "baseScore": 5.3,
+       "exploitabilityScore": 3.9,
+       "impactScore": 1.4
+      },
+      "vendorMetadata": {
+       "base_severity": "Medium",
+       "status": "N/A"
+      }
+     }
+    ],
+    "fix": {
+     "versions": [
+      "7.5.2"
+     ],
+     "state": "fixed"
+    },
+    "advisories": []
+   },
+   "relatedVulnerabilities": [
+    {
+     "id": "CVE-2022-25883",
+     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2022-25883",
+     "namespace": "nvd:cpe",
+     "severity": "Medium",
+     "urls": [
+      "https://github.com/npm/node-semver/blob/main/classes/range.js%23L97-L104",
+      "https://github.com/npm/node-semver/blob/main/internal/re.js%23L138",
+      "https://github.com/npm/node-semver/blob/main/internal/re.js%23L160",
+      "https://github.com/npm/node-semver/commit/717534ee353682f3bcf33e60a8af4292626d4441",
+      "https://github.com/npm/node-semver/pull/564",
+      "https://security.snyk.io/vuln/SNYK-JS-SEMVER-3247795"
+     ],
+     "description": "Versions of the package semver before 7.5.2 are vulnerable to Regular Expression Denial of Service (ReDoS) via the function new Range, when untrusted user data is provided as a range.\r\r\r",
+     "cvss": [
+      {
+       "source": "report@snyk.io",
+       "type": "Secondary",
+       "version": "3.1",
+       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+       "metrics": {
+        "baseScore": 5.3,
+        "exploitabilityScore": 3.9,
+        "impactScore": 1.4
+       },
+       "vendorMetadata": {}
+      }
+     ]
+    }
+   ],
+   "matchDetails": [
+    {
+     "type": "exact-direct-match",
+     "matcher": "javascript-matcher",
+     "searchedBy": {
+      "language": "javascript",
+      "namespace": "github:language:javascript",
+      "package": {
+       "name": "semver",
+       "version": "7.3.8"
+      }
+     },
+     "found": {
+      "versionConstraint": "<7.5.2 (unknown)",
+      "vulnerabilityID": "GHSA-c2qf-rxjj-qqgw"
+     }
+    }
+   ],
+   "artifact": {
+    "id": "ab14fa407a07a033",
+    "name": "semver",
+    "version": "7.3.8",
+    "type": "npm",
+    "locations": [
+     {
+      "path": "/usr/lib/node_modules/npm/node_modules/semver/package.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
+     }
+    ],
+    "language": "javascript",
+    "licenses": [
+     "ISC"
+    ],
+    "cpes": [
+     "cpe:2.3:a:semver:semver:7.3.8:*:*:*:*:*:*:*",
+     "cpe:2.3:a:npm:semver:7.3.8:*:*:*:*:*:*:*"
+    ],
+    "purl": "pkg:npm/semver@7.3.8",
+    "upstreams": []
+   }
+  },
+  {
+   "vulnerability": {
     "id": "GHSA-cmhx-cq75-c4mj",
     "dataSource": "https://github.com/advisories/GHSA-cmhx-cq75-c4mj",
     "namespace": "github:language:dotnet",
@@ -5635,14 +3328,14 @@
     }
    ],
    "artifact": {
-    "id": "738a6d03a3a9b0c5",
+    "id": "676404518f863544",
     "name": "System.Text.RegularExpressions",
     "version": "4.3.0",
     "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/share/dotnet/sdk/7.0.105/DotnetTools/dotnet-format/dotnet-format.deps.json",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/dotnet-watch.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "dotnet",
@@ -5745,14 +3438,14 @@
     }
    ],
    "artifact": {
-    "id": "4b5e72f9bcdfb9d8",
+    "id": "e516c5fd34305bae",
     "name": "System.Text.RegularExpressions",
     "version": "4.3.0",
     "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/share/dotnet/sdk/7.0.105/dotnet-watch.deps.json",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/DotnetTools/dotnet-watch/7.0.108-servicing.23319.9/tools/net7.0/any/dotnet-watch.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "dotnet",
@@ -5855,14 +3548,14 @@
     }
    ],
    "artifact": {
-    "id": "c73aef037d6cfd7c",
+    "id": "2dc94c9b2709d278",
     "name": "System.Text.RegularExpressions",
     "version": "4.3.0",
     "type": "dotnet",
     "locations": [
      {
-      "path": "/usr/share/dotnet/sdk/7.0.105/DotnetTools/dotnet-watch/7.0.105-servicing.23177.17/tools/net7.0/any/dotnet-watch.deps.json",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
+      "path": "/usr/share/dotnet/sdk/7.0.108/DotnetTools/dotnet-format/dotnet-format.deps.json",
+      "layerID": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3"
      }
     ],
     "language": "dotnet",
@@ -5872,651 +3565,6 @@
     ],
     "purl": "pkg:nuget/System.Text.RegularExpressions@4.3.0",
     "upstreams": []
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "GHSA-fxg5-wq6x-vr4w",
-    "dataSource": "https://github.com/advisories/GHSA-fxg5-wq6x-vr4w",
-    "namespace": "github:language:go",
-    "severity": "High",
-    "urls": [
-     "https://github.com/advisories/GHSA-fxg5-wq6x-vr4w"
-    ],
-    "description": "golang.org/x/net/http2/h2c vulnerable to request smuggling attack",
-    "cvss": [
-     {
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-      "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
-      },
-      "vendorMetadata": {
-       "base_severity": "High",
-       "status": "N/A"
-      }
-     }
-    ],
-    "fix": {
-     "versions": [
-      "0.1.1-0.20221104162952-702349b0e862"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2022-41721",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2022-41721",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "https://go.dev/cl/447396",
-      "https://go.dev/issue/56352",
-      "https://pkg.go.dev/vuln/GO-2023-1495"
-     ],
-     "description": "A request smuggling attack is possible when using MaxBytesHandler. When using MaxBytesHandler, the body of an HTTP request is not fully consumed. When the server attempts to read HTTP2 frames from the connection, it will instead be reading the body of the HTTP request, which could be attacker-manipulated to represent arbitrary HTTP2 requests.",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
-      "package": {
-       "name": "golang.org/x/net",
-       "version": "v0.0.0-20220722155237-a158d28d115b"
-      }
-     },
-     "found": {
-      "versionConstraint": ">=0.0.0-20220524220425-1d687d428aca,<0.1.1-0.20221104162952-702349b0e862 (unknown)",
-      "vulnerabilityID": "GHSA-fxg5-wq6x-vr4w"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "f330e05b1117726b",
-    "name": "golang.org/x/net",
-    "version": "v0.0.0-20220722155237-a158d28d115b",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi-language-dotnet",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:golang:x/net:v0.0.0-20220722155237-a158d28d115b:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/golang.org/x/net@v0.0.0-20220722155237-a158d28d115b",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:PxfKdU9lEEDYjdIzOtC4qFWgkU2rGHdKlKowJSMN9h0=",
-     "mainModule": "github.com/pulumi/pulumi-dotnet/pulumi-language-dotnet"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "GHSA-hw7c-3rfg-p46j",
-    "dataSource": "https://github.com/advisories/GHSA-hw7c-3rfg-p46j",
-    "namespace": "github:language:go",
-    "severity": "High",
-    "urls": [
-     "https://github.com/advisories/GHSA-hw7c-3rfg-p46j"
-    ],
-    "description": "Panic leading to denial of service",
-    "cvss": [
-     {
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-      "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
-      },
-      "vendorMetadata": {
-       "base_severity": "High",
-       "status": "N/A"
-      }
-     }
-    ],
-    "fix": {
-     "versions": [
-      "1.29.1"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2023-24535",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2023-24535",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "https://github.com/golang/protobuf/issues/1530",
-      "https://go.dev/cl/475995",
-      "https://pkg.go.dev/vuln/GO-2023-1631"
-     ],
-     "description": "Parsing invalid messages can panic. Parsing a text-format message which contains a potential number consisting of a minus sign, one or more characters of whitespace, and no further input will cause a panic.",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
-      "package": {
-       "name": "google.golang.org/protobuf",
-       "version": "v1.29.0"
-      }
-     },
-     "found": {
-      "versionConstraint": ">=1.29.0,<1.29.1 (unknown)",
-      "vulnerabilityID": "GHSA-hw7c-3rfg-p46j"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "ec82f60be615644c",
-    "name": "google.golang.org/protobuf",
-    "version": "v1.29.0",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi-language-java",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:google:protobuf:v1.29.0:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/google.golang.org/protobuf@v1.29.0",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:44S3JjaKmLEE4YIkjzexaP+NzZsudE3Zin5Njn/pYX0=",
-     "mainModule": "github.com/pulumi/pulumi-java/pkg"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "GHSA-ppp9-7jff-5vj2",
-    "dataSource": "https://github.com/advisories/GHSA-ppp9-7jff-5vj2",
-    "namespace": "github:language:go",
-    "severity": "High",
-    "urls": [
-     "https://github.com/advisories/GHSA-ppp9-7jff-5vj2"
-    ],
-    "description": "golang.org/x/text/language Out-of-bounds Read vulnerability",
-    "cvss": [
-     {
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-      "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
-      },
-      "vendorMetadata": {
-       "base_severity": "High",
-       "status": "N/A"
-      }
-     }
-    ],
-    "fix": {
-     "versions": [
-      "0.3.7"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2021-38561",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2021-38561",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "https://deps.dev/advisory/OSV/GO-2021-0113",
-      "https://go.googlesource.com/text/+/383b2e75a7a4198c42f8f87833eefb772868a56f",
-      "https://groups.google.com/g/golang-announce",
-      "https://pkg.go.dev/golang.org/x/text/language"
-     ],
-     "description": "golang.org/x/text/language in golang.org/x/text before 0.3.7 can panic with an out-of-bounds read during BCP 47 language tag parsing. Index calculation is mishandled. If parsing untrusted user input, this can be used as a vector for a denial-of-service attack.",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
-      "package": {
-       "name": "golang.org/x/text",
-       "version": "v0.3.6"
-      }
-     },
-     "found": {
-      "versionConstraint": "<0.3.7 (unknown)",
-      "vulnerabilityID": "GHSA-ppp9-7jff-5vj2"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "c1a3d13f2786257a",
-    "name": "golang.org/x/text",
-    "version": "v0.3.6",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi-language-nodejs",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:golang:x/text:v0.3.6:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/golang.org/x/text@v0.3.6",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:aRYxNxv6iGQlyVaZmk6ZgYEDa+Jg18DxebPSrd6bg1M=",
-     "mainModule": "github.com/pulumi/pulumi/sdk/v3"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "GHSA-ppp9-7jff-5vj2",
-    "dataSource": "https://github.com/advisories/GHSA-ppp9-7jff-5vj2",
-    "namespace": "github:language:go",
-    "severity": "High",
-    "urls": [
-     "https://github.com/advisories/GHSA-ppp9-7jff-5vj2"
-    ],
-    "description": "golang.org/x/text/language Out-of-bounds Read vulnerability",
-    "cvss": [
-     {
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-      "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
-      },
-      "vendorMetadata": {
-       "base_severity": "High",
-       "status": "N/A"
-      }
-     }
-    ],
-    "fix": {
-     "versions": [
-      "0.3.7"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2021-38561",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2021-38561",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "https://deps.dev/advisory/OSV/GO-2021-0113",
-      "https://go.googlesource.com/text/+/383b2e75a7a4198c42f8f87833eefb772868a56f",
-      "https://groups.google.com/g/golang-announce",
-      "https://pkg.go.dev/golang.org/x/text/language"
-     ],
-     "description": "golang.org/x/text/language in golang.org/x/text before 0.3.7 can panic with an out-of-bounds read during BCP 47 language tag parsing. Index calculation is mishandled. If parsing untrusted user input, this can be used as a vector for a denial-of-service attack.",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
-      "package": {
-       "name": "golang.org/x/text",
-       "version": "v0.3.6"
-      }
-     },
-     "found": {
-      "versionConstraint": "<0.3.7 (unknown)",
-      "vulnerabilityID": "GHSA-ppp9-7jff-5vj2"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "745839ae69370f4a",
-    "name": "golang.org/x/text",
-    "version": "v0.3.6",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi-language-go",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:golang:x/text:v0.3.6:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/golang.org/x/text@v0.3.6",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:aRYxNxv6iGQlyVaZmk6ZgYEDa+Jg18DxebPSrd6bg1M=",
-     "mainModule": "github.com/pulumi/pulumi/sdk/v3"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "GHSA-ppp9-7jff-5vj2",
-    "dataSource": "https://github.com/advisories/GHSA-ppp9-7jff-5vj2",
-    "namespace": "github:language:go",
-    "severity": "High",
-    "urls": [
-     "https://github.com/advisories/GHSA-ppp9-7jff-5vj2"
-    ],
-    "description": "golang.org/x/text/language Out-of-bounds Read vulnerability",
-    "cvss": [
-     {
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-      "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
-      },
-      "vendorMetadata": {
-       "base_severity": "High",
-       "status": "N/A"
-      }
-     }
-    ],
-    "fix": {
-     "versions": [
-      "0.3.7"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2021-38561",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2021-38561",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "https://deps.dev/advisory/OSV/GO-2021-0113",
-      "https://go.googlesource.com/text/+/383b2e75a7a4198c42f8f87833eefb772868a56f",
-      "https://groups.google.com/g/golang-announce",
-      "https://pkg.go.dev/golang.org/x/text/language"
-     ],
-     "description": "golang.org/x/text/language in golang.org/x/text before 0.3.7 can panic with an out-of-bounds read during BCP 47 language tag parsing. Index calculation is mishandled. If parsing untrusted user input, this can be used as a vector for a denial-of-service attack.",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
-      "package": {
-       "name": "golang.org/x/text",
-       "version": "v0.3.6"
-      }
-     },
-     "found": {
-      "versionConstraint": "<0.3.7 (unknown)",
-      "vulnerabilityID": "GHSA-ppp9-7jff-5vj2"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "ea8c54647dbe266a",
-    "name": "golang.org/x/text",
-    "version": "v0.3.6",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi-language-python",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:golang:x/text:v0.3.6:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/golang.org/x/text@v0.3.6",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:aRYxNxv6iGQlyVaZmk6ZgYEDa+Jg18DxebPSrd6bg1M=",
-     "mainModule": "github.com/pulumi/pulumi/sdk/v3"
-    }
-   }
-  },
-  {
-   "vulnerability": {
-    "id": "GHSA-vvpx-j8f3-3w6h",
-    "dataSource": "https://github.com/advisories/GHSA-vvpx-j8f3-3w6h",
-    "namespace": "github:language:go",
-    "severity": "High",
-    "urls": [
-     "https://github.com/advisories/GHSA-vvpx-j8f3-3w6h"
-    ],
-    "description": "Uncontrolled Resource Consumption",
-    "cvss": [
-     {
-      "version": "3.1",
-      "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-      "metrics": {
-       "baseScore": 7.5,
-       "exploitabilityScore": 3.9,
-       "impactScore": 3.6
-      },
-      "vendorMetadata": {
-       "base_severity": "High",
-       "status": "N/A"
-      }
-     }
-    ],
-    "fix": {
-     "versions": [
-      "0.7.0"
-     ],
-     "state": "fixed"
-    },
-    "advisories": []
-   },
-   "relatedVulnerabilities": [
-    {
-     "id": "CVE-2022-41723",
-     "dataSource": "https://nvd.nist.gov/vuln/detail/CVE-2022-41723",
-     "namespace": "nvd:cpe",
-     "severity": "High",
-     "urls": [
-      "https://go.dev/cl/468135",
-      "https://go.dev/cl/468295",
-      "https://go.dev/issue/57855",
-      "https://groups.google.com/g/golang-announce/c/V0aBFqaFs_E",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/4MA5XS5DAOJ5PKKNG5TUXKPQOFHT5VBC/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/RGW7GE2Z32ZT47UFAQFDRQE33B7Q7LMT/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/RLBQ3A7ROLEQXQLXFDLNJ7MYPKG5GULE/",
-      "https://lists.fedoraproject.org/archives/list/package-announce@lists.fedoraproject.org/message/XX3IMUTZKRQ73PBZM4E2JP4BKYH4C6XE/",
-      "https://pkg.go.dev/vuln/GO-2023-1571"
-     ],
-     "description": "A maliciously crafted HTTP/2 stream could cause excessive CPU consumption in the HPACK decoder, sufficient to cause a denial of service from a small number of small requests.",
-     "cvss": [
-      {
-       "source": "nvd@nist.gov",
-       "type": "Primary",
-       "version": "3.1",
-       "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
-       "metrics": {
-        "baseScore": 7.5,
-        "exploitabilityScore": 3.9,
-        "impactScore": 3.6
-       },
-       "vendorMetadata": {}
-      }
-     ]
-    }
-   ],
-   "matchDetails": [
-    {
-     "type": "exact-direct-match",
-     "matcher": "go-module-matcher",
-     "searchedBy": {
-      "language": "go",
-      "namespace": "github:language:go",
-      "package": {
-       "name": "golang.org/x/net",
-       "version": "v0.0.0-20220722155237-a158d28d115b"
-      }
-     },
-     "found": {
-      "versionConstraint": "<0.7.0 (unknown)",
-      "vulnerabilityID": "GHSA-vvpx-j8f3-3w6h"
-     }
-    }
-   ],
-   "artifact": {
-    "id": "f330e05b1117726b",
-    "name": "golang.org/x/net",
-    "version": "v0.0.0-20220722155237-a158d28d115b",
-    "type": "go-module",
-    "locations": [
-     {
-      "path": "/usr/bin/pulumi-language-dotnet",
-      "layerID": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6"
-     }
-    ],
-    "language": "go",
-    "licenses": [],
-    "cpes": [
-     "cpe:2.3:a:golang:x/net:v0.0.0-20220722155237-a158d28d115b:*:*:*:*:*:*:*"
-    ],
-    "purl": "pkg:golang/golang.org/x/net@v0.0.0-20220722155237-a158d28d115b",
-    "upstreams": [],
-    "metadataType": "GolangBinMetadata",
-    "metadata": {
-     "goCompiledVersion": "go1.20.4",
-     "architecture": "arm64",
-     "h1Digest": "h1:PxfKdU9lEEDYjdIzOtC4qFWgkU2rGHdKlKowJSMN9h0=",
-     "mainModule": "github.com/pulumi/pulumi-dotnet/pulumi-language-dotnet"
-    }
    }
   }
  ],
@@ -6524,24 +3572,22 @@
   "type": "image",
   "target": {
    "userInput": "REDACTED",
-   "imageID": "sha256:58e0b7ff2974061835f33ce50db7f861ad774a9ec691907203004b46ab717b65",
-   "manifestDigest": "sha256:ea3b98b07096d5ff1a9fdffbd41d57df79cf1dadf62169102a028d11749860b5",
-   "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-   "tags": [
-    "REDACTED"
-   ],
-   "imageSize": 1860377933,
+   "imageID": "sha256:61be6e7fd925fe3a826171547804367c546a6592ac3eef899ff221c7bafc4940",
+   "manifestDigest": "sha256:38da9d3f33b7f247b6813b7052cadb2ed237d4426108660b6f7474ca0c34726f",
+   "mediaType": "application/vnd.oci.image.manifest.v1+json",
+   "tags": [],
+   "imageSize": 1782125360,
    "layers": [
     {
-     "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
-     "digest": "sha256:637fdb69b1657d3be63ae9d87b5b5fcaf53f5cdfc9bb8478f6fd1347c1919bf6",
-     "size": 1860377933
+     "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+     "digest": "sha256:15bcc729dd6078f484527aa1c55f531a3bc3b813982ac803aba8f8775c4f88d3",
+     "size": 1782125360
     }
    ],
-   "manifest": "eyJzY2hlbWFWZXJzaW9uIjoyLCJtZWRpYVR5cGUiOiJhcHBsaWNhdGlvbi92bmQuZG9ja2VyLmRpc3RyaWJ1dGlvbi5tYW5pZmVzdC52Mitqc29uIiwiY29uZmlnIjp7Im1lZGlhVHlwZSI6ImFwcGxpY2F0aW9uL3ZuZC5kb2NrZXIuY29udGFpbmVyLmltYWdlLnYxK2pzb24iLCJzaXplIjo0NzMsImRpZ2VzdCI6InNoYTI1Njo1OGUwYjdmZjI5NzQwNjE4MzVmMzNjZTUwZGI3Zjg2MWFkNzc0YTllYzY5MTkwNzIwMzAwNGI0NmFiNzE3YjY1In0sImxheWVycyI6W3sibWVkaWFUeXBlIjoiYXBwbGljYXRpb24vdm5kLmRvY2tlci5pbWFnZS5yb290ZnMuZGlmZi50YXIuZ3ppcCIsInNpemUiOjE4NzQ1MTEzNjAsImRpZ2VzdCI6InNoYTI1Njo2MzdmZGI2OWIxNjU3ZDNiZTYzYWU5ZDg3YjViNWZjYWY1M2Y1Y2RmYzliYjg0NzhmNmZkMTM0N2MxOTE5YmY2In1dfQ==",
-   "config": "eyJhcmNoaXRlY3R1cmUiOiJhcm02NCIsImF1dGhvciI6ImdpdGh1Yi5jb20vY2hhaW5ndWFyZC1kZXYvYXBrbyIsImNyZWF0ZWQiOiIyMDIzLTA1LTA4VDE2OjAzOjUwWiIsImhpc3RvcnkiOlt7ImF1dGhvciI6ImFwa28iLCJjcmVhdGVkIjoiMjAyMy0wNS0wOFQxNjowMzo1MFoiLCJjcmVhdGVkX2J5IjoiYXBrbyIsImNvbW1lbnQiOiJUaGlzIGlzIGFuIGFwa28gc2luZ2xlLWxheWVyIGltYWdlIn1dLCJvcyI6ImxpbnV4Iiwicm9vdGZzIjp7InR5cGUiOiJsYXllcnMiLCJkaWZmX2lkcyI6WyJzaGEyNTY6NjM3ZmRiNjliMTY1N2QzYmU2M2FlOWQ4N2I1YjVmY2FmNTNmNWNkZmM5YmI4NDc4ZjZmZDEzNDdjMTkxOWJmNiJdfSwiY29uZmlnIjp7IkNtZCI6WyItaCJdLCJFbnRyeXBvaW50IjpbIi91c3IvYmluL3B1bHVtaSJdLCJFbnYiOlsiUEFUSD0vdXNyL3NiaW46L3NiaW46L3Vzci9iaW46L2JpbiJdLCJVc2VyIjoiNjU1MzIifX0=",
+   "manifest": "eyJzY2hlbWFWZXJzaW9uIjoyLCJtZWRpYVR5cGUiOiJhcHBsaWNhdGlvbi92bmQub2NpLmltYWdlLm1hbmlmZXN0LnYxK2pzb24iLCJjb25maWciOnsibWVkaWFUeXBlIjoiYXBwbGljYXRpb24vdm5kLm9jaS5pbWFnZS5jb25maWcudjEranNvbiIsInNpemUiOjYyNiwiZGlnZXN0Ijoic2hhMjU2OjYxYmU2ZTdmZDkyNWZlM2E4MjYxNzE1NDc4MDQzNjdjNTQ2YTY1OTJhYzNlZWY4OTlmZjIyMWM3YmFmYzQ5NDAifSwibGF5ZXJzIjpbeyJtZWRpYVR5cGUiOiJhcHBsaWNhdGlvbi92bmQub2NpLmltYWdlLmxheWVyLnYxLnRhcitnemlwIiwic2l6ZSI6NjAzNDE5MTcxLCJkaWdlc3QiOiJzaGEyNTY6OGIwNzg3MzQxNzFmMWQ3ODNiNzNiOTg4M2IzOWRmOTJiZGNkNWMwNTFkNjg1YzgzMzg5ZGVhYzdlNTQyNTcwYyJ9XSwiYW5ub3RhdGlvbnMiOnsib3JnLm9wZW5jb250YWluZXJzLmltYWdlLmF1dGhvcnMiOiJDaGFpbmd1YXJkIFRlYW0gaHR0cHM6Ly93d3cuY2hhaW5ndWFyZC5kZXYvIiwib3JnLm9wZW5jb250YWluZXJzLmltYWdlLnNvdXJjZSI6Imh0dHBzOi8vZ2l0aHViLmNvbS9jaGFpbmd1YXJkLWltYWdlcy9pbWFnZXMvdHJlZS9tYWluL2ltYWdlcy9wdWx1bWkiLCJvcmcub3BlbmNvbnRhaW5lcnMuaW1hZ2UudXJsIjoiaHR0cHM6Ly9lZHUuY2hhaW5ndWFyZC5kZXYvY2hhaW5ndWFyZC9jaGFpbmd1YXJkLWltYWdlcy9yZWZlcmVuY2UvcHVsdW1pIn19",
+   "config": "eyJhcmNoaXRlY3R1cmUiOiJhcm02NCIsImF1dGhvciI6ImdpdGh1Yi5jb20vY2hhaW5ndWFyZC1kZXYvYXBrbyIsImNyZWF0ZWQiOiIyMDIzLTA2LTI3VDEwOjU2OjQ0WiIsImhpc3RvcnkiOlt7ImF1dGhvciI6ImFwa28iLCJjcmVhdGVkIjoiMjAyMy0wNi0yN1QxMDo1Njo0NFoiLCJjcmVhdGVkX2J5IjoiYXBrbyIsImNvbW1lbnQiOiJUaGlzIGlzIGFuIGFwa28gc2luZ2xlLWxheWVyIGltYWdlIn1dLCJvcyI6ImxpbnV4Iiwicm9vdGZzIjp7InR5cGUiOiJsYXllcnMiLCJkaWZmX2lkcyI6WyJzaGEyNTY6MTViY2M3MjlkZDYwNzhmNDg0NTI3YWExYzU1ZjUzMWEzYmMzYjgxMzk4MmFjODAzYWJhOGY4Nzc1YzRmODhkMyJdfSwiY29uZmlnIjp7IkNtZCI6WyItaCJdLCJFbnRyeXBvaW50IjpbIi91c3IvYmluL3B1bHVtaSJdLCJFbnYiOlsiTEFORz1DLlVURi04IiwiUEFUSD0vdXNyL3NiaW46L3NiaW46L3Vzci9iaW46L2JpbiIsIlNTTF9DRVJUX0ZJTEU9L2V0Yy9zc2wvY2VydHMvY2EtY2VydGlmaWNhdGVzLmNydCIsIlhER19DQUNIRV9IT01FPS90bXAvLmNhY2hlIiwiWERHX0NPTkZJR19DQUNIRT0vdG1wLy5jYWNoZSIsIlhER19DT05GSUdfSE9NRT0vdG1wLy5jb25maWciXSwiVXNlciI6IjAifX0=",
    "repoDigests": [
-    "REDACTED"
+    "REDACTED@sha256:817bc83cef676bd508aee60d4c84fe35202635b70b0b262a46c6bb469a139dc0"
    ],
    "architecture": "arm64",
    "os": "linux"
@@ -6576,7 +3622,7 @@
    "ignore": null,
    "exclude": [],
    "db": {
-    "cache-dir": "REDACTED",
+    "cache-dir": "REDACTED/grype/db",
     "update-url": "https://toolbox-data.anchore.io/grype/databases/listing.json",
     "ca-cert": "",
     "auto-update": true,
@@ -6635,12 +3681,12 @@
    "default-image-pull-source": ""
   },
   "db": {
-   "built": "2023-06-21T01:33:29Z",
+   "built": "2023-06-29T13:39:15Z",
    "schemaVersion": 5,
-   "location": "REDACTED",
-   "checksum": "sha256:f7eb946e3a2dcebd2cecd254b4d4b8b5f4039f65efeda81ce542032985f857b1",
+   "location": "REDACTED/grype/db/5",
+   "checksum": "sha256:7555f69a6de8f256c1a2dcbf69ea2ee91877d669aabda110525d847f70054e24",
    "error": null
   },
-  "timestamp": "2023-06-21T22:31:52.548828-05:00"
+  "timestamp": "2023-06-29T13:03:31.733634-05:00"
  }
 }

@@ -57,7 +57,8 @@ jobs:
               --env-file github.env \
               "${REF}" \
               -image "${{ matrix.image }}" \
-              -scanner "${scanner}"
+              -scanner "${scanner}" \
+              -syft
           done
       - uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
         if: ${{ failure() }}
@@ -113,7 +114,8 @@ jobs:
               --env-file github.env \
               "${REF}" \
               -image "${{ matrix.ref }}" \
-              -scanner "${scanner}"
+              -scanner "${scanner}" \
+              -syft
           done
       - uses: slackapi/slack-github-action@007b2c3c751a190b6f0f040e47ed024deaa72844 # v1.23.0
         if: ${{ failure() }}

@@ -7,32 +7,37 @@ import (
 
 const (
 	testGrypeScan = "testdata/grype-scan.json"
+	testSyftScan  = "testdata/syft-scan.json"
 
 	testTime   = "2023-06-22T02:38:46Z"
 	testScanID = "testing123"
 
-	expectedVulnCount = 37
+	expectedVulnCount = 20
 )
 
 var (
 	expectedVulnCountsByType = map[string]int{
-		"apk":          14,
-		"dotnet":       3,
-		"go-module":    8,
-		"java-archive": 11,
+		"apk":          1,
+		"dotnet":       5,
+		"java-archive": 12,
 		"python":       1,
 	}
 )
 
 func TestVulnExtraction(t *testing.T) {
-	b, err := os.ReadFile(testGrypeScan)
+	grypeBytes, err := os.ReadFile(testGrypeScan)
+	if err != nil {
+		t.Errorf("expected no error on os.ReadFile(), got %v", err)
+	}
+	syftBytes, err := os.ReadFile(testSyftScan)
 	if err != nil {
 		t.Errorf("expected no error on os.ReadFile(), got %v", err)
 	}
 	summary := ImageScanSummary{
 		Time:         testTime,
 		ID:           testScanID,
-		RawGrypeJSON: string(b),
+		RawGrypeJSON: string(grypeBytes),
+		RawSyftJSON:  string(syftBytes),
 	}
 	vulns, err := summary.ExtractVulns()
 	if err != nil {
@@ -57,6 +62,27 @@ func TestVulnExtraction(t *testing.T) {
 				t.Errorf("got empty value for required field %s", vuln.id())
 			}
 		}
+
+		// spot check a python vuln package extract
+		if vuln.Type == "python" && vuln.Vulnerability == "CVE-2018-20225" {
+			if vuln.DistroPackageName != "py3.11-pip" {
+				t.Errorf("expcted package name to be pip but got %s", vuln.DistroPackageName)
+			}
+			if vuln.DistroPackageVersion != "23.1.2-r0" {
+				t.Errorf("expcted package version to be 23.1.2 but got %s", vuln.DistroPackageVersion)
+			}
+		}
+
+		// spot check apk vuln package extract
+		if vuln.Type == "apk" && vuln.Vulnerability == "CVE-2007-4559" {
+			if vuln.DistroPackageName != "python-3.11" {
+				t.Errorf("expcted package name to be pip but got %s", vuln.DistroPackageName)
+			}
+			if vuln.DistroPackageVersion != "3.11.4-r0" {
+				t.Errorf("expcted package version to be 23.1.2 but got %s", vuln.DistroPackageVersion)
+			}
+		}
+
 		if _, ok := actualVulnCountsByType[vuln.Type]; !ok {
 			actualVulnCountsByType[vuln.Type] = 0
 		}
