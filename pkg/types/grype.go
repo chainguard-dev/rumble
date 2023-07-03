@@ -29,10 +29,15 @@ type GrypeScanOutputMatches struct {
 }
 
 type GrypeScanOutputMatchesArtifact struct {
-	ID      string `json:"id"`
-	Name    string `json:"name"`
-	Version string `json:"version"`
-	Type    string `json:"type"`
+	ID        string                                   `json:"id"`
+	Name      string                                   `json:"name"`
+	Version   string                                   `json:"version"`
+	Type      string                                   `json:"type"`
+	Locations []GrypeScanOutputMatchesArtifactLocation `json:"locations"`
+}
+type GrypeScanOutputMatchesArtifactLocation struct {
+	Path    string `json:"path"`
+	LayedID string `json:"layerID"`
 }
 
 type GrypeScanOutputMatchesVulnerability struct {

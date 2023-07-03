@@ -62,6 +62,11 @@ func (row *ImageScanSummary) ExtractVulns() ([]*Vuln, error) {
 	}
 	uniqueVulns := map[string]*Vuln{}
 	for _, match := range grypeOutput.Matches {
+		// Parse the locations struct into a string
+		locationsRaw, err := json.Marshal(match.Artifact.Locations)
+		if err != nil {
+			return nil, err
+		}
 		packageName, packageVersion := determineDistroPackage(&match, &grypeOutput, &syftOutput)
 		v := Vuln{
 			ScanID:               row.ID,
@@ -74,6 +79,7 @@ func (row *ImageScanSummary) ExtractVulns() ([]*Vuln, error) {
 			Time:                 row.Time,
 			DistroPackageName:    packageName,
 			DistroPackageVersion: packageVersion,
+			Locations:            string(locationsRaw),
 		}
 		v.SetID()
 		uniqueVulns[v.ID] = &v
@@ -100,6 +106,7 @@ type Vuln struct {
 	Time                 string `bigquery:"time"`
 	DistroPackageName    string `bigquery:"distro_package_name"`
 	DistroPackageVersion string `bigquery:"distro_package_version"`
+	Locations            string `bigquery:"locations"`
 }
 
 func (row *Vuln) SetID() {
@@ -107,7 +114,7 @@ func (row *Vuln) SetID() {
 }
 
 func (row *Vuln) id() string {
-	return strings.Join([]string{row.Name, row.Installed, row.Vulnerability, row.Type, row.Time}, "--")
+	return strings.Join([]string{row.Name, row.Installed, row.Vulnerability, row.Type, row.Locations, row.Time}, "--")
 }
 
 func sha256Sum(s string) string {
