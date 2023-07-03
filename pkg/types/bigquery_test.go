@@ -12,13 +12,13 @@ const (
 	testTime   = "2023-06-22T02:38:46Z"
 	testScanID = "testing123"
 
-	expectedVulnCount = 20
+	expectedVulnCount = 30
 )
 
 var (
 	expectedVulnCountsByType = map[string]int{
 		"apk":          1,
-		"dotnet":       5,
+		"dotnet":       15,
 		"java-archive": 12,
 		"python":       1,
 	}
