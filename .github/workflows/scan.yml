@@ -25,9 +25,15 @@ jobs:
           identity: 720909c9f5279097d847ad02a2f24ba8f59de36a/a033a6fabe0bfa0d
       - id: list-images
         run: |
-          chainctl img ls --group 720909c9f5279097d847ad02a2f24ba8f59de36a -ojson > image-list.json
+          image_list="$(chainctl img ls --group 720909c9f5279097d847ad02a2f24ba8f59de36a -o json)"
 
-          echo images=$(cat image-list.json | jq -c '[ .[] | select(.tags[].name | contains("latest")) | "cgr.dev/chainguard/" + .repo.name + ":latest" ] | unique') >> $GITHUB_OUTPUT
+          unwanted_images=("alpine-base" "sdk" "spire")
+
+          for img in ${unwanted_images[@]}; do
+            image_list=$(echo "$image_list" | jq "map(select(.repo.name != \"$img\"))")
+          done
+
+          echo images=$(echo $image_list | jq -c '[ .[] | select(.tags[].name | contains("latest")) | "cgr.dev/chainguard/" + .repo.name + ":latest" ] | unique') >> $GITHUB_OUTPUT
 
   scan-chainguard:
     runs-on: ubuntu-latest
