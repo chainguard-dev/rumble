@@ -27,7 +27,7 @@ jobs:
         run: |
           image_list="$(chainctl img ls --group 720909c9f5279097d847ad02a2f24ba8f59de36a -o json)"
 
-          unwanted_images=("alpine-base" "k3s-images" "sdk" "spire")
+          unwanted_images=("alpine-base" "k3s-images" "sdk" "source-controller" "spire")
 
           for img in ${unwanted_images[@]}; do
             image_list=$(echo "$image_list" | jq "map(select(.repo.name != \"$img\"))")
