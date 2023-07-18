@@ -38,7 +38,7 @@ debian:bullseye-slim
 debian:latest
 denoland/deno:latest
 dexidp/dex:latest
-docker:latest
+library/docker:latest
 eclipse-mosquitto:latest
 eclipse-temurin:latest
 eggdrop:latest
@@ -137,7 +137,7 @@ rakudo-star:latest
 redhat/ubi8:latest
 redis:latest
 redmine:latest
-registry:latest
+library/registry:latest
 rethinkdb:latest
 rocket.chat:latest
 rockylinux:9
