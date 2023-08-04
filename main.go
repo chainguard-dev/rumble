@@ -339,7 +339,6 @@ func grypeOutputToSummary(image string, scanTime time.Time, output *types.GrypeS
 	summary.Digest = strings.Split(output.Source.Target.RepoDigests[0], "@")[1]
 
 	// CVE counts by severity
-	summary.TotCveCount = len(output.Matches)
 	for _, match := range output.Matches {
 		switch match.Vulnerability.Severity {
 		case "Low":
@@ -358,6 +357,8 @@ func grypeOutputToSummary(image string, scanTime time.Time, output *types.GrypeS
 			fmt.Printf("WARNING: unknown severity: %s\n", match.Vulnerability.Severity)
 		}
 	}
+
+	summary.TotCveCount = summary.LowCveCount + summary.MedCveCount + summary.HighCveCount + summary.CritCveCount + summary.NegligibleCveCount + summary.UnknownCveCount
 	return summary
 }
 
