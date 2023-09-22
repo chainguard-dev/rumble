@@ -126,6 +126,7 @@ postfixadmin:latest
 postgres:latest
 pypy:latest
 python:latest
+quay.io/domino/provider-aws.aws-ebs-csi-driver:v1.22.0-375468
 r-base:latest
 rabbitmq:latest
 rapidfort/nginx:1.22
