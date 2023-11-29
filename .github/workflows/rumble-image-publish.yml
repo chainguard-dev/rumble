@@ -41,6 +41,7 @@ jobs:
       - name: Publish image
         env:
           DOCKER_CONFIG: ${{ steps.login.outputs.docker-config }}
+          COSIGN_YES: true
         run: |
           set -x
           ./scripts/publish.sh
@@ -51,6 +52,7 @@ jobs:
           set -x
           env > github.env
           echo "DOCKER_CONFIG=/config" >> github.env
+          echo "COSIGN_YES=true" >> github.env
           for scanner in "grype" "trivy"; do
             docker run --rm -v "${DOCKER_CONFIG}":/config \
               --env-file github.env \
