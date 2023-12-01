@@ -1,13 +1,19 @@
 name: scan
 on:
   schedule:
-    - cron: '0 10 * * *' # 10 UTC
-  workflow_dispatch: {}
+    - cron: "0 10 * * *" # 10 UTC
+  workflow_dispatch:
+    inputs:
+      GCLOUD_TABLE:
+        description: "gcloud bigquery table to publish results to"
+        required: true
+        default: "scheduled"
+
 env:
   REF: "ghcr.io/chainguard-dev/rumble:latest"
   GCLOUD_PROJECT: ${{ secrets.GCLOUD_PROJECT }}
   GCLOUD_DATASET: ${{ secrets.GCLOUD_DATASET }}
-  GCLOUD_TABLE: ${{ secrets.GCLOUD_TABLE }}
+  GCLOUD_TABLE: ${{ inputs.GCLOUD_TABLE }}
   GCLOUD_TABLE_VULNS: ${{ secrets.GCLOUD_TABLE_VULNS }}
   GOOGLE_APPLICATION_CREDENTIALS_BASE64: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}
 concurrency: scan
