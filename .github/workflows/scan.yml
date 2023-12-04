@@ -13,7 +13,7 @@ env:
   REF: "ghcr.io/chainguard-dev/rumble:latest"
   GCLOUD_PROJECT: ${{ secrets.GCLOUD_PROJECT }}
   GCLOUD_DATASET: ${{ secrets.GCLOUD_DATASET }}
-  GCLOUD_TABLE: ${{ inputs.GCLOUD_TABLE }}
+  GCLOUD_TABLE: ${{ inputs.GCLOUD_TABLE || 'scheduled' }}
   GCLOUD_TABLE_VULNS: ${{ secrets.GCLOUD_TABLE_VULNS }}
   GOOGLE_APPLICATION_CREDENTIALS_BASE64: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_BASE64 }}
 concurrency: scan
